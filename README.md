@@ -31,7 +31,7 @@ Now that you've got the code, follow these steps to get acclimated:
 createdb <YOUR APP NAME HERE FROM package.json>
 createdb <YOUR APP NAME HERE FROM package.json>-test
 ```
-
+s
 - By default, running `npm test` will use your test database, while
   regular development uses development database
 
