@@ -2,8 +2,9 @@
 
 const {
   db,
-  models: { User },
+  models: { User, Product, Category },
 } = require("../server/db");
+const { products } = require("./dummyData");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -19,12 +20,22 @@ async function seed() {
     User.create({ username: "murphy", password: "123" }),
   ]);
 
+  // Createing Categories
+  const categories = await Promise.all(Cat);
+
+  // Creating Products
+  const products = await Promise.all([Product.bulkCreate(products)]);
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],
       murphy: users[1],
+    },
+    products: {
+      waterCookie: products[0],
+      fireCookie: products[1],
     },
   };
 }
@@ -59,9 +70,3 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;
-
-//testing
-//I added another line
-//here is another line
-
-//here is the 3rd line
