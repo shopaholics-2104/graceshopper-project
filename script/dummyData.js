@@ -5,7 +5,8 @@ const products = [
       single_price: 99.99,
       dozen_price: 1170.00,
       status: 'running_low',
-      imageUrl: 'https://i.pinimg.com/originals/00/b3/a8/00b3a817a303dbe6fedb81af9a65394c.png'
+      imageUrl: 'https://i.pinimg.com/originals/00/b3/a8/00b3a817a303dbe6fedb81af9a65394c.png',
+      categoryId: 1
   },
 
   {
@@ -14,7 +15,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'running_low',
-    imageUrl: 'https://64.media.tumblr.com/77e94c182e27591ccf9d0ae2477f556f/tumblr_od2y0kfDY91vycuvuo1_1280.jpg'
+    imageUrl: 'https://64.media.tumblr.com/77e94c182e27591ccf9d0ae2477f556f/tumblr_od2y0kfDY91vycuvuo1_1280.jpg',
+    categoryId:3
   },
 
   {
@@ -23,7 +25,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'in_stock',
-    imageUrl: 'https://www.pikpng.com/pngl/m/46-467923_captainamerica-marvel-superhero-avengers-chibi-captain-america-drawing.png'
+    imageUrl: 'https://www.pikpng.com/pngl/m/46-467923_captainamerica-marvel-superhero-avengers-chibi-captain-america-drawing.png',
+    categoryId: 4
 },
 
 {
@@ -32,7 +35,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'in_stock',
-    imageUrl: 'https://i.pinimg.com/736x/e2/39/ff/e239ff825e9e3b8543d1a15b69cd93b9.jpg'
+    imageUrl: 'https://i.pinimg.com/736x/e2/39/ff/e239ff825e9e3b8543d1a15b69cd93b9.jpg',
+    categoryId: 1
 },
 
 {
@@ -41,7 +45,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'running_low',
-    imageUrl: 'https://i.pinimg.com/originals/03/90/dc/0390dc70fbbd524efe4fbb01a903cdc9.png'
+    imageUrl: 'https://i.pinimg.com/originals/03/90/dc/0390dc70fbbd524efe4fbb01a903cdc9.png',
+    categoryId: 5
 },
 
 {
@@ -50,7 +55,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'out_of_stock',
-    imageUrl: 'https://i.pinimg.com/originals/33/e9/fe/33e9fe1cfec6d0b54fa04b5bc479faa4.jpg'
+    imageUrl: 'https://i.pinimg.com/originals/33/e9/fe/33e9fe1cfec6d0b54fa04b5bc479faa4.jpg',
+    categoryId:2
 },
 
 {
@@ -59,7 +65,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'in_stock',
-    imageUrl: 'https://sketchok.com/images/articles/02-comics/006-superheroes-chibi/01/12.jpg'
+    imageUrl: 'https://sketchok.com/images/articles/02-comics/006-superheroes-chibi/01/12.jpg',
+    categoryId: 3
 },
 
 {
@@ -68,7 +75,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'running_low',
-    imageUrl: 'https://i.pinimg.com/originals/b9/f8/28/b9f82843262ebb7af01f22074e452f36.jpg'
+    imageUrl: 'https://i.pinimg.com/originals/b9/f8/28/b9f82843262ebb7af01f22074e452f36.jpg',
+    categoryId: 2
 },
 
 {
@@ -77,7 +85,8 @@ const products = [
     single_price: 99.99,
     dozen_price: 1170.00,
     status: 'running_low',
-    imageUrl: 'https://cdn.dribbble.com/users/228053/screenshots/2692658/vision4.png?compress=1&resize=400x300'
+    imageUrl: 'https://cdn.dribbble.com/users/228053/screenshots/2692658/vision4.png?compress=1&resize=400x300',
+    categoryId: 5
 },
 ]
 
