@@ -4,7 +4,7 @@ const { STRING } = Sequelize
 const db = require('../db');
 
 const Category = db.define ('category', {
-    superPower:{
+    flavor:{
         type: STRING,
         allowNull: false,
         validate:{
