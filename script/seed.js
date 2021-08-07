@@ -4,7 +4,7 @@ const {
   db,
   models: { User, Product, Category },
 } = require("../server/db");
-const { products } = require("./dummyData");
+const { productList, categoryList, userList } = require("./dummyData");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -15,16 +15,13 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
-    User.create({ username: "murphy", password: "123" }),
-  ]);
+  const users = await User.bulkCreate(userList);
 
   // Createing Categories
-  const categories = await Promise.all(Cat);
+  const categories = await Category.bulkCreate(categoryList);
 
   // Creating Products
-  const products = await Promise.all([Product.bulkCreate(products)]);
+  const products = await Product.bulkCreate(productList);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);

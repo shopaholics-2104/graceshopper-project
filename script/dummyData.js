@@ -1,4 +1,4 @@
-const products = [
+const productList = [
   {
     name: "Wakanda forever",
     description:
@@ -99,7 +99,7 @@ const products = [
   },
 ];
 
-const catogory = [
+const categoryList = [
   { flavor: "The Dark Chocolate Pistachio Sea Salt" },
   { flavor: "The Brown Butter Oatmeal filled With Caramel" },
   { flavor: "The Brown Butter Bourbon Spice" },
@@ -107,4 +107,42 @@ const catogory = [
   { flavor: "The Cinnamon Roll Sugar" },
 ];
 
-module.exports = { products, catogory };
+const userList = [
+  {
+    username: "cody",
+    password: "123",
+    firstName: "cody",
+    lastName: "smith",
+    email: "cody@gmail.com",
+  },
+  {
+    username: "murphy",
+    password: "123",
+    firstName: "murphy",
+    lastName: "smith",
+    email: "murphy@gmail.com",
+  },
+  {
+    username: "Lucy",
+    password: "123",
+    firstName: "lucy",
+    lastName: "smith",
+    email: "lucy@gmail.com",
+  },
+  {
+    username: "Jing",
+    password: "123",
+    firstName: "jing",
+    lastName: "smith",
+    email: "jing@gmail.com",
+  },
+  {
+    username: "Tashif",
+    password: "123",
+    firstName: "tashif",
+    lastName: "smith",
+    email: "tashif@gmail.com",
+  },
+];
+
+module.exports = { productList, categoryList, userList };
