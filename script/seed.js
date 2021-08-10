@@ -2,9 +2,16 @@
 
 const {
   db,
-  models: { User, Product, Category },
+  models: { User, Product, Category, Order },
 } = require("../server/db");
-const { productList, categoryList, userList } = require("./dummyData");
+const Order_Item = require("../server/db/models/OrderItem");
+const {
+  productList,
+  categoryList,
+  userList,
+  orderList,
+  orderItems,
+} = require("./dummyData");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -22,6 +29,14 @@ async function seed() {
 
   // Creating Products
   const products = await Product.bulkCreate(productList);
+
+  //Creating Orders
+
+  const orders = await Order.bulkCreate(orderList);
+
+  //Creating Order_items
+
+  const order_items = await Order_Item.bulkCreate(orderItems);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);

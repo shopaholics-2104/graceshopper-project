@@ -8,6 +8,7 @@ const productList = [
     status: "running_low",
     imageUrl:
       "https://i.pinimg.com/originals/00/b3/a8/00b3a817a303dbe6fedb81af9a65394c.png",
+    categoryId: 1,
   },
 
   {
@@ -19,6 +20,7 @@ const productList = [
     status: "running_low",
     imageUrl:
       "https://64.media.tumblr.com/77e94c182e27591ccf9d0ae2477f556f/tumblr_od2y0kfDY91vycuvuo1_1280.jpg",
+    categoryId: 3,
   },
 
   {
@@ -30,6 +32,7 @@ const productList = [
     status: "in_stock",
     imageUrl:
       "https://www.pikpng.com/pngl/m/46-467923_captainamerica-marvel-superhero-avengers-chibi-captain-america-drawing.png",
+    categoryId: 4,
   },
 
   {
@@ -41,6 +44,7 @@ const productList = [
     status: "in_stock",
     imageUrl:
       "https://i.pinimg.com/736x/e2/39/ff/e239ff825e9e3b8543d1a15b69cd93b9.jpg",
+    categoryId: 1,
   },
 
   {
@@ -52,6 +56,7 @@ const productList = [
     status: "running_low",
     imageUrl:
       "https://i.pinimg.com/originals/03/90/dc/0390dc70fbbd524efe4fbb01a903cdc9.png",
+    categoryId: 5,
   },
 
   {
@@ -63,6 +68,7 @@ const productList = [
     status: "out_of_stock",
     imageUrl:
       "https://i.pinimg.com/originals/33/e9/fe/33e9fe1cfec6d0b54fa04b5bc479faa4.jpg",
+    categoryId: 2,
   },
 
   {
@@ -74,6 +80,7 @@ const productList = [
     status: "in_stock",
     imageUrl:
       "https://sketchok.com/images/articles/02-comics/006-superheroes-chibi/01/12.jpg",
+    categoryId: 3,
   },
 
   {
@@ -85,6 +92,7 @@ const productList = [
     status: "running_low",
     imageUrl:
       "https://i.pinimg.com/originals/b9/f8/28/b9f82843262ebb7af01f22074e452f36.jpg",
+    categoryId: 2,
   },
 
   {
@@ -96,6 +104,7 @@ const productList = [
     status: "running_low",
     imageUrl:
       "https://cdn.dribbble.com/users/228053/screenshots/2692658/vision4.png?compress=1&resize=400x300",
+    categoryId: 5,
   },
 ];
 
@@ -145,4 +154,27 @@ const userList = [
   },
 ];
 
-module.exports = { productList, categoryList, userList };
+const orderList = [
+  { userId: 1, status: "New", comment: "new order", totalAmount: 199.98 },
+  {
+    userId: 2,
+    status: "CheckOut",
+    comment: "order checked out",
+    totalAmount: 1770.0,
+  },
+  {
+    userId: 1,
+    status: "Completed",
+    comment: "order completed",
+    totalAmount: 3540.0,
+  },
+  { userId: 3, status: "Paid", comment: "order paid", totalAmount: 99.99 },
+];
+
+const orderItems = [
+  { quantity: 1, price: 99.99, orderId: 1, productId: 1 },
+  { quantity: 1, price: 99.99, orderId: 1, productId: 2 },
+  { quantity: 1, price: 99.99, orderId: 2, productId: 3 },
+];
+
+module.exports = { productList, categoryList, userList, orderList, orderItems };

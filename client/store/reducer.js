@@ -1,10 +1,16 @@
 import type from "./type";
-import action from "./actions";
-const initState = { allProducts: [], singleProduct: {} };
+
+const initState = {
+  allProducts: [],
+  singleProduct: {},
+  allOrders: [],
+  openOrder: {},
+  cartItems: [],
+};
 
 export const allProductsReducer = (state = initState.allProducts, action) => {
   switch (action.type) {
-    case type.SET_ALL_PRODUCT:
+    case type.SET_ALL_PRODUCTS:
       return action.allProducts;
     case type.CREATE_PRODUCT:
       return [...state, action.newProduct];
@@ -26,6 +32,43 @@ export const singleProductReducer = (
       return action.singleProduct;
     case type.UPDATE_PRODUCT:
       return action.productToUpdate;
+    default:
+      return state;
+  }
+};
+
+export const orderReducer = (state = initState.allOrders, action) => {
+  switch (action.type) {
+    case type.SET_ALL_ORDERS:
+      return action.allOrders;
+    case type.CREATE_ORDER:
+      return [...state, action.newOrder];
+    case type.DELETE_ORDER:
+      return state.filter((order) => order.id !== action.orderToDelete.id);
+    case type.UPDATE_ORDER: // need to change
+      return null;
+    default:
+      return state;
+  }
+};
+
+export const cartReducer = (state = initState.cartItems, action) => {
+  switch (action.type) {
+    case type.SET_CART_ITEMS:
+      return action.cartItems;
+    case type.ADD_CART_ITEM:
+      return [...state, action.newItem];
+    case type.DELETE_CART_ITEM:
+      return state.filter((item) => item.id !== action.itemToDelete.id);
+    default:
+      return state;
+  }
+};
+
+export const openOrderReducer = (state = initState.openOrder, action) => {
+  switch (action.type) {
+    case type.SET_OPEN_ORDER:
+      return action.openOrder;
     default:
       return state;
   }

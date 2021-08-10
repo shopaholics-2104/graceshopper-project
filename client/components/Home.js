@@ -1,18 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
+import {
+  _fetchAllOrders,
+  _fetchCartItems,
+  _fetchOpenOrder,
+} from "../store/thunk";
 
 /**
  * COMPONENT
  */
-export const Home = (props) => {
-  const { username } = props;
+export class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    const { fetchAllOrders, userId } = this.props;
+    fetchAllOrders(userId);
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {username}</h3>
-    </div>
-  );
-};
+  render() {
+    const { username, orderHistory } = this.props;
+
+    return (
+      <div>
+        <h3>Welcome, {username}</h3>
+        <h4>Order History ({orderHistory.length})</h4>
+      </div>
+    );
+  }
+}
 
 /**
  * CONTAINER
@@ -20,7 +36,18 @@ export const Home = (props) => {
 const mapState = (state) => {
   return {
     username: state.auth.username,
+    userId: state.auth.id,
+    orderHistory: state.allOrders.filter((order) => order.status !== "New"),
+    openOrder: state.openOrder,
   };
 };
 
-export default connect(mapState)(Home);
+const mapDispatch = (dispatch) => {
+  return {
+    fetchAllOrders: (userId) => {
+      dispatch(_fetchAllOrders(userId));
+    },
+  };
+};
+
+export default connect(mapState, mapDispatch)(Home);
