@@ -2,6 +2,22 @@ const router = require('express').Router()
 const { models: { Order, Product, Order_Item }} = require('../db')
 module.exports = router
 
+router.get("/:userId", async (req, res, next) => {
+  res.status(200).send(
+    await Order.findAll({
+      where: {
+        userId: req.params.userId,
+      },
+      include: {
+        model: Product,
+      },
+    })
+  );
+});
+
+
+
+
 router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll()
@@ -11,17 +27,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-/* shouldn't editing the order be a front end  thing?
-router.put('/edit', async (req, res, next) => {
-    try{
-
-
-    }
-    catch(ex){
-        next(ex)
-    }
-})
-*/
 
 
 router.delete('/:id', async(req, res, next)=> {
@@ -34,3 +39,4 @@ router.delete('/:id', async(req, res, next)=> {
     next(ex)
   }
 })
+

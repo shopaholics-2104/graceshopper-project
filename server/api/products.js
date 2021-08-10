@@ -1,6 +1,8 @@
-const router = require('express').Router()
-const { models: { Product }} = require('../db')
-module.exports = router
+
+const router = require("express").Router();
+const {
+  models: { Product },
+} = require("../db");
 
 //get all products even if not in stock
 router.get('/', async (req, res, next) => {
@@ -83,3 +85,6 @@ router.delete('/:id', async(req, res, next)=> {
     next(ex)
   }
 })
+
+
+module.exports = router;

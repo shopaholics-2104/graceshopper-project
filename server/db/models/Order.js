@@ -6,6 +6,10 @@ const Order = db.define("order", {
     type: Sequelize.ENUM("New", "CheckOut", "Paid", "Completed"),
   },
   comment: { type: Sequelize.TEXT },
+  totalAmount: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+  },
 });
 
 module.exports = Order;

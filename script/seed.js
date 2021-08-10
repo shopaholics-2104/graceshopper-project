@@ -2,8 +2,16 @@
 
 const {
   db,
-  models: { User },
+  models: { User, Product, Category, Order },
 } = require("../server/db");
+const Order_Item = require("../server/db/models/OrderItem");
+const {
+  productList,
+  categoryList,
+  userList,
+  orderList,
+  orderItems,
+} = require("./dummyData");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -14,43 +22,23 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({
-      username: "cody",
-      password: "123",
-      firstName: "cody",
-      lastName: "smith",
-      email: "cody@gmail.com",
-    }),
-    User.create({
-      username: "murphy",
-      password: "123",
-      firstName: "murphy",
-      lastName: "smith",
-      email: "murphy@gmail.com",
-    }),
-    User.create({
-      username: "Lucy",
-      password: "123",
-      firstName: "lucy",
-      lastName: "smith",
-      email: "lucy@gmail.com",
-    }),
-    User.create({
-      username: "Jing",
-      password: "123",
-      firstName: "jing",
-      lastName: "smith",
-      email: "jing@gmail.com",
-    }),
-    User.create({
-      username: "Tashif",
-      password: "123",
-      firstName: "tashif",
-      lastName: "smith",
-      email: "tashif@gmail.com",
-    }),
-  ]);
+
+  const users = await User.bulkCreate(userList);
+
+  // Createing Categories
+  const categories = await Category.bulkCreate(categoryList);
+
+  // Creating Products
+  const products = await Product.bulkCreate(productList);
+
+  //Creating Orders
+
+  const orders = await Order.bulkCreate(orderList);
+
+  //Creating Order_items
+
+  const order_items = await Order_Item.bulkCreate(orderItems);
+
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
@@ -58,6 +46,10 @@ async function seed() {
     users: {
       cody: users[0],
       murphy: users[1],
+    },
+    products: {
+      waterCookie: products[0],
+      fireCookie: products[1],
     },
   };
 }
@@ -92,9 +84,3 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;
-
-//testing
-//I added another line
-//here is another line
-
-//here is the 3rd line
