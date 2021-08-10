@@ -1,14 +1,14 @@
 const productList = [
   {
-    name: "Wakanda forever",
-    description:
-      "This cookie will give you the enhanced senses, with superhuman condition and speed,on top of that you will gain magical resistance, and a super cool vibranium-assisted outfit.",
-    single_price: 99.99,
-    dozen_price: 1170.0,
-    status: "running_low",
-    imageUrl:
-      "https://i.pinimg.com/originals/00/b3/a8/00b3a817a303dbe6fedb81af9a65394c.png",
-    categoryId: 1,
+
+      name: 'Wakanda forever',
+      description: "This cookie will give you the enhanced senses, with superhuman condition and speed,on top of that you will gain magical resistance, and a super cool vibranium-assisted outfit.",
+      single_price: 99.99,
+      dozen_price: 1170.00,
+      status: 'running_low',
+      imageUrl: 'https://i.pinimg.com/originals/00/b3/a8/00b3a817a303dbe6fedb81af9a65394c.png',
+      categoryId: 1
+
   },
 
   {
@@ -16,11 +16,13 @@ const productList = [
     description:
       "This cookie will have you extraordinary set of powers. Telekinesis, telepathy, and energy manipulation, what more do you need?",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "running_low",
     imageUrl:
       "https://64.media.tumblr.com/77e94c182e27591ccf9d0ae2477f556f/tumblr_od2y0kfDY91vycuvuo1_1280.jpg",
     categoryId: 3,
+
   },
 
   {
@@ -28,6 +30,7 @@ const productList = [
     description:
       "This cookie will provide you superhuman strength, aglility and stamina. And if that's not enough, it will also give you healing ability, and have you be able to fight like Bruce Lee",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "in_stock",
     imageUrl:
@@ -35,11 +38,13 @@ const productList = [
     categoryId: 4,
   },
 
+
   {
     name: "Groot",
     description:
       "Have you ever thought about becoming a tree with some sick superpower? if you have, now this cookie is your chance, not only this cookie will make you to have superhuman strength to lift and break, it will also gift you the ability to generate flowers, twig and leaves.",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "in_stock",
     imageUrl:
@@ -47,11 +52,13 @@ const productList = [
     categoryId: 1,
   },
 
+
   {
     name: "Hawkeye",
     description:
       "Even though this cookie won't equip you with any superhuman power, but with this cookie, you will be at the very peak of human condition, and gain the exceptional fencing and marksmanship",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "running_low",
     imageUrl:
@@ -59,11 +66,13 @@ const productList = [
     categoryId: 5,
   },
 
+
   {
     name: "Doctor Strange",
     description:
       "Consider this cookie will transform you to be the most powerful being in the Universe, we suggest you consume it carefully",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "out_of_stock",
     imageUrl:
@@ -76,6 +85,7 @@ const productList = [
     description:
       "We know the look of this cookie isn't too appaetizing, but trust us when we say this cookie will provide you some marvelous abilities.",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "in_stock",
     imageUrl:
@@ -88,6 +98,7 @@ const productList = [
     description:
       "Supersonic flight speed, enhanced maneuverability and agility, force generation, extreme vision, pilot, combatant, marksman and tactician. Communication with birds. With those being said, we don't see why you still hesitate",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "running_low",
     imageUrl:
@@ -100,6 +111,7 @@ const productList = [
     description:
       "This cookie will transform you to an ideal hybird of organic and inorganic material form, with the ability to understand emothions. And as if those are not awesome enough, this cookie will also offer you genius-level intellect and master combatant",
     single_price: 99.99,
+
     dozen_price: 1170.0,
     status: "running_low",
     imageUrl:
@@ -170,6 +182,7 @@ const orderList = [
   },
   { userId: 3, status: "Paid", comment: "order paid", totalAmount: 99.99 },
 ];
+
 
 const orderItems = [
   { quantity: 1, price: 99.99, orderId: 1, productId: 1 },

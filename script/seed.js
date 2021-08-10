@@ -22,6 +22,7 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
+
   const users = await User.bulkCreate(userList);
 
   // Createing Categories
@@ -37,6 +38,7 @@ async function seed() {
   //Creating Order_items
 
   const order_items = await Order_Item.bulkCreate(orderItems);
+
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);

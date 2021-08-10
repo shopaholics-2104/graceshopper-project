@@ -38,10 +38,6 @@ const User = db.define("user", {
   },
   addressLine_1: {
     type: Sequelize.STRING,
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true,
-    // },
   },
   addressLine_2: {
     type: Sequelize.STRING,
