@@ -41,8 +41,6 @@ export const orderReducer = (state = initState.allOrders, action) => {
   switch (action.type) {
     case type.SET_ALL_ORDERS:
       return action.allOrders;
-    case type.CREATE_ORDER:
-      return [...state, action.newOrder];
     case type.DELETE_ORDER:
       return state.filter((order) => order.id !== action.orderToDelete.id);
     case type.UPDATE_ORDER: // need to change

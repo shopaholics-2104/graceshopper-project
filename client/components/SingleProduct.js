@@ -1,6 +1,7 @@
 const React = require("react");
 const { connect } = require("react-redux");
-import { _fetchSingleProduct, _fetchAllOrders, _addItem } from "../store/thunk";
+import { _fetchSingleProduct, _fetchOpenOrder, _addItem } from "../store/thunk";
+import axios from "axios";
 
 class Product extends React.Component {
   constructor(props) {
@@ -14,14 +15,32 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchSingleProduct, fetchAllOrders, userId } = this.props;
+    const { fetchSingleProduct, userId, fetchOpenOrder } = this.props;
     const productId = this.props.match.params.productId;
     fetchSingleProduct(productId);
-    fetchAllOrders(userId);
+    !!userId ? fetchOpenOrder(userId) : null;
+  }
+  componentDidUpdate(previousProps) {
+    const { userId, fetchOpenOrder } = this.props;
+    if (previousProps.userId !== userId) {
+      fetchOpenOrder(userId);
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    // // this is the post request for when you only have userId
+    //     const post = () => {
+    //       axios.post(`/api/orders/${this.props.userId}`, {
+    //         product: this.props.singleProduct,
+    //         newItem: {
+    //           quantity: Number(this.state.quantity),
+    //           price: Number(this.state.price),
+    //         },
+    //       });
+    //     };
+    //     post();
+
     const newItem = {
       productId: Number(this.props.match.params.productId),
       quantity: Number(this.state.quantity),
@@ -29,11 +48,11 @@ class Product extends React.Component {
       orderId: this.props.openOrder.id,
     };
     this.props.addItem(newItem);
-
-    // this.setState({
-    //   quantity: 0,
-    //   price: 0,
-    // });
+    this.setState({
+      quantity: 0,
+      price: 0,
+    });
+    alert(`"${this.props.singleProduct.name}" is added to the cart`);
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -92,9 +111,10 @@ const mapDispatch = (dispatch) => ({
   fetchSingleProduct: (productId) => {
     dispatch(_fetchSingleProduct(productId));
   },
-  fetchAllOrders: (userId) => {
-    dispatch(_fetchAllOrders(userId));
+  fetchOpenOrder: (userId) => {
+    dispatch(_fetchOpenOrder(userId));
   },
+
   addItem: (newItem) => {
     dispatch(_addItem(newItem));
   },

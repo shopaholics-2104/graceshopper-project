@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Order_Item },
+  models: { Order_Item, Product },
 } = require("../db");
 
 router.get("/:orderId", async (req, res, next) => {
@@ -15,7 +15,7 @@ router.get("/:orderId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newItem = await Order_Item.create(req.body);
-    res.status(200).send(Order_Item.findByPk(newItem.id, { include: All }));
+    res.status(200);
   } catch (er) {
     console.log(er);
   }
