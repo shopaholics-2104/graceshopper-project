@@ -13,7 +13,7 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { openOrder } = this.props;
+    const { openOrder, totalAmount } = this.props;
     const cartItems = openOrder.products;
     return (
       <div>
@@ -49,7 +49,7 @@ class Cart extends React.Component {
               ))}
           </tbody>
         </table>
-        {/* <div> Total Amount: {openOrder && totalAmount.toFixed(2)}</div> */}
+        <div> Total Amount: {totalAmount}</div>
 
         <button type="button">Check Out</button>
         <button type="button">Clear the Cart</button>
@@ -61,6 +61,13 @@ class Cart extends React.Component {
 const mapState = (state) => ({
   userId: state.auth.id,
   openOrder: state.openOrder,
+  totalAmount: state.openOrder.products
+    ? state.openOrder.products.reduce(
+        (accum, product) =>
+          accum + product.order_item.price * product.order_item.quantity,
+        0
+      )
+    : 0.0,
 });
 
 const mapDispatch = (dispatch) => ({
