@@ -30,10 +30,7 @@ const actionCreator = {
     type: type.SET_OPEN_ORDER,
     openOrder,
   }),
-  createOrder: (newOrder) => ({
-    type: type.CREATE_ORDER,
-    newOrder,
-  }),
+
   deleteOrder: (orderToDelete) => ({
     type: type.DELETE_ORDER,
     orderToDelete,

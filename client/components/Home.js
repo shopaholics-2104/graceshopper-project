@@ -1,10 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  _fetchAllOrders,
-  _fetchCartItems,
-  _fetchOpenOrder,
-} from "../store/thunk";
+import { _fetchAllOrders } from "../store/thunk";
 
 /**
  * COMPONENT
@@ -38,7 +34,6 @@ const mapState = (state) => {
     username: state.auth.username,
     userId: state.auth.id,
     orderHistory: state.allOrders.filter((order) => order.status !== "New"),
-    openOrder: state.openOrder,
   };
 };
 

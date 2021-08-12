@@ -9,7 +9,6 @@ const type = {
   // login user activities affect order model (order status)
   SET_ALL_ORDERS: "SET_ALL_ORDERS",
   SET_OPEN_ORDER: "SET_OPEN_ORDER",
-  CREATE_ORDER: "CREATE_ORDER",
   DELETE_ORDER: "DELETE_ORDER",
   UPDATE_ORDER: "UPDATE_ORDER",
 
