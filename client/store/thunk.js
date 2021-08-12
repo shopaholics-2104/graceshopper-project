@@ -26,6 +26,7 @@ export const _fetchOpenOrder = (userId) => {
   return async (dispatch) => {
     const { data } = await axios.get(`/api/orders/open/${userId}`);
     dispatch(action.setOpenOrder(data));
+    dispatch(action.setItems(data.products));
   };
 };
 
@@ -36,3 +37,10 @@ export const _addItem = (newItem) => {
     dispatch(action.addItem(data));
   };
 };
+
+export const _removeCartItem = (productId, userId) => {
+  return async (dispatch)=> {
+    const { data } = await axios.put(`/api/order_items/${productId}`, {userId});
+    dispatch(action.removeItem(data));
+  }
+}

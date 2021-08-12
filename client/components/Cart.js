@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { _fetchOpenOrder } from "../store/thunk";
+import { _fetchOpenOrder, _removeCartItem } from "../store/thunk";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -13,8 +13,8 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { openOrder, totalAmount } = this.props;
-    const cartItems = openOrder.products;
+    const { openOrder, totalAmount, userId, cartItems, removeCartItem } = this.props;
+    
     return (
       <div>
         <h1>Cart Items ({cartItems && cartItems.length})</h1>
@@ -40,7 +40,9 @@ class Cart extends React.Component {
                     )}
                   </td>
                   <td>
-                    <button type="button"> remove </button>
+                    <button onClick = {()=>
+                    removeCartItem( item.id, userId )
+                    } type="button"> remove </button>
                   </td>
                   <td>
                     <button type="button"> change Qty </button>
@@ -60,9 +62,10 @@ class Cart extends React.Component {
 
 const mapState = (state) => ({
   userId: state.auth.id,
-  openOrder: state.openOrder,
-  totalAmount: state.openOrder.products
-    ? state.openOrder.products.reduce(
+  // openOrder: state.openOrder,
+  cartItems: state.cartItems,
+  totalAmount: state.cartItems
+    ? state.cartItems.reduce(
         (accum, product) =>
           accum + product.order_item.price * product.order_item.quantity,
         0
@@ -74,6 +77,9 @@ const mapDispatch = (dispatch) => ({
   fetchOpenOrder: (userId) => {
     dispatch(_fetchOpenOrder(userId));
   },
+  removeCartItem: (productId, userId) => {
+    dispatch(_removeCartItem(productId, userId))
+  }
 });
 
 export default connect(mapState, mapDispatch)(Cart);
