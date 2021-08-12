@@ -49,7 +49,7 @@ class Cart extends React.Component {
               ))}
           </tbody>
         </table>
-        <div> Total Amount: {totalAmount}</div>
+        <div> Total Amount: {totalAmount.toFixed(2)}</div>
 
         <button type="button">Check Out</button>
         <button type="button">Clear the Cart</button>

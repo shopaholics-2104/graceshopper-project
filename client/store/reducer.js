@@ -5,7 +5,6 @@ const initState = {
   singleProduct: {},
   allOrders: [],
   openOrder: {},
-  cartItems: [],
 };
 
 export const allProductsReducer = (state = initState.allProducts, action) => {
@@ -52,8 +51,6 @@ export const orderReducer = (state = initState.allOrders, action) => {
 
 export const cartReducer = (state = initState.cartItems, action) => {
   switch (action.type) {
-    case type.SET_CART_ITEMS:
-      return action.cartItems;
     case type.ADD_CART_ITEM:
       return [...state, action.newItem];
     case type.DELETE_CART_ITEM:

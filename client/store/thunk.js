@@ -29,10 +29,11 @@ export const _fetchOpenOrder = (userId) => {
   };
 };
 
-export const _addItem = (newItem) => {
+export const _addItem = (newItem, userId) => {
   return async (dispatch) => {
-    await axios.post(`/api/order_items`, newItem);
-    const { data } = await axios.get(`/api/products/${newItem.productId}`);
+    const { data } = await axios.post(`/api/orders/${userId}`, newItem);
+    // const { data } = await axios.get(`/api/products/${newItem.productId}`);
+    console.log(data);
     dispatch(action.addItem(data));
   };
 };

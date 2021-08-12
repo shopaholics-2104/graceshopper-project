@@ -18,36 +18,25 @@ class Product extends React.Component {
     const { fetchSingleProduct, userId, fetchOpenOrder } = this.props;
     const productId = this.props.match.params.productId;
     fetchSingleProduct(productId);
-    !!userId ? fetchOpenOrder(userId) : null;
+    // !!userId ? fetchOpenOrder(userId) : null;
   }
-  componentDidUpdate(previousProps) {
-    const { userId, fetchOpenOrder } = this.props;
-    if (previousProps.userId !== userId) {
-      fetchOpenOrder(userId);
-    }
-  }
+  // componentDidUpdate(previousProps) {
+  //   const { userId, fetchOpenOrder } = this.props;
+  //   if (previousProps.userId !== userId) {
+  //     fetchOpenOrder(userId);
+  //   }
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
-    // // this is the post request for when you only have userId
-    //     const post = () => {
-    //       axios.post(`/api/orders/${this.props.userId}`, {
-    //         product: this.props.singleProduct,
-    //         newItem: {
-    //           quantity: Number(this.state.quantity),
-    //           price: Number(this.state.price),
-    //         },
-    //       });
-    //     };
-    //     post();
-
+    const userId = this.props.userId;
+    const productId = Number(this.props.match.params.productId);
     const newItem = {
-      productId: Number(this.props.match.params.productId),
+      productId,
       quantity: Number(this.state.quantity),
       price: Number(this.state.price),
-      orderId: this.props.openOrder.id,
     };
-    this.props.addItem(newItem);
+    this.props.addItem(newItem, userId);
     this.setState({
       quantity: 0,
       price: 0,
@@ -115,8 +104,8 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchOpenOrder(userId));
   },
 
-  addItem: (newItem) => {
-    dispatch(_addItem(newItem));
+  addItem: (newItem, userId) => {
+    dispatch(_addItem(newItem, userId));
   },
 });
 export default connect(mapState, mapDispatch)(Product);
