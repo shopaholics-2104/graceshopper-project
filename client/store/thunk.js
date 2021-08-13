@@ -32,8 +32,8 @@ export const _fetchOpenOrder = (userId) => {
 
 export const _updateOrder = (order) => {
   return async (dispatch) => {
-    const updated = (await axios.put(`/api/orders/${order.id}`, order)).data;
-    dispatch(action.updateOrder(updated));
+    const { data } = await axios.put(`/api/orders/${order.id}`, order);
+    dispatch(action.updateOrder(data));
   };
 };
 
@@ -54,9 +54,9 @@ export const _removeItem = (productId, userId) => {
   };
 };
 
-export const _removeAllItems = (order) => {
+export const _clearCart = (order) => {
   return async (dispatch) => {
-    const { data } = await axios.put(`/api/order_items/clear/${order.id}`);
-    dispatch(action.removeAllItems(data));
+    await axios.delete(`/api/order_items/${order.id}`);
+    dispatch(action.clearCart());
   };
 };

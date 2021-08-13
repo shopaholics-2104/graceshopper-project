@@ -4,13 +4,13 @@ import {
   _fetchOpenOrder,
   _createOrder,
   _fetchAllOrders,
-  _removeAllItems,
+  _clearCart,
 } from "../store/thunk";
 import { connect } from "react-redux";
 
 class ClearButton extends Component {
   handleClear = async () => {
-    await this.props.removeAllItems(this.props.openOrder);
+    await this.props.clearCart(this.props.openOrder);
     await this.props.fetchOpenOrder(this.props.userId);
   };
 
@@ -26,7 +26,7 @@ class ClearButton extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  removeAllItems: (order) => dispatch(_removeAllItems(order)),
+  clearCart: (order) => dispatch(_clearCart(order)),
   fetchOpenOrder: (userId) => dispatch(_fetchOpenOrder(userId)),
 });
 

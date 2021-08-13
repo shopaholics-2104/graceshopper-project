@@ -60,12 +60,8 @@ router.delete("/:id", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id, {
-      include: {
-        model: Product,
-      },
-    });
-    res.send(await order.update(req.body));
+    const order = await Order.findByPk(req.params.id);
+    res.status(200).send(await order.update(req.body));
   } catch (err) {
     next(err);
   }

@@ -7,12 +7,11 @@ const Order = require("../db/models/Order");
 router.get("/:orderId", async (req, res, next) => {
   res.status(200).send(
     await Order_Item.findAll({
-      where: {
-        orderId: req.params.orderId,
-      },
+      where: { orderId: req.params.orderId },
     })
   );
 });
+
 router.post("/", async (req, res, next) => {
   try {
     const newItem = await Order_Item.create(req.body);
@@ -39,13 +38,12 @@ router.put("/:productId", async (req, res, next) => {
   }
 });
 
-router.put("/clear/:orderId", async (req, res, next) => {
+router.delete("/:orderId", async (req, res, next) => {
   try {
-    const cart = await Order.findByPk(req.params.orderId);
-    await cart.removeProducts(await Product.findAll());
-    res.send([]);
-  } catch (err) {
-    next(err);
+    await Order_Item.destroy({ where: { orderId: req.params.orderId } });
+    res.sendStatus(204);
+  } catch (ex) {
+    next(ex);
   }
 });
 
