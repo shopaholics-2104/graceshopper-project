@@ -22,22 +22,31 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-
 //DELETE items from cart => api/cart/:productId
-router.put('/:productId', async(req, res, next) => {
+router.put("/:productId", async (req, res, next) => {
   try {
-    
     const cart = await Order.findOne({
-      where:{
-         status: 'New', userId: req.body.userId
-      }
-    })
-    const product = await Product.findByPk(req.params.productId)
-    await cart.removeProduct(product)
-    res.send(product)
-  } catch(err) {
-    next(err)
+      where: {
+        status: "New",
+        userId: req.body.userId,
+      },
+    });
+    const product = await Product.findByPk(req.params.productId);
+    await cart.removeProduct(product);
+    res.send(product);
+  } catch (err) {
+    next(err);
   }
-})
+});
+
+router.put("/clear/:orderId", async (req, res, next) => {
+  try {
+    const cart = await Order.findByPk(req.params.orderId);
+    await cart.removeProducts(await Product.findAll());
+    res.send([]);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;
