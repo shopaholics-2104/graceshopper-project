@@ -43,8 +43,10 @@ export const orderReducer = (state = initState.allOrders, action) => {
       return action.allOrders;
     case type.DELETE_ORDER:
       return state.filter((order) => order.id !== action.orderToDelete.id);
-    case type.UPDATE_ORDER: // need to change
-      return null;
+    case type.UPDATE_ORDER:
+      return state.map((order) =>
+        order.id === action.orderToUpdate.id ? action.orderToUpdate : order
+      );
     default:
       return state;
   }
@@ -58,6 +60,8 @@ export const cartReducer = (state = initState.cartItems, action) => {
       return [...state, action.newItem];
     case type.REMOVE_CART_ITEM:
       return state.filter((item) => item.id !== action.itemToRemove.id);
+    case type.CLEAR_CART:
+      return [];
     default:
       return state;
   }

@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { _fetchOpenOrder, _removeCartItem } from "../store/thunk";
+import { _fetchOpenOrder, _removeItem } from "../store/thunk";
+import CheckoutButton from "./CheckoutButton";
+import ClearButton from "./ClearButton";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -57,9 +59,8 @@ class Cart extends React.Component {
           </tbody>
         </table>
         <div> Total Amount: {totalAmount}</div>
-
-        <button type="button">Check Out</button>
-        <button type="button">Clear the Cart</button>
+        <CheckoutButton />
+        <ClearButton />
       </div>
     );
   }
@@ -83,7 +84,7 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchOpenOrder(userId));
   },
   removeCartItem: (productId, userId) => {
-    dispatch(_removeCartItem(productId, userId));
+    dispatch(_removeItem(productId, userId));
   },
 });
 
