@@ -13,8 +13,9 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { openOrder, totalAmount, userId, cartItems, removeCartItem } = this.props;
-    
+    const { openOrder, totalAmount, userId, cartItems, removeCartItem } =
+      this.props;
+
     return (
       <div>
         <h1>Cart Items ({cartItems && cartItems.length})</h1>
@@ -40,9 +41,13 @@ class Cart extends React.Component {
                     )}
                   </td>
                   <td>
-                    <button onClick = {()=>
-                    removeCartItem( item.id, userId )
-                    } type="button"> remove </button>
+                    <button
+                      onClick={() => removeCartItem(item.id, userId)}
+                      type="button"
+                    >
+                      {" "}
+                      remove{" "}
+                    </button>
                   </td>
                   <td>
                     <button type="button"> change Qty </button>
@@ -78,8 +83,8 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchOpenOrder(userId));
   },
   removeCartItem: (productId, userId) => {
-    dispatch(_removeCartItem(productId, userId))
-  }
+    dispatch(_removeCartItem(productId, userId));
+  },
 });
 
 export default connect(mapState, mapDispatch)(Cart);
