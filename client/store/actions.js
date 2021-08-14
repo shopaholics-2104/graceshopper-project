@@ -57,5 +57,8 @@ const actionCreator = {
     type: type.REMOVE_CART_ITEM,
     itemToRemove,
   }),
+  clearCart: () => ({
+    type: type.CLEAR_CART,
+  }),
 };
 export default actionCreator;
