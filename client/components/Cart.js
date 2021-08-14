@@ -84,7 +84,7 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchOpenOrder(userId));
   },
   removeCartItem: (productId, userId) => {
-    dispatch(_removeCartItem(productId, userId));
+    dispatch(_removeItem(productId, userId));
   },
 });
 
