@@ -48,20 +48,6 @@ router.get("/open/:userId", async (req, res, next) => {
       );
 });
 
-// router.get("/checkItem/:userId", async (req, res, next) => {
-//   try {
-//     const openOrder = await Order.findOne({
-//       where: {
-//         userId: req.params.userId,
-//         status: "New",
-//       },
-//     });
-
-//     res.status(200).send(await openOrder.has)
-//   } catch (er) {
-//     next(er);
-//   }
-// });
 //this is a post request for single product when only userId & product.id are passed into server
 router.post("/:userId", async (req, res, next) => {
   try {
@@ -69,7 +55,7 @@ router.post("/:userId", async (req, res, next) => {
     const userId = req.params.userId;
 
     const product = await Product.findByPk(productId);
-    const openOrder = await Order.findOne({
+    const openOrder = await Order.findOrCreate({
       where: {
         userId,
         status: "New",
@@ -79,17 +65,9 @@ router.post("/:userId", async (req, res, next) => {
       },
     });
 
-    const newOpenOrder = openOrder
-      ? openOrder
-      : await Order.create({
-          userId,
-          status: "New",
-          totalAmount: 0.0,
-        });
-
-    await newOpenOrder.addProduct(product, {
-      through: req.body,
-    });
+    //     openOrder.hasProduct(product)?:await openOrder.addProduct(product, {
+    //   through: req.body,
+    // });
     // const result = await Order.findOne({
     //   where: {
     //     userId,
@@ -100,7 +78,7 @@ router.post("/:userId", async (req, res, next) => {
     //   },
     // });
 
-    const result = await newOpenOrder.hasProduct(productId);
+    const result = await openOrder.hasProduct(productId);
     res.status(200).send(result);
   } catch (err) {
     console.log(err);
