@@ -15,17 +15,10 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchSingleProduct, userId, fetchOpenOrder } = this.props;
+    const { fetchSingleProduct } = this.props;
     const productId = this.props.match.params.productId;
     fetchSingleProduct(productId);
-    // !!userId ? fetchOpenOrder(userId) : null;
   }
-  // componentDidUpdate(previousProps) {
-  //   const { userId, fetchOpenOrder } = this.props;
-  //   if (previousProps.userId !== userId) {
-  //     fetchOpenOrder(userId);
-  //   }
-  // }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -38,7 +31,7 @@ class Product extends React.Component {
     };
     this.props.addItem(newItem, userId);
     this.setState({
-      quantity: 0,
+      quantity: 1,
       price: 0,
     });
     alert(`"${this.props.singleProduct.name}" is added to the cart`);
@@ -48,7 +41,7 @@ class Product extends React.Component {
   }
 
   render() {
-    const { imageUrl, name, description, single_price, dozen_price, status } =
+    const { imageUrl, name, description, single_price, status } =
       this.props.singleProduct;
     const { quantity, price } = this.state;
 
@@ -61,9 +54,8 @@ class Product extends React.Component {
         <div>Inventory Status: {status}</div>
         <form onSubmit={this.handleSubmit}>
           <select value={price} name="price" onChange={this.handleChange}>
-            <option value="">Buy Single Or Dozen</option>
+            <option value="">Select unit</option>
             <option value={single_price}>single unit</option>
-            <option value={dozen_price}>dozen</option>
           </select>
 
           {!price ? (

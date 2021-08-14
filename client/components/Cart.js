@@ -13,8 +13,8 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { openOrder, totalAmount } = this.props;
-    const cartItems = openOrder.products;
+    const { openOrder, totalAmount, cartItems } = this.props;
+
     return (
       <div>
         <h1>Cart Items ({cartItems && cartItems.length})</h1>
@@ -61,6 +61,7 @@ class Cart extends React.Component {
 const mapState = (state) => ({
   userId: state.auth.id,
   openOrder: state.openOrder,
+  cartItems: state.cartItems,
   totalAmount: state.openOrder.products
     ? state.openOrder.products.reduce(
         (accum, product) =>

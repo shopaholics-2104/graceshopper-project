@@ -12,4 +12,41 @@ const Order = db.define("order", {
   },
 });
 
+Order.prototype.findOrCreateOpenOrder = async (userId) => {
+  const [openOrder] = await Order.findOrCreate({
+    where: {
+      userId,
+      status: "New",
+    },
+    include: {
+      all: true,
+    },
+  });
+
+  return openOrder;
+};
+
+Order.prototype.addItem = async (openOrder, product, itemInfo) => {
+  if (await openOrder.hasProduct(product.id)) {
+    const item = (
+      await openOrder.getProducts({ where: { id: product.id } })
+    )[0];
+    item.order_item.quantity += itemInfo.quantity;
+    await item.order_item.save();
+    return item;
+  } else {
+    await openOrder.addProduct(product, {
+      through: itemInfo,
+    });
+  }
+
+  return (
+    await openOrder.getProducts({
+      where: {
+        id: product.id,
+      },
+    })
+  )[0];
+};
+
 module.exports = Order;

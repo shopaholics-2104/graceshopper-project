@@ -32,8 +32,7 @@ export const _fetchOpenOrder = (userId) => {
 export const _addItem = (newItem, userId) => {
   return async (dispatch) => {
     const { data } = await axios.post(`/api/orders/${userId}`, newItem);
-    // const { data } = await axios.get(`/api/products/${newItem.productId}`);
-    console.log(data);
+    console.log("this is addeditem", data);
     dispatch(action.addItem(data));
   };
 };
