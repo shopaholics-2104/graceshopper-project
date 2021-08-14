@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { _fetchOpenOrder, _removeItem } from "../store/thunk";
+import { _fetchOpenOrder, _removeItem, _updateItem } from "../store/thunk";
 import CheckoutButton from "./CheckoutButton";
 import ClearButton from "./ClearButton";
 
@@ -14,9 +14,23 @@ class Cart extends React.Component {
     this.props.fetchOpenOrder(this.props.userId);
   }
 
+  handleSubmit = (ev) => {
+    ev.preventDefault();
+  };
+
+  onChangeHandler = (ev) => {
+    const change = {};
+  };
+
   render() {
-    const { openOrder, totalAmount, userId, cartItems, removeCartItem } =
-      this.props;
+    const {
+      openOrder,
+      totalAmount,
+      userId,
+      cartItems,
+      removeCartItem,
+      updateCartItem,
+    } = this.props;
 
     return (
       <div>
@@ -52,7 +66,19 @@ class Cart extends React.Component {
                     </button>
                   </td>
                   <td>
-                    <button type="button"> change Qty </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        updateCartItem(
+                          item.order_item.orderId,
+                          item.order_item.productId,
+                          item.order_item.quantity + 1
+                        )
+                      }
+                    >
+                      {" "}
+                      + 1{" "}
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -84,7 +110,10 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchOpenOrder(userId));
   },
   removeCartItem: (productId, userId) => {
-    dispatch(_removeCartItem(productId, userId));
+    dispatch(_removeItem(productId, userId));
+  },
+  updateCartItem: (orderId, productId, quantity) => {
+    dispatch(_updateItem(orderId, productId, quantity));
   },
 });
 
