@@ -37,10 +37,10 @@ export const _updateOrder = (order) => {
   };
 };
 
-export const _addItem = (newItem, userId) => {
+export const _addItem = (newItem) => {
   return async (dispatch) => {
-    const { data } = await axios.post(`/api/orders/${userId}`, newItem);
-    console.log("this is addeditem", data);
+    await axios.post(`/api/order_items`, newItem);
+    const { data } = await axios.get(`/api/products/${newItem.productId}`);
     dispatch(action.addItem(data));
   };
 };

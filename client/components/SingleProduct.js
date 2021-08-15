@@ -15,23 +15,41 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchSingleProduct } = this.props;
+    const { fetchSingleProduct, userId, fetchOpenOrder } = this.props;
     const productId = this.props.match.params.productId;
     fetchSingleProduct(productId);
+    !!userId ? fetchOpenOrder(userId) : null;
+  }
+  componentDidUpdate(previousProps) {
+    const { userId, fetchOpenOrder } = this.props;
+    if (previousProps.userId !== userId) {
+      fetchOpenOrder(userId);
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const userId = this.props.userId;
-    const productId = Number(this.props.match.params.productId);
+    // // this is the post request for when you only have userId
+    //     const post = () => {
+    //       axios.post(`/api/orders/${this.props.userId}`, {
+    //         product: this.props.singleProduct,
+    //         newItem: {
+    //           quantity: Number(this.state.quantity),
+    //           price: Number(this.state.price),
+    //         },
+    //       });
+    //     };
+    //     post();
+
     const newItem = {
-      productId,
+      productId: Number(this.props.match.params.productId),
       quantity: Number(this.state.quantity),
       price: Number(this.state.price),
+      orderId: this.props.openOrder.id,
     };
-    this.props.addItem(newItem, userId);
+    this.props.addItem(newItem);
     this.setState({
-      quantity: 1,
+      quantity: 0,
       price: 0,
     });
     alert(`"${this.props.singleProduct.name}" is added to the cart`);
@@ -41,7 +59,7 @@ class Product extends React.Component {
   }
 
   render() {
-    const { imageUrl, name, description, single_price, status } =
+    const { imageUrl, name, description, single_price, dozen_price, status } =
       this.props.singleProduct;
     const { quantity, price } = this.state;
 
@@ -54,8 +72,9 @@ class Product extends React.Component {
         <div>Inventory Status: {status}</div>
         <form onSubmit={this.handleSubmit}>
           <select value={price} name="price" onChange={this.handleChange}>
-            <option value="">Select unit</option>
+            <option value="">Buy Single Or Dozen</option>
             <option value={single_price}>single unit</option>
+            <option value={dozen_price}>dozen</option>
           </select>
 
           {!price ? (
@@ -96,8 +115,8 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchOpenOrder(userId));
   },
 
-  addItem: (newItem, userId) => {
-    dispatch(_addItem(newItem, userId));
+  addItem: (newItem) => {
+    dispatch(_addItem(newItem));
   },
 });
 export default connect(mapState, mapDispatch)(Product);

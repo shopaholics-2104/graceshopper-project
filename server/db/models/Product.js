@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const { STRING, TEXT, DECIMAL, ENUM } = Sequelize;
+const { STRING, TEXT, FLOAT, INTEGER, ENUM } = Sequelize;
 
 const db = require("../db");
 
@@ -21,7 +21,15 @@ const Product = db.define("product", {
   },
 
   single_price: {
-    type: DECIMAL(10, 2),
+    type: FLOAT,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+
+  dozen_price: {
+    type: FLOAT,
     allowNull: false,
     validate: {
       notEmpty: true,
