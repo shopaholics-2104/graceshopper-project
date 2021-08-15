@@ -60,6 +60,10 @@ export const cartReducer = (state = initState.cartItems, action) => {
       return [...state, action.newItem];
     case type.REMOVE_CART_ITEM:
       return state.filter((item) => item.id !== action.itemToRemove.id);
+    case type.UPDATE_CART_ITEM:
+      return state.map((item) =>
+        item.id === action.itemToUpdate.id ? action.itemToUpdate : item
+      );
     case type.CLEAR_CART:
       return [];
     default:

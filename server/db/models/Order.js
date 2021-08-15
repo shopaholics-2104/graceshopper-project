@@ -12,4 +12,14 @@ const Order = db.define("order", {
   },
 });
 
+Order.prototype.updateItem = async (openOrder, itemInfo) => {
+  const item = (
+    await openOrder.getProducts({ where: { id: itemInfo.productId } })
+  )[0];
+
+  item.order_item.quantity = itemInfo.quantity;
+  await item.order_item.save();
+  return item;
+};
+
 module.exports = Order;
