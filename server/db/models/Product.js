@@ -28,6 +28,14 @@ const Product = db.define("product", {
     },
   },
 
+  dozen_price: {
+    type: DECIMAL(10, 2),
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+
   status: {
     type: ENUM("out_of_stock", "in_stock", "running_low"),
   },

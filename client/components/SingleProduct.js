@@ -23,13 +23,12 @@ class Product extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const userId = this.props.userId;
-    const productId = Number(this.props.match.params.productId);
     const newItem = {
-      productId,
+      productId: Number(this.props.match.params.productId),
       quantity: Number(this.state.quantity),
       price: Number(this.state.price),
     };
-    this.props.addItem(newItem, userId);
+    this.props.addItem(userId, newItem);
     this.setState({
       quantity: 1,
       price: 0,
@@ -41,7 +40,7 @@ class Product extends React.Component {
   }
 
   render() {
-    const { imageUrl, name, description, single_price, status } =
+    const { imageUrl, name, description, single_price, dozen_price, status } =
       this.props.singleProduct;
     const { quantity, price } = this.state;
 
@@ -54,8 +53,9 @@ class Product extends React.Component {
         <div>Inventory Status: {status}</div>
         <form onSubmit={this.handleSubmit}>
           <select value={price} name="price" onChange={this.handleChange}>
-            <option value="">Select unit</option>
+            <option value="">Buy Single Or Dozen</option>
             <option value={single_price}>single unit</option>
+            <option value={dozen_price}>dozen</option>
           </select>
 
           {!price ? (
@@ -84,7 +84,6 @@ class Product extends React.Component {
 const mapState = (state) => ({
   singleProduct: state.singleProduct,
   userId: state.auth.id,
-  openOrder: state.openOrder,
   cartItems: state.cartItems,
 });
 
@@ -96,8 +95,8 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchOpenOrder(userId));
   },
 
-  addItem: (newItem, userId) => {
-    dispatch(_addItem(newItem, userId));
+  addItem: (userId, newItem) => {
+    dispatch(_addItem(userId, newItem));
   },
 });
 export default connect(mapState, mapDispatch)(Product);

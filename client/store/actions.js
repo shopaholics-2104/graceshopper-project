@@ -1,11 +1,9 @@
 import type from "./type";
-
-export const actionCreator = {
+const actionCreator = {
   setAllProducts: (allProducts) => ({
     type: type.SET_ALL_PRODUCTS,
     allProducts,
   }),
-
   setSingleProduct: (singleProduct) => ({
     type: type.SET_SINGLE_PRODUCT,
     singleProduct,
@@ -43,7 +41,6 @@ export const actionCreator = {
   }),
 
   //
-
   setItems: (cartItems) => ({
     type: type.SET_CART_ITEMS,
     cartItems,

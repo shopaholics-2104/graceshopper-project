@@ -7,7 +7,8 @@ const Order = db.define("order", {
   },
   comment: { type: Sequelize.TEXT },
   totalAmount: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
     defaultValue: 0.0,
   },
 });

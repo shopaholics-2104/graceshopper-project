@@ -27,30 +27,9 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 router.get("/open/:userId", async (req, res, next) => {
-  const userId = req.params.userId;
-  const openOrder = Order.prototype.findOrCreateOpenOrder(userId);
-  res.status(200).send(openOrder);
-});
-
-
-//this is a post request for single product when only userId & product.id are passed into server
-router.post("/:userId", async (req, res, next) => {
-  try {
-    const productId = req.body.productId;
-    const userId = req.params.userId;
-
-    const product = await Product.findByPk(productId);
-    const openOrder = await Order.prototype.findOrCreateOpenOrder(userId);
-    const addedItem = await Order.prototype.addItem(
-      openOrder,
-      product,
-      req.body
-    );
-
-    res.status(200).send(addedItem);
-  } catch (err) {
-    console.log(err);
-  }
+  res
+    .status(200)
+    .send(await Order.prototype.findOrCreateOpenOrder(req.params.userId));
 });
 
 router.delete("/:id", async (req, res, next) => {
@@ -69,6 +48,20 @@ router.put("/:id", async (req, res, next) => {
     res.status(200).send(await order.update(req.body));
   } catch (err) {
     next(err);
+  }
+});
+
+router.post("/:userId", async (req, res, next) => {
+  try {
+    const openOrder = await Order.prototype.findOrCreateOpenOrder(
+      req.params.userId
+    );
+    const product = await Product.findByPk(req.body.productId);
+    res
+      .status(200)
+      .send(await Order.prototype.addItem(openOrder, product, req.body));
+  } catch (er) {
+    console.log(er);
   }
 });
 

@@ -14,14 +14,6 @@ class Cart extends React.Component {
     this.props.fetchOpenOrder(this.props.userId);
   }
 
-  handleSubmit = (ev) => {
-    ev.preventDefault();
-  };
-
-  onChangeHandler = (ev) => {
-    const change = {};
-  };
-
   render() {
     const {
       openOrder,
@@ -84,8 +76,7 @@ class Cart extends React.Component {
               ))}
           </tbody>
         </table>
-
-        <div> Total Amount: {totalAmount}</div>
+        <div> Total Amount: {totalAmount.toFixed(2)}</div>
         <CheckoutButton />
         <ClearButton />
       </div>
@@ -95,7 +86,6 @@ class Cart extends React.Component {
 
 const mapState = (state) => ({
   userId: state.auth.id,
-
   // openOrder: state.openOrder,
   cartItems: state.cartItems,
   totalAmount: state.cartItems
