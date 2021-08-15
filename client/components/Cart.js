@@ -111,9 +111,12 @@ const mapDispatch = (dispatch) => ({
   },
   removeCartItem: (productId, userId) => {
     dispatch(_removeItem(productId, userId));
+
   },
   updateCartItem: (orderId, productId, quantity) => {
     dispatch(_updateItem(orderId, productId, quantity));
+
+
   },
 });
 
