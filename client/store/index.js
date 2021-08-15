@@ -13,11 +13,11 @@ import {
 
 const reducer = combineReducers({
   auth,
+  cartItems: cartReducer,
   singleProduct: singleProductReducer,
   allProducts: allProductsReducer,
   allOrders: orderReducer,
   openOrder: openOrderReducer,
-  cartItems: cartReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

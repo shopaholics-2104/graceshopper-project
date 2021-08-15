@@ -84,6 +84,7 @@ class Cart extends React.Component {
               ))}
           </tbody>
         </table>
+
         <div> Total Amount: {totalAmount}</div>
         <CheckoutButton />
         <ClearButton />
@@ -94,6 +95,7 @@ class Cart extends React.Component {
 
 const mapState = (state) => ({
   userId: state.auth.id,
+
   // openOrder: state.openOrder,
   cartItems: state.cartItems,
   totalAmount: state.cartItems
