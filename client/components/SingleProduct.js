@@ -53,9 +53,8 @@ class Product extends React.Component {
         <div>Inventory Status: {status}</div>
         <form onSubmit={this.handleSubmit}>
           <select value={price} name="price" onChange={this.handleChange}>
-            <option value="">Buy Single Or Dozen</option>
+            <option value="">Select a Unit</option>
             <option value={single_price}>single unit</option>
-            <option value={dozen_price}>dozen</option>
           </select>
 
           {!price ? (
