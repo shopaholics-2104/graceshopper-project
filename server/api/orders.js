@@ -66,3 +66,14 @@ router.put("/:id", async (req, res, next) => {
     next(err);
   }
 });
+
+//UPDATE item quantity in cart
+router.put("/updateItem/:orderId", async (req, res, next) => {
+  try {
+    const openOrder = await Order.findByPk(req.params.orderId);
+
+    res.status(200).send(await Order.prototype.updateItem(openOrder, req.body));
+  } catch (err) {
+    console.log(err);
+  }
+});

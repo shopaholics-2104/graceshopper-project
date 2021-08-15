@@ -54,6 +54,17 @@ export const _removeItem = (productId, userId) => {
   };
 };
 
+export const _updateItem = (orderId, productId, quantity) => {
+  return async (dispatch) => {
+    const { data } = await axios.put(`/api/orders/updateItem/${orderId}`, {
+      quantity,
+      productId,
+    });
+    console.log(data);
+    dispatch(action.updateItem(data));
+  };
+};
+
 export const _clearCart = (order) => {
   return async (dispatch) => {
     await axios.delete(`/api/order_items/${order.id}`);
