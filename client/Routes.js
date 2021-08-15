@@ -47,7 +47,6 @@ class Routes extends Component {
             />
           </Switch>
         )}
-        <Switch></Switch>
       </div>
     );
   }
