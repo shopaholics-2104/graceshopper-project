@@ -27,9 +27,11 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 router.get("/open/:userId", async (req, res, next) => {
+
   res
     .status(200)
     .send(await Order.prototype.findOrCreateOpenOrder(req.params.userId));
+
 });
 
 router.delete("/:id", async (req, res, next) => {

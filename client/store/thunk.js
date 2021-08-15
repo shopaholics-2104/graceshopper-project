@@ -37,9 +37,11 @@ export const _updateOrder = (order) => {
   };
 };
 
+
 export const _addItem = (userId, newItem) => {
   return async (dispatch) => {
     const { data } = await axios.post(`/api/orders/${userId}`, newItem);
+
     dispatch(action.addItem(data));
   };
 };

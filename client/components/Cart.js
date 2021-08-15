@@ -76,7 +76,9 @@ class Cart extends React.Component {
               ))}
           </tbody>
         </table>
+
         <div> Total Amount: {totalAmount.toFixed(2)}</div>
+
         <CheckoutButton />
         <ClearButton />
       </div>

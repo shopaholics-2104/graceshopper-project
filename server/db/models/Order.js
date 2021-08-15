@@ -7,6 +7,7 @@ const Order = db.define("order", {
   },
   comment: { type: Sequelize.TEXT },
   totalAmount: {
+
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     defaultValue: 0.0,
@@ -49,6 +50,7 @@ Order.prototype.addItem = async (openOrder, product, itemInfo) => {
     })
   )[0];
 };
+
 
 Order.prototype.updateItem = async (openOrder, itemInfo) => {
   const item = (
