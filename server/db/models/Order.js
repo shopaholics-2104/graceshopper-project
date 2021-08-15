@@ -48,6 +48,7 @@ Order.prototype.addItem = async (openOrder, product, itemInfo) => {
       },
     })
   )[0];
+}
 
 Order.prototype.updateItem = async (openOrder, itemInfo) => {
   const item = (
