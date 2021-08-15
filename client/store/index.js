@@ -13,6 +13,7 @@ import {
 
 const reducer = combineReducers({
   auth,
+  cartItems: cartReducer,
   singleProduct: singleProductReducer,
   allProducts: allProductsReducer,
   allOrders: orderReducer,

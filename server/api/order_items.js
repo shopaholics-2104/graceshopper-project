@@ -38,8 +38,6 @@ router.put("/:productId", async (req, res, next) => {
   }
 });
 
-
-
 router.delete("/:orderId", async (req, res, next) => {
   try {
     await Order_Item.destroy({ where: { orderId: req.params.orderId } });

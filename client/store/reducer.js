@@ -57,7 +57,11 @@ export const cartReducer = (state = initState.cartItems, action) => {
     case type.SET_CART_ITEMS:
       return action.cartItems;
     case type.ADD_CART_ITEM:
-      return [...state, action.newItem];
+      return state.filter((item) => item.id === action.newItem.id).length
+        ? state.map((item) =>
+            item.id === action.newItem.id ? action.newItem : item
+          )
+        : [...state, action.newItem];
     case type.REMOVE_CART_ITEM:
       return state.filter((item) => item.id !== action.itemToRemove.id);
     case type.UPDATE_CART_ITEM:

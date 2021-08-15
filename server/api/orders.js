@@ -27,25 +27,11 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 router.get("/open/:userId", async (req, res, next) => {
-  const openOrder = await Order.findOne({
-    where: {
-      userId: req.params.userId,
-      status: "New",
-    },
-    include: {
-      model: Product,
-    },
-  });
-  openOrder
-    ? res.status(200).send(openOrder)
-    : res.status(200).send(
-        await Order.create({
-          userId: req.params.userId,
-          status: "New",
-          totalAmount: 0.0,
-          products: [],
-        })
-      );
+
+  res
+    .status(200)
+    .send(await Order.prototype.findOrCreateOpenOrder(req.params.userId));
+
 });
 
 router.delete("/:id", async (req, res, next) => {
@@ -64,6 +50,20 @@ router.put("/:id", async (req, res, next) => {
     res.status(200).send(await order.update(req.body));
   } catch (err) {
     next(err);
+  }
+});
+
+router.post("/:userId", async (req, res, next) => {
+  try {
+    const openOrder = await Order.prototype.findOrCreateOpenOrder(
+      req.params.userId
+    );
+    const product = await Product.findByPk(req.body.productId);
+    res
+      .status(200)
+      .send(await Order.prototype.addItem(openOrder, product, req.body));
+  } catch (er) {
+    console.log(er);
   }
 });
 

@@ -37,10 +37,11 @@ export const _updateOrder = (order) => {
   };
 };
 
-export const _addItem = (newItem) => {
+
+export const _addItem = (userId, newItem) => {
   return async (dispatch) => {
-    await axios.post(`/api/order_items`, newItem);
-    const { data } = await axios.get(`/api/products/${newItem.productId}`);
+    const { data } = await axios.post(`/api/orders/${userId}`, newItem);
+
     dispatch(action.addItem(data));
   };
 };
@@ -60,7 +61,7 @@ export const _updateItem = (orderId, productId, quantity) => {
       quantity,
       productId,
     });
-    console.log(data);
+
     dispatch(action.updateItem(data));
   };
 };
