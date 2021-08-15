@@ -32,6 +32,7 @@ router.get("/open/:userId", async (req, res, next) => {
   res.status(200).send(openOrder);
 });
 
+
 //this is a post request for single product when only userId & product.id are passed into server
 router.post("/:userId", async (req, res, next) => {
   try {
@@ -59,5 +60,25 @@ router.delete("/:id", async (req, res, next) => {
     res.sendStatus(204);
   } catch (ex) {
     next(ex);
+  }
+});
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.id);
+    res.status(200).send(await order.update(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+//UPDATE item quantity in cart
+router.put("/updateItem/:orderId", async (req, res, next) => {
+  try {
+    const openOrder = await Order.findByPk(req.params.orderId);
+
+    res.status(200).send(await Order.prototype.updateItem(openOrder, req.body));
+  } catch (err) {
+    console.log(err);
   }
 });

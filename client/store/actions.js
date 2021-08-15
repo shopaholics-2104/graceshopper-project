@@ -51,9 +51,12 @@ export const actionCreator = {
     type: type.UPDATE_CART_ITEM,
     itemToUpdate,
   }),
-  deleteItem: (itemToDelete) => ({
-    type: type.DELETE_CART_ITEM,
-    itemToDelete,
+  removeItem: (itemToRemove) => ({
+    type: type.REMOVE_CART_ITEM,
+    itemToRemove,
+  }),
+  clearCart: () => ({
+    type: type.CLEAR_CART,
   }),
 };
 export default actionCreator;

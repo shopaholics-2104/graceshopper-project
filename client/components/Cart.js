@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { _fetchOpenOrder } from "../store/thunk";
+import { _fetchOpenOrder, _removeItem, _updateItem } from "../store/thunk";
+import CheckoutButton from "./CheckoutButton";
+import ClearButton from "./ClearButton";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -12,8 +14,26 @@ class Cart extends React.Component {
     this.props.fetchOpenOrder(this.props.userId);
   }
 
+  handleSubmit = (ev) => {
+    ev.preventDefault();
+  };
+
+  onChangeHandler = (ev) => {
+    const change = {};
+  };
+
   render() {
-    const { openOrder, totalAmount, cartItems } = this.props;
+
+
+    const {
+      openOrder,
+      totalAmount,
+      userId,
+      cartItems,
+      removeCartItem,
+      updateCartItem,
+    } = this.props;
+
 
     return (
       <div>
@@ -40,19 +60,38 @@ class Cart extends React.Component {
                     )}
                   </td>
                   <td>
-                    <button type="button"> remove </button>
+                    <button
+                      onClick={() => removeCartItem(item.id, userId)}
+                      type="button"
+                    >
+                      {" "}
+                      remove{" "}
+                    </button>
                   </td>
                   <td>
-                    <button type="button"> change Qty </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        updateCartItem(
+                          item.order_item.orderId,
+                          item.order_item.productId,
+                          item.order_item.quantity + 1
+                        )
+                      }
+                    >
+                      {" "}
+                      + 1{" "}
+                    </button>
                   </td>
                 </tr>
               ))}
           </tbody>
         </table>
-        <div> Total Amount: {totalAmount.toFixed(2)}</div>
 
-        <button type="button">Check Out</button>
-        <button type="button">Clear the Cart</button>
+        <div> Total Amount: {totalAmount}</div>
+        <CheckoutButton />
+        <ClearButton />
+
       </div>
     );
   }
@@ -60,10 +99,11 @@ class Cart extends React.Component {
 
 const mapState = (state) => ({
   userId: state.auth.id,
-  openOrder: state.openOrder,
+
+  // openOrder: state.openOrder,
   cartItems: state.cartItems,
-  totalAmount: state.openOrder.products
-    ? state.openOrder.products.reduce(
+  totalAmount: state.cartItems
+    ? state.cartItems.reduce(
         (accum, product) =>
           accum + product.order_item.price * product.order_item.quantity,
         0
@@ -74,6 +114,15 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   fetchOpenOrder: (userId) => {
     dispatch(_fetchOpenOrder(userId));
+  },
+  removeCartItem: (productId, userId) => {
+    dispatch(_removeItem(productId, userId));
+
+  },
+  updateCartItem: (orderId, productId, quantity) => {
+    dispatch(_updateItem(orderId, productId, quantity));
+
+
   },
 });
 
