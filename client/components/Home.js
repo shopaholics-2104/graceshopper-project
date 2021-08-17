@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { _fetchAllOrders } from "../store/thunk";
 
 /**
@@ -15,11 +16,14 @@ export class Home extends React.Component {
   }
 
   render() {
-    const { username, orderHistory } = this.props;
+    const { username, orderHistory, isAdmin, role } = this.props;
 
     return (
       <div>
-        <h3>Welcome, {username}</h3>
+        <h3>
+          Welcome, {role.toUpperCase()} {username}
+        </h3>
+        {isAdmin && <Link to="/Admin">Admin Page</Link>}
         <h4>Order History ({orderHistory.length})</h4>
       </div>
     );
@@ -33,6 +37,8 @@ const mapState = (state) => {
   return {
     username: state.auth.username,
     userId: state.auth.id,
+    role: state.auth.role,
+    isAdmin: state.auth.role === "admin",
     orderHistory: state.allOrders.filter((order) => order.status !== "New"),
   };
 };

@@ -1,14 +1,14 @@
 const productList = [
   {
-
-      name: 'Wakanda forever',
-      description: "This cookie will give you the enhanced senses, with superhuman condition and speed,on top of that you will gain magical resistance, and a super cool vibranium-assisted outfit.",
-      single_price: 99.99,
-      dozen_price: 1170.00,
-      status: 'running_low',
-      imageUrl: 'https://i.pinimg.com/originals/00/b3/a8/00b3a817a303dbe6fedb81af9a65394c.png',
-      categoryId: 1
-
+    name: "Wakanda forever",
+    description:
+      "This cookie will give you the enhanced senses, with superhuman condition and speed,on top of that you will gain magical resistance, and a super cool vibranium-assisted outfit.",
+    single_price: 99.99,
+    dozen_price: 1170.0,
+    status: "running_low",
+    imageUrl:
+      "https://i.pinimg.com/originals/00/b3/a8/00b3a817a303dbe6fedb81af9a65394c.png",
+    categoryId: 1,
   },
 
   {
@@ -22,7 +22,6 @@ const productList = [
     imageUrl:
       "https://64.media.tumblr.com/77e94c182e27591ccf9d0ae2477f556f/tumblr_od2y0kfDY91vycuvuo1_1280.jpg",
     categoryId: 3,
-
   },
 
   {
@@ -38,7 +37,6 @@ const productList = [
     categoryId: 4,
   },
 
-
   {
     name: "Groot",
     description:
@@ -52,7 +50,6 @@ const productList = [
     categoryId: 1,
   },
 
-
   {
     name: "Hawkeye",
     description:
@@ -65,7 +62,6 @@ const productList = [
       "https://i.pinimg.com/originals/03/90/dc/0390dc70fbbd524efe4fbb01a903cdc9.png",
     categoryId: 5,
   },
-
 
   {
     name: "Doctor Strange",
@@ -135,6 +131,7 @@ const userList = [
     firstName: "cody",
     lastName: "smith",
     email: "cody@gmail.com",
+    role: "admin",
   },
   {
     username: "murphy",
@@ -156,6 +153,7 @@ const userList = [
     firstName: "jing",
     lastName: "smith",
     email: "jing@gmail.com",
+    role: "admin",
   },
   {
     username: "Tashif",
@@ -182,7 +180,6 @@ const orderList = [
   },
   { userId: 3, status: "Paid", comment: "order paid", totalAmount: 99.99 },
 ];
-
 
 const orderItems = [
   { quantity: 1, price: 99.99, orderId: 1, productId: 1 },

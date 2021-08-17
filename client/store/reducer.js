@@ -1,6 +1,8 @@
 import type from "./type";
 
 const initState = {
+  allUsers: [],
+  singleUser: {},
   allProducts: [],
   singleProduct: {},
   allOrders: [],
@@ -8,6 +10,29 @@ const initState = {
   cartItems: [],
 };
 
+export const allUsersReducer = (state = initState.allUsers, action) => {
+  switch (action.type) {
+    case type.SET_ALL_USERS:
+      return action.allUsers;
+    case type.CREATE_USER:
+      return [...state, action.newUser];
+    case type.DELETE_USER:
+      return state.filter((user) => user.id !== action.userToDelete.id);
+    default:
+      return state;
+  }
+};
+
+export const singleUserReducer = (state = initState.singleUser, action) => {
+  switch (action.type) {
+    case type.SET_SINGLE_USER:
+      return action.singleUser;
+    case type.UPDATE_USER:
+      return action.userToUpdate;
+    default:
+      return state;
+  }
+};
 export const allProductsReducer = (state = initState.allProducts, action) => {
   switch (action.type) {
     case type.SET_ALL_PRODUCTS:

@@ -57,6 +57,10 @@ const User = db.define("user", {
   mobile: {
     type: Sequelize.STRING,
   },
+  role: {
+    type: Sequelize.ENUM("user", "admin"),
+    defaultValue: "user",
+  },
 });
 
 module.exports = User;
