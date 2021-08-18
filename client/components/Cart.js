@@ -20,14 +20,8 @@ class Cart extends React.Component {
   }
 
   render() {
-    const {
-      openOrder,
-      totalAmount,
-      userId,
-      cartItems,
-      removeCartItem,
-      updateCartItem,
-    } = this.props;
+    const { totalAmount, userId, cartItems, removeCartItem, updateCartItem } =
+      this.props;
 
     return (
       <div className="cart">
@@ -103,7 +97,6 @@ class Cart extends React.Component {
 }
 const mapState = (state) => ({
   userId: state.auth.id,
-  // openOrder: state.openOrder,
   cartItems: state.cartItems,
   totalAmount: state.cartItems
     ? state.cartItems.reduce(

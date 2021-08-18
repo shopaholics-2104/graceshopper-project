@@ -6,7 +6,9 @@ const {
 //get all products even if not in stock
 router.get("/", async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+
+
+    const products = await Product.findAll({ include: { all: true } });
     res.json(products);
   } catch (err) {
     next(err);
@@ -52,6 +54,32 @@ router.get("/running_low", async (req, res, next) => {
     res.json(products);
   } catch (err) {
     next(err);
+
+  }
+});
+
+//get specific product
+router.get("/:id", async (req, res, next) => {
+  try {
+    const single_product = await Product.findByPk(req.params.id, {
+      include: { all: true },
+    });
+    res.json(single_product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const productToUpdate = await Product.findByPk(req.params.id, {
+      include: { all: true },
+    });
+    productToUpdate.update(req.body);
+    res.json(productToUpdate);
+  } catch (err) {
+    next(err);
+
   }
 });
 
@@ -73,6 +101,7 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+
 //for pagination
 router.get("/pagination/:idx?", async (req, res, next) => {
   try {
@@ -92,14 +121,9 @@ router.get("/pagination/:idx?", async (req, res, next) => {
   }
 });
 
-//get specific product
-router.get("/:id", async (req, res, next) => {
-  try {
-    const single_product = await Product.findByPk(req.params.id);
-    res.json(single_product);
-  } catch (err) {
-    next(err);
-  }
-});
+
+
+//missing error handling router
+
 
 module.exports = router;

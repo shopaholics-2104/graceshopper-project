@@ -1,7 +1,7 @@
-const React = require("react");
-const { connect } = require("react-redux");
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { _fetchSingleProduct, _fetchOpenOrder, _addItem } from "../store/thunk";
-import axios from "axios";
 
 class Product extends React.Component {
   constructor(props) {
@@ -18,9 +18,7 @@ class Product extends React.Component {
     const { fetchSingleProduct } = this.props;
     const productId = this.props.match.params.productId;
     fetchSingleProduct(productId);
-    
   }
-  
 
   handleSubmit(event) {
     event.preventDefault();
@@ -29,7 +27,6 @@ class Product extends React.Component {
       productId: Number(this.props.match.params.productId),
       quantity: Number(this.state.quantity),
       price: Number(this.state.price),
-      
     };
 
     this.props.addItem(userId, newItem);
@@ -45,23 +42,31 @@ class Product extends React.Component {
   }
 
   render() {
-    const { imageUrl, name, description, single_price, status } =
-      this.props.singleProduct;
+    const {
+      imageUrl,
+      name,
+      description,
+      single_price,
+      status,
+      categoryId,
+      category,
+    } = this.props.singleProduct;
     const { quantity, price } = this.state;
 
     return (
       <div>
         <img src={imageUrl}></img>
         <h1>{name}</h1>
+        {category && (
+          <Link to={`/categories/${categoryId}`}>{category.flavor}</Link>
+        )}
         <p>{description}</p>
 
         <div>Inventory Status: {status}</div>
         <form onSubmit={this.handleSubmit}>
           <select value={price} name="price" onChange={this.handleChange}>
             <option value="">Select a Unit</option>
-
             <option value={single_price}>single unit</option>
-           
           </select>
 
           {!price ? (
@@ -97,13 +102,8 @@ const mapDispatch = (dispatch) => ({
   fetchSingleProduct: (productId) => {
     dispatch(_fetchSingleProduct(productId));
   },
-  fetchOpenOrder: (userId) => {
-    dispatch(_fetchOpenOrder(userId));
-  },
-
   addItem: (userId, newItem) => {
     dispatch(_addItem(userId, newItem));
-
   },
 });
 export default connect(mapState, mapDispatch)(Product);
