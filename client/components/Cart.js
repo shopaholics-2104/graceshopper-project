@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { _fetchOpenOrder, _removeItem, _updateItem } from "../store/thunk";
-import CheckoutButton from "./CheckoutButton";
 import ClearButton from "./ClearButton";
+import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -78,8 +78,9 @@ class Cart extends React.Component {
         </table>
 
         <div> Total Amount: {totalAmount.toFixed(2)}</div>
-
-        <CheckoutButton />
+        <Link to={`/checkout`}>
+          <button type="button">Check Out</button>
+        </Link>
         <ClearButton />
       </div>
     );

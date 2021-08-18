@@ -7,6 +7,7 @@ import Cart from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
 import Products from "./components/Products";
 import { me } from "./store";
+import Checkout, { InjectedCheckoutForm } from "./components/Checkout";
 
 /**
  * COMPONENT
@@ -31,7 +32,7 @@ class Routes extends Component {
             <Route path="/products" component={Products} exact />
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
-
+            <Route path="/checkout" component={Checkout} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -39,6 +40,8 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/checkout" component={Checkout} />
+
             <Route path="/products" component={Products} exact />
             <Route
               path="/products/:productId"

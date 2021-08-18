@@ -36,22 +36,7 @@ const User = db.define("user", {
       notEmpty: true,
     },
   },
-  addressLine_1: {
-    type: Sequelize.STRING,
-  },
-  addressLine_2: {
-    type: Sequelize.STRING,
-  },
-  city: {
-    type: Sequelize.STRING,
-  },
-  state: {
-    type: Sequelize.STRING,
-  },
-  zipCode: {
-    type: Sequelize.STRING,
-  },
-  country: {
+  address: {
     type: Sequelize.STRING,
   },
   mobile: {

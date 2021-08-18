@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  _updateOrder,
-  _fetchOpenOrder,
-  _createOrder,
-  _fetchAllOrders,
-  _clearCart,
-} from "../store/thunk";
+import { _fetchOpenOrder, _clearCart } from "../store/thunk";
 import { connect } from "react-redux";
 
 class ClearButton extends Component {
