@@ -9,11 +9,19 @@ import {
   orderReducer,
   cartReducer,
   openOrderReducer,
+  allUsersReducer,
+  singleUserReducer,
+  allCategoriesReducer,
+  singleCategoryReducer,
 } from "./reducer";
 
 const reducer = combineReducers({
   auth,
   cartItems: cartReducer,
+  allUsers: allUsersReducer,
+  singleUser: singleUserReducer,
+  allCategories: allCategoriesReducer,
+  singleCategory: singleCategoryReducer,
   singleProduct: singleProductReducer,
   allProducts: allProductsReducer,
   allOrders: orderReducer,
