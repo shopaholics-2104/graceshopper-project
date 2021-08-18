@@ -5,6 +5,8 @@ const initState = {
   singleUser: {},
   allProducts: [],
   singleProduct: {},
+  allCategories: [],
+  singleCategory: {},
   allOrders: [],
   openOrder: {},
   cartItems: [],
@@ -33,6 +35,35 @@ export const singleUserReducer = (state = initState.singleUser, action) => {
       return state;
   }
 };
+
+export const allCategoriesReducer = (state = initState.allUsers, action) => {
+  switch (action.type) {
+    case type.SET_ALL_CATEGORIES:
+      return action.allCategories;
+    case type.CREATE_CATEGORY:
+      return [...state, action.newCategory];
+    case type.DELETE_CATEGORY:
+      return state.filter(
+        (category) => category.id !== action.categoryToDelete.id
+      );
+    default:
+      return state;
+  }
+};
+
+export const singleCategoryReducer = (
+  state = initState.singleCategory,
+  action
+) => {
+  switch (action.type) {
+    case type.SET_SINGLE_CATEGORY:
+      return action.singleCategory;
+    case type.UPDATE_CATEGORY:
+      return action.categoryToUpdate;
+    default:
+      return state;
+  }
+};
 export const allProductsReducer = (state = initState.allProducts, action) => {
   switch (action.type) {
     case type.SET_ALL_PRODUCTS:
@@ -40,9 +71,7 @@ export const allProductsReducer = (state = initState.allProducts, action) => {
     case type.CREATE_PRODUCT:
       return [...state, action.newProduct];
     case type.DELETE_PRODUCT:
-      return state.filter(
-        (product) => product.id !== action.productToDelete.id
-      );
+      return state.filter((product) => product.id !== action.productId);
     default:
       return state;
   }

@@ -11,6 +11,8 @@ import {
   openOrderReducer,
   allUsersReducer,
   singleUserReducer,
+  allCategoriesReducer,
+  singleCategoryReducer,
 } from "./reducer";
 
 const reducer = combineReducers({
@@ -18,6 +20,8 @@ const reducer = combineReducers({
   cartItems: cartReducer,
   allUsers: allUsersReducer,
   singleUser: singleUserReducer,
+  allCategories: allCategoriesReducer,
+  singleCategory: singleCategoryReducer,
   singleProduct: singleProductReducer,
   allProducts: allProductsReducer,
   allOrders: orderReducer,
