@@ -7,6 +7,7 @@ import Cart from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
 import Products from "./components/Products";
 import { me } from "./store";
+import { fetchTotal } from "./store/thunk";
 
 /**
  * COMPONENT
@@ -28,6 +29,11 @@ class Routes extends Component {
               component={SingleProduct}
               exact
             />
+            <Route
+              path="/products/pagination/:idx?"
+              component={Products}
+              exact
+            />
             <Route path="/products" component={Products} exact />
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
@@ -36,6 +42,11 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
+            <Route
+              path="/products/pagination/:idx?"
+              component={Products}
+              exact
+            />
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
@@ -68,6 +79,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
+      dispatch(fetchTotal());
     },
   };
 };

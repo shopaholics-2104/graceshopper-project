@@ -9,6 +9,7 @@ import {
   orderReducer,
   cartReducer,
   openOrderReducer,
+  totalReducer,
 } from "./reducer";
 
 const reducer = combineReducers({
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   allOrders: orderReducer,
   openOrder: openOrderReducer,
   cartItems: cartReducer,
+  total: totalReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
