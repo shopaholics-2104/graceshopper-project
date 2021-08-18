@@ -7,28 +7,16 @@ import ClearButton from "./ClearButton";
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      productId: [],
-      quantity: [],
-    };
     this.handleChange = this.handleChange.bind(this);
   }
-  
   componentDidMount() {
     this.props.fetchOpenOrder(this.props.userId);
   }
 
-  componentDidUpdate(preProps) {
-    if (preProps.userId !== this.props.userId) {
-      this.props.cartItems.map((item) =>
-        this.setState({ [item.id]: item.quantity })
-      );
-    }
-  }
-
   handleChange(event) {
     console.log(event.target.name, event.target.value);
-    // this.setState({ [event.target.name]: event.target.value });
+
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
@@ -49,7 +37,7 @@ class Cart extends React.Component {
           <p>Items</p>
           <ClearButton />
         </div>
-
+        
         <div className="cartItems">
           {cartItems &&
             cartItems.map((item) => (
@@ -71,15 +59,36 @@ class Cart extends React.Component {
                 {/* for actions */}
                 <div className="cart_Items_actions">
                   <div className="cartItem_qty">
-                    <label htmlFor="qty"> Quantity </label>
-                    <input
-                      min="1"
-                      type="number"
-                      id="qty"
-                      name={item.id}
-                      value={this.state[item.id]}
-                      onChange={handleChange}
-                    />
+                    {/* <label htmlFor="qty"> Quantity </label> */}
+                    <span
+                      className="material-icons"
+                      onClick={() => {
+                        updateCartItem(
+                          openOrder.id,
+                          item.id,
+                          item.order_item.quantity + 1
+                        );
+                      }}
+                    >
+                      add
+                    </span>
+                    <div>{item.order_item.quantity}</div>
+                    <span
+                      className="material-icons"
+                      onClick={() => {
+                        item.order_item.quantity === 1
+                          ? removeCartItem(item.id, userId)
+                          : item.order_item.quantity > 0
+                          ? updateCartItem(
+                              openOrder.id,
+                              item.id,
+                              item.order_item.quantity - 1
+                            )
+                          : null;
+                      }}
+                    >
+                      remove
+                    </span>
                   </div>
                   {/* for delete button */}
                   <button
@@ -90,22 +99,6 @@ class Cart extends React.Component {
                       delete_outline
                     </span>
                   </button>
-                  <button
-                    onClick={() =>
-                      updateCartItem(openOrder.id, item.id, quantity)
-                    }
-                    className="addBtn"
-                  >
-                    <span className="material-icons" style={{ fontSize: 25 }}>
-                      add_shopping_cart
-                    </span>
-                  </button>
-
-                  {/* <span>
-                    {(item.order_item.quantity * item.order_item.price).toFixed(
-                      2
-                    )}
-                  </span> */}
                 </div>
               </div>
             ))}

@@ -17,7 +17,7 @@ const AdminUser = ({ user }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h4 className="modal-title">
-                {user.fullName} {user.role.toUpperCase()}
+                {user.role.toUpperCase()} {user.username}
               </h4>
               <button type="button" className="close" data-dismiss="modal">
                 &times;
@@ -25,27 +25,68 @@ const AdminUser = ({ user }) => {
             </div>
 
             <div className="modal-body">
-              <div>
-                <label>Order History:</label>
-                {user.orders.length}
-              </div>
-              <div>
-                <label>Email:</label>
-                {user.email}
-              </div>
-              <div>
-                <label>Mobile:</label>
-                {user.mobile}
-              </div>
-              <div>
-                <label>Full Address:</label>
-                {user.fullAddress}
-              </div>
-              <div>
-                <label>Open Cart:</label>
-                {user.orders.filter((order) => order.status === "New")[0]
-                  ? user.orders.filter((order) => order.status === "New")[0].id
-                  : "No open cart"}
+              <div class="container">
+                <div class="row g-2">
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      {" "}
+                      <label>UserName:</label>
+                      {user.username}
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      {" "}
+                      <label>Full Name:</label>
+                      {user.fullName}
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      {" "}
+                      <label>Role:</label>
+                      {user.role}
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      <label>Order History:</label>
+                      {user.orders.length}
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      <label>Email:</label>
+                      {user.email}
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      <label> Mobile:</label>
+                      {user.mobile}
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      {" "}
+                      <label>Full Address:</label>
+                      {user.fullAddress}
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="p-3 border bg-light">
+                      <label>Open Cart:</label>
+                      {user.orders.filter((order) => order.status === "New")[0]
+                        ? user.orders.filter(
+                            (order) => order.status === "New"
+                          )[0].id
+                        : "No open cart"}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
