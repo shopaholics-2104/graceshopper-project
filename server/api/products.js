@@ -6,6 +6,8 @@ const {
 //get all products even if not in stock
 router.get("/", async (req, res, next) => {
   try {
+
+
     const products = await Product.findAll({ include: { all: true } });
     res.json(products);
   } catch (err) {
@@ -52,6 +54,7 @@ router.get("/running_low", async (req, res, next) => {
     res.json(products);
   } catch (err) {
     next(err);
+
   }
 });
 
@@ -76,6 +79,7 @@ router.put("/:id", async (req, res, next) => {
     res.json(productToUpdate);
   } catch (err) {
     next(err);
+
   }
 });
 
@@ -97,6 +101,29 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+
+//for pagination
+router.get("/pagination/:idx?", async (req, res, next) => {
+  try {
+    const pageSize = process.env.PAGE_SIZE || 4;
+    const idx = req.params.idx ? req.params.idx * 1 : 0;
+
+    const [total, products] = await Promise.all([
+      Product.count(),
+      Product.findAll({ limit: pageSize, offset: pageSize * idx }),
+    ]);
+    res.send({
+      total,
+      products,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
 //missing error handling router
+
 
 module.exports = router;

@@ -56,6 +56,15 @@ const actionCreator = {
     productToUpdate,
   }),
 
+
+  //for pagination
+  setTotal: (total) => ({
+    type: type.SET_TOTAL,
+    total,
+  }),
+
+
+
   //orders
   setAllOrders: (allOrders) => ({
     type: type.SET_ALL_ORDERS,

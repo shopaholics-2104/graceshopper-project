@@ -114,3 +114,13 @@ export const _clearCart = (order) => {
     dispatch(action.clearCart());
   };
 };
+
+//for pagination
+
+export const fetchTotal = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`/api/products/pagination`);
+    console.log(response.data);
+    dispatch(action.setTotal(response.data.total));
+  };
+};

@@ -1,3 +1,4 @@
+import axios from "axios";
 import type from "./type";
 
 const initState = {
@@ -10,6 +11,7 @@ const initState = {
   allOrders: [],
   openOrder: {},
   cartItems: [],
+  total: 0,
 };
 
 export const allUsersReducer = (state = initState.allUsers, action) => {
@@ -72,6 +74,16 @@ export const allProductsReducer = (state = initState.allProducts, action) => {
       return [...state, action.newProduct];
     case type.DELETE_PRODUCT:
       return state.filter((product) => product.id !== action.productId);
+    default:
+      return state;
+  }
+};
+
+//reducer for pagination
+export const totalReducer = (state = initState.total, action) => {
+  switch (action.type) {
+    case type.SET_TOTAL:
+      return action.total;
     default:
       return state;
   }
