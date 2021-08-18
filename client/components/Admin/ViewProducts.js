@@ -1,7 +1,12 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { _fetchAllProducts, _deleteProduct } from "../../store/thunk";
+import {
+  _fetchAllProducts,
+  _deleteProduct,
+  _fetchAllCategoties,
+} from "../../store/thunk";
 import AdminProduct from "./AdminProduct";
+import CreateProduct from "./CreateProduct";
 
 class Product extends React.Component {
   constructor(props) {
@@ -10,31 +15,36 @@ class Product extends React.Component {
 
   componentDidMount() {
     this.props.fetchAllProducts();
+    this.props.fetchAllCategoties();
   }
 
   render() {
-    const { allProducts, deleteProduct } = this.props;
+    const { allProducts, deleteProduct, allCategories } = this.props;
     return (
       <Fragment>
-        <h1>Products</h1>
-
+        <h1>Products</h1> <CreateProduct allCategories={allCategories} />
         <table className="table table-hover">
           <thead className="thead-dark">
             <tr>
               <th scope="col">Id</th>
               <th scope="col">Name</th>
+              <th scope="col">Price</th>
               <th scope="col">Edit</th>
               <th scope="col">Remove</th>
             </tr>
           </thead>
           <tbody>
             {allProducts.map((product) => (
-              <tr key={product.id}>
+              <tr key={`productId&${product.id}`}>
                 <th scope="row">{product.id}</th>
 
                 <td>{product.name}</td>
+                <td>{product.single_price}</td>
                 <td>
-                  <AdminProduct product={product} />
+                  <AdminProduct
+                    product={product}
+                    allCategories={allCategories}
+                  />
                 </td>
                 <td>
                   <button
@@ -58,6 +68,7 @@ class Product extends React.Component {
 }
 const mapState = (state) => ({
   allProducts: state.allProducts,
+  allCategories: state.allCategories,
 });
 const mapDispatch = (dispatch) => ({
   fetchAllProducts: () => {
@@ -65,6 +76,9 @@ const mapDispatch = (dispatch) => ({
   },
   deleteProduct: (productId) => {
     dispatch(_deleteProduct(productId));
+  },
+  fetchAllCategoties: () => {
+    dispatch(_fetchAllCategoties());
   },
 });
 export default connect(mapState, mapDispatch)(Product);
