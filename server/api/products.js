@@ -6,8 +6,6 @@ const {
 //get all products even if not in stock
 router.get("/", async (req, res, next) => {
   try {
-
-
     const products = await Product.findAll({ include: { all: true } });
     res.json(products);
   } catch (err) {
@@ -54,10 +52,8 @@ router.get("/running_low", async (req, res, next) => {
     res.json(products);
   } catch (err) {
     next(err);
-
   }
 });
-
 
 router.put("/:id", async (req, res, next) => {
   try {
@@ -68,13 +64,14 @@ router.put("/:id", async (req, res, next) => {
     res.json(productToUpdate);
   } catch (err) {
     next(err);
-
   }
 });
 
 router.post("/", async (req, res, next) => {
   try {
-    res.status(201).send(await Product.create(req.body));
+    res
+      .status(201)
+      .send(await Product.create(req.body, { include: { all: true } }));
   } catch (ex) {
     next(ex);
   }
@@ -89,7 +86,6 @@ router.delete("/:id", async (req, res, next) => {
     next(ex);
   }
 });
-
 
 //for pagination
 router.get("/pagination/:idx?", async (req, res, next) => {
@@ -110,7 +106,6 @@ router.get("/pagination/:idx?", async (req, res, next) => {
   }
 });
 
-
 //get specific product
 router.get("/:id", async (req, res, next) => {
   try {
@@ -123,9 +118,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-
-
 //missing error handling router
-
 
 module.exports = router;
