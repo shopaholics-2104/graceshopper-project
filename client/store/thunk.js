@@ -37,7 +37,6 @@ export const _updateOrder = (order) => {
   };
 };
 
-
 export const _addItem = (userId, newItem) => {
   return async (dispatch) => {
     const { data } = await axios.post(`/api/orders/${userId}`, newItem);
@@ -70,5 +69,15 @@ export const _clearCart = (order) => {
   return async (dispatch) => {
     await axios.delete(`/api/order_items/${order.id}`);
     dispatch(action.clearCart());
+  };
+};
+
+//for pagination
+
+export const fetchTotal = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`/api/products/pagination`);
+    console.log(response.data);
+    dispatch(action.setTotal(response.data.total));
   };
 };

@@ -6,6 +6,9 @@ const type = {
   DELETE_PRODUCT: "DELETE_PRODUCT",
   UPDATE_PRODUCT: "UPDATE_PRODUCT",
 
+  //this is for pagination
+  SET_TOTAL: "SET_TOTAL",
+
   // login user activities affect order model (order status)
   SET_ALL_ORDERS: "SET_ALL_ORDERS",
   SET_OPEN_ORDER: "SET_OPEN_ORDER",
