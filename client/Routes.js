@@ -1,13 +1,19 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
+import Admin from "./components/Admin/Admin";
 import Products from "./components/Products";
 import Search from "./components/Search"
 import { me } from "./store";
+
+import { fetchTotal } from "./store/thunk";
+
+import Category from "./components/Categories";
+import SingleCategory from "./components/SingleCategory";
 
 /**
  * COMPONENT
@@ -29,15 +35,39 @@ class Routes extends Component {
               component={SingleProduct}
               exact
             />
+      
+            <Route
+
+              path="/products/pagination/:idx?"
+              component={Products}
+              exact
+            />
+            
+            <Route
+              path="/categories/:categoryId"
+              component={SingleCategory}
+
+              exact
+            />
             <Route path="/products" component={Products} exact />
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
+
             <Route path="/search" component={Search} />
+
+            <Route path="/admin" component={Admin} />
+            <Route path="/categories" component={Category} />
+
 
             <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
+            <Route
+              path="/products/pagination/:idx?"
+              component={Products}
+              exact
+            />
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
@@ -70,6 +100,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
+      dispatch(fetchTotal());
     },
   };
 };

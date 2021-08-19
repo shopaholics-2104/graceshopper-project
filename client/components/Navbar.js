@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
-    <h1>Shopaholics-2104</h1>
+    <h1 className="nav_title">MARVELOUS COOKIES</h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -16,7 +16,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </a>
           <Link to="/products">All Products</Link>
           <Link to="/cart">Cart</Link>
+
           <Link to="/search">Search</Link>
+
+          <Link to="/categories">Category</Link>
+
         </div>
       ) : (
         <div>
@@ -38,8 +42,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.role === "admin",
   };
-  s;
 };
 
 const mapDispatch = (dispatch) => {

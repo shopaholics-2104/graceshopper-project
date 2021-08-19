@@ -1,6 +1,30 @@
 import axios from "axios";
 import action from "./actions";
 
+//User
+export const _fetchAllUsers = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get("/api/users");
+    dispatch(action.setAllUsers(data));
+  };
+};
+
+//Category
+export const _fetchAllCategoties = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get("/api/categories");
+    dispatch(action.setAllCategories(data));
+  };
+};
+
+export const _fetchSingleCategory = (categoryId) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/categories/${categoryId}`);
+    dispatch(action.setSingleCategory(data));
+  };
+};
+
+//Product
 export const _fetchAllProducts = () => {
   return async (dispatch) => {
     const { data } = await axios.get("/api/products");
@@ -15,6 +39,32 @@ export const _fetchSingleProduct = (productId) => {
   };
 };
 
+export const _createProduct = (newProduct) => {
+  return async (dispatch) => {
+    const { data } = await axios.post(`/api/products`, newProduct);
+    dispatch(action.createProduct(data));
+  };
+};
+
+export const _updateProduct = (productId, productToUpdate) => {
+  return async (dispatch) => {
+    const { data } = await axios.put(
+      `/api/products/${productId}`,
+      productToUpdate
+    );
+    dispatch(action.updateProduct(data));
+  };
+};
+
+export const _deleteProduct = (productId) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/products/${productId}`);
+
+    dispatch(action.deleteProduct(productId));
+  };
+};
+
+//Order
 export const _fetchAllOrders = (userId) => {
   return async (dispatch) => {
     const { data } = await axios.get(`/api/orders/${userId}`);
@@ -37,7 +87,7 @@ export const _updateOrder = (order) => {
   };
 };
 
-
+//Cart
 export const _addItem = (userId, newItem) => {
   return async (dispatch) => {
     const { data } = await axios.post(`/api/orders/${userId}`, newItem);
@@ -61,7 +111,6 @@ export const _updateItem = (orderId, productId, quantity) => {
       quantity,
       productId,
     });
-
     dispatch(action.updateItem(data));
   };
 };
@@ -70,5 +119,15 @@ export const _clearCart = (order) => {
   return async (dispatch) => {
     await axios.delete(`/api/order_items/${order.id}`);
     dispatch(action.clearCart());
+  };
+};
+
+//for pagination
+
+export const fetchTotal = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`/api/products/pagination`);
+    console.log(response.data);
+    dispatch(action.setTotal(response.data.total));
   };
 };

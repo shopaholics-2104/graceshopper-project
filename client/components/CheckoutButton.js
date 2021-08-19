@@ -22,8 +22,8 @@ class CheckoutButton extends Component {
     const { handleCheckOut } = this;
 
     return (
-      <button type="button" onClick={handleCheckOut}>
-        Check Out
+      <button className="checkoutBtn" type="button" onClick={handleCheckOut}>
+        Proceed To Checkout
       </button>
     );
   }

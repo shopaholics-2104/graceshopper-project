@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { _fetchAllProducts } from "../store/thunk";
 import { Link } from "react-router-dom";
 
+import Paginate from "./pagination";
+
 class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -13,24 +15,9 @@ class Product extends React.Component {
   }
 
   render() {
-    const { allProducts } = this.props;
     return (
       <div>
-        <h1>Transfiguration Cookies</h1>
-
-        {allProducts.map((product) => (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              {" "}
-              <img src={product.imageUrl}></img>
-            </Link>
-            <div>{product.name}</div> <p>{product.description}</p>
-            <span>
-              Single Price: {product.single_price} Dozen Price:{" "}
-              {product.dozen_price} Status: {product.status}
-            </span>
-          </div>
-        ))}
+        <Paginate {...this.props} />
       </div>
     );
   }
