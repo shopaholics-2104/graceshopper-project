@@ -7,9 +7,15 @@ import Cart from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
 import Admin from "./components/Admin/Admin";
 import Products from "./components/Products";
+import Search from "./components/Search";
 import { me } from "./store";
 import Checkout from "./components/Checkout";
 import { fetchTotal } from "./store/thunk";
+
+import { fetchTotal } from "./store/thunk";
+
+import Category from "./components/Categories";
+import SingleCategory from "./components/SingleCategory";
 
 /**
  * COMPONENT
@@ -36,11 +42,22 @@ class Routes extends Component {
               component={Products}
               exact
             />
+
+            <Route
+              path="/categories/:categoryId"
+              component={SingleCategory}
+              exact
+            />
             <Route path="/products" component={Products} exact />
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/admin" component={Admin} />
+
+            <Route path="/search" component={Search} />
+
+            <Route path="/admin" component={Admin} />
+            <Route path="/categories" component={Category} />
 
             <Redirect to="/home" />
           </Switch>

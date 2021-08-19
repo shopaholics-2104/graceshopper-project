@@ -73,6 +73,37 @@ const User = db.define("user", {
       );
     },
   },
+  role: {
+    type: Sequelize.ENUM("user", "admin"),
+    defaultValue: "user",
+  },
+
+  fullName: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return (
+        this.getDataValue("firstName") + " " + this.getDataValue("lastName")
+      );
+    },
+  },
+  fullAddress: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return (
+        this.getDataValue("addressLine_1") +
+        " " +
+        this.getDataValue("addressLine_2") +
+        " " +
+        this.getDataValue("city") +
+        " " +
+        this.getDataValue("state") +
+        " " +
+        this.getDataValue("zipCode") +
+        " " +
+        this.getDataValue("country")
+      );
+    },
+  },
 });
 
 module.exports = User;
