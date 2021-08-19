@@ -55,18 +55,6 @@ router.get("/running_low", async (req, res, next) => {
   }
 });
 
-//get specific product
-router.get("/:id", async (req, res, next) => {
-  try {
-    const single_product = await Product.findByPk(req.params.id, {
-      include: { all: true },
-    });
-    res.json(single_product);
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.put("/:id", async (req, res, next) => {
   try {
     const productToUpdate = await Product.findByPk(req.params.id, {
@@ -119,12 +107,15 @@ router.get("/pagination/:idx?", async (req, res, next) => {
 //get specific product
 router.get("/:id", async (req, res, next) => {
   try {
-    const single_product = await Product.findByPk(req.params.id);
+    const single_product = await Product.findByPk(req.params.id, {
+      include: { all: true },
+    });
     res.json(single_product);
   } catch (err) {
     next(err);
   }
 });
+
 //missing error handling router
 
 module.exports = router;
