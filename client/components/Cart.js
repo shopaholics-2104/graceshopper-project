@@ -106,7 +106,14 @@ class Cart extends React.Component {
         <div className="cart_summary">
           <h4 className="summary_title">Cart Summary</h4>
           <div className="summary_price">
-            <span>TOTAL: ({cartItems.length})</span>
+            <span>
+              TOTAL: (
+              {cartItems.reduce((accum, item) => {
+                accum += item.order_item.quantity;
+                return accum;
+              }, 0)}
+              )
+            </span>
             <span>${totalAmount.toFixed(2)}</span>
           </div>
           <div>

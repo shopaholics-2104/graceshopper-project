@@ -90,9 +90,17 @@ export const _updateOrder = (order) => {
 //Cart
 export const _addItem = (userId, newItem) => {
   return async (dispatch) => {
-    const { data } = await axios.post(`/api/orders/${userId}`, newItem);
+    if (userId) {
+      const { data } = await axios.post(`/api/orders/${userId}`, newItem);
+      dispatch(action.addItem(data));
+    } else {
+      localStorage.hasOwnProperty(newItem.productId);
+      const { data } = await axios.get(`/api/products/${newItem.productId}`);
+      window.localStorage.setItem(newItem.productId, JSON.stringify(data));
 
-    dispatch(action.addItem(data));
+      const cartItems = { ...localStorage };
+      console.log("after add", localStorage);
+    }
   };
 };
 
@@ -127,7 +135,6 @@ export const _clearCart = (order) => {
 export const fetchTotal = () => {
   return async (dispatch) => {
     const response = await axios.get(`/api/products/pagination`);
-    console.log(response.data);
     dispatch(action.setTotal(response.data.total));
   };
 };

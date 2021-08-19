@@ -25,42 +25,46 @@ const AdminUser = ({ user }) => {
             </div>
 
             <div className="modal-body">
-              <div class="container">
-                <div class="row g-2">
-                  <div class="col-6">
+              <div className="container">
+                <div className="row g-2">
+                  <div className="col-6">
                     <label>UserName:</label>
-                    <div class="p-3 border bg-light"> {user.username}</div>
+                    <div className="p-3 border bg-light"> {user.username}</div>
                   </div>
-                  <div class="col-6">
+                  <div className="col-6">
                     <label>Full Name:</label>
-                    <div class="p-3 border bg-light"> {user.fullName}</div>
+                    <div className="p-3 border bg-light"> {user.fullName}</div>
                   </div>
 
-                  <div class="col-6">
+                  <div className="col-6">
                     <label>Role:</label>
-                    <div class="p-3 border bg-light"> {user.role}</div>
+                    <div className="p-3 border bg-light"> {user.role}</div>
                   </div>
 
-                  <div class="col-6">
+                  <div className="col-6">
                     <label>Order History:</label>
-                    <div class="p-3 border bg-light">{user.orders.length}</div>
+                    <div className="p-3 border bg-light">
+                      {user.orders.length}
+                    </div>
                   </div>
-                  <div class="col-6">
+                  <div className="col-6">
                     <label>Email:</label>
-                    <div class="p-3 border bg-light">{user.email}</div>
+                    <div className="p-3 border bg-light">{user.email}</div>
                   </div>
-                  <div class="col-6">
+                  <div className="col-6">
                     <label> Mobile:</label>
-                    <div class="p-3 border bg-light">{user.mobile}</div>
+                    <div className="p-3 border bg-light">{user.mobile}</div>
                   </div>
-                  <div class="col-6">
+                  <div className="col-6">
                     <label>Full Address:</label>
-                    <div class="p-3 border bg-light">{user.fullAddress}</div>
+                    <div className="p-3 border bg-light">
+                      {user.fullAddress}
+                    </div>
                   </div>
 
-                  <div class="col-6">
+                  <div className="col-6">
                     <label>Open Cart:</label>
-                    <div class="p-3 border bg-light">
+                    <div className="p-3 border bg-light">
                       {user.orders.filter((order) => order.status === "New")[0]
                         ? user.orders.filter(
                             (order) => order.status === "New"
