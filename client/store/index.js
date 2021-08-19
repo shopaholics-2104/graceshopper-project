@@ -10,7 +10,6 @@ import {
   cartReducer,
   openOrderReducer,
   totalReducer,
-  totalReducer,
   allUsersReducer,
   singleUserReducer,
   allCategoriesReducer,

@@ -12,8 +12,6 @@ import { me } from "./store";
 import Checkout from "./components/Checkout";
 import { fetchTotal } from "./store/thunk";
 
-import { fetchTotal } from "./store/thunk";
-
 import Category from "./components/Categories";
 import SingleCategory from "./components/SingleCategory";
 
