@@ -24,15 +24,6 @@ class Product extends React.Component {
       <Fragment>
         <h1>Products</h1> <CreateProduct allCategories={allCategories} />
         <table className="table table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Price</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Remove</th>
-            </tr>
-          </thead>
           <tbody>
             {allProducts.map((product) => (
               <tr key={`productId&${product.id}`}>
