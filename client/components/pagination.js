@@ -9,6 +9,7 @@ class Paginate extends Component {
     super();
     this.state = {
       products: [],
+      sortType: 'asc'
     };
   }
 
@@ -32,8 +33,16 @@ class Paginate extends Component {
     this.fetchPage();
   }
 
+  onSort = sortType => {
+    this.setState({sortType})
+  }
   render() {
-    const { products } = this.state;
+    const { products, sortType } = this.state;
+    const sorted = products.sort( (a, b) => {
+
+      const isReversed = (sortType === 'asc' ) ? 1 : -1
+      return isReversed * a.name.localeCompare(b.name)
+    })
     const pageCount = Math.ceil(this.props.total / 4);
     const pages = new Array(pageCount).fill("-").map((_, idx) => {
       return {
@@ -46,8 +55,19 @@ class Paginate extends Component {
 
     return (
       <div>
+        <div className='pageHeader'>
+          <h1>Products</h1>
+        </div>
+        <div className='sort'>
+          <div className='row'>
+            <div className='col'>
+              <button className='sortButton' onClick={()=>this.onSort('asc')}>Sort A-Z</button>
+              <button className='sortButton' onClick={()=>this.onSort('desc')}>Sort Z-A</button>
+            </div>
+          </div>
+        </div>
         <div className="product_card">
-          {products.map((product) => {
+          {sorted.map((product) => {
             return (
               <div className="for_Product" key={product.id}>
                 <img className="product_img" src={product.imageUrl} />
