@@ -7,22 +7,41 @@ import { Link } from "react-router-dom";
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      productId: [],
+      quantity: [],
+    };
     this.handleChange = this.handleChange.bind(this);
   }
-
+  
   componentDidMount() {
     this.props.fetchOpenOrder(this.props.userId);
   }
 
+  componentDidUpdate(preProps) {
+    if (preProps.userId !== this.props.userId) {
+      this.props.cartItems.map((item) =>
+        this.setState({ [item.id]: item.quantity })
+      );
+    }
+  }
+
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.name, event.target.value);
+    // this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
-    const { totalAmount, userId, cartItems, removeCartItem, updateCartItem } =
-      this.props;
-
+    const {
+      totalAmount,
+      userId,
+      cartItems,
+      removeCartItem,
+      openOrder,
+      updateCartItem,
+    } = this.props;
+    const { handleChange } = this;
+    console.log(this.state);
     return (
       <div className="cart">
         <div>
@@ -57,9 +76,9 @@ class Cart extends React.Component {
                       min="1"
                       type="number"
                       id="qty"
-                      name="qty"
-                      value={item.order_item.quantity}
-                      onChange={this.handleChange}
+                      name={item.id}
+                      value={this.state[item.id]}
+                      onChange={handleChange}
                     />
                   </div>
                   {/* for delete button */}
@@ -69,6 +88,16 @@ class Cart extends React.Component {
                   >
                     <span className="material-icons" style={{ fontSize: 25 }}>
                       delete_outline
+                    </span>
+                  </button>
+                  <button
+                    onClick={() =>
+                      updateCartItem(openOrder.id, item.id, quantity)
+                    }
+                    className="addBtn"
+                  >
+                    <span className="material-icons" style={{ fontSize: 25 }}>
+                      add_shopping_cart
                     </span>
                   </button>
 
@@ -132,6 +161,7 @@ class Cart extends React.Component {
 }
 const mapState = (state) => ({
   userId: state.auth.id,
+  openOrder: state.openOrder,
   cartItems: state.cartItems,
   totalAmount: state.cartItems
     ? state.cartItems.reduce(

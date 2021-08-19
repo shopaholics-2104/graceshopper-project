@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
-import { _fetchAllCategoties, _updateProduct } from "../../store/thunk";
+import { _createProduct } from "../../store/thunk";
 import { connect } from "react-redux";
 
-class AdminProduct extends React.Component {
+class CreateProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       imageUrl: "",
       description: "",
       single_price: 0.0,
@@ -21,39 +22,46 @@ class AdminProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault;
-    const { updateProduct, product } = this.props;
-    updateProduct(product.id, this.state);
+    const { createProduct } = this.props;
+    createProduct(this.state);
   }
 
-  componentDidMount() {
-    const { product } = this.props;
-    this.setState(product);
-  }
   render() {
-    const { imageUrl, description, single_price, status, categoryId } =
+    const { name, imageUrl, description, single_price, status, categoryId } =
       this.state;
     const { handleChange, handleSubmit } = this;
-    const { product, allCategories } = this.props;
+    const { allCategories } = this.props;
     return (
       <Fragment>
         <button
           type="button"
           className="btn btn-warning"
           data-toggle="modal"
-          data-target={`#ProductId${product.id}`}
+          data-target={"#CreateProduct"}
         >
-          Edit Product
+          Create Product
         </button>
 
-        <div className="modal" id={`ProductId${product.id}`}>
+        <div className="modal" id={"CreateProduct"}>
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">{product.name}</h4>
+                <h4 className="modal-title">{name}</h4>
               </div>
 
               <form>
                 <div className="modal-body">
+                  <div className="form-group">
+                    <label htmlFor="imageUrl">Product Name</label>
+                    <input
+                      name="name"
+                      value={name}
+                      onChange={handleChange}
+                      type="text"
+                      className="form-control"
+                      id="name"
+                    />
+                  </div>
                   <div className="form-group">
                     <label htmlFor="imageUrl">Product ImageUrl</label>
                     <input
@@ -87,14 +95,14 @@ class AdminProduct extends React.Component {
                       className="form-control"
                       id="status"
                     >
-                      <option>out_of_stock</option>
-                      <option>in_stock</option>
-                      <option>running_low</option>
+                      <option value="out_of_stock">out_of_stock</option>
+                      <option value="in_stock">in_stock</option>
+                      <option value="running_low">running_low</option>
                     </select>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="categoryId">Product Flavor</label>
+                    <label htmlFor="category">Product Flavor</label>
                     <select
                       name="categoryId"
                       value={categoryId}
@@ -102,6 +110,7 @@ class AdminProduct extends React.Component {
                       className="form-control"
                       id="categoryId"
                     >
+                      <option>{"<---Pick a Flavor--->"}</option>
                       {allCategories &&
                         allCategories.map((category) => (
                           <option value={category.id} key={category.id}>
@@ -111,7 +120,7 @@ class AdminProduct extends React.Component {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="description">Product Description</label>
+                    <label htmlFor="description">Product Category</label>
                     <textarea
                       name="description"
                       value={description}
@@ -130,7 +139,7 @@ class AdminProduct extends React.Component {
                     data-dismiss="modal"
                     onClick={handleSubmit}
                   >
-                    Update
+                    Create
                   </button>
                   <button
                     type="button"
@@ -148,10 +157,9 @@ class AdminProduct extends React.Component {
     );
   }
 }
-
 const mapDispatch = (dispatch) => ({
-  updateProduct: (productId, productToUpdate) => {
-    dispatch(_updateProduct(productId, productToUpdate));
+  createProduct: (newProduct) => {
+    dispatch(_createProduct(newProduct));
   },
 });
-export default connect(null, mapDispatch)(AdminProduct);
+export default connect(null, mapDispatch)(CreateProduct);

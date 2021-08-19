@@ -39,7 +39,14 @@ export const _fetchSingleProduct = (productId) => {
   };
 };
 
-export const _updateProduct = (productId) => {
+export const _createProduct = (newProduct) => {
+  return async (dispatch) => {
+    const { data } = await axios.post(`/api/products`, newProduct);
+    dispatch(action.createProduct(data));
+  };
+};
+
+export const _updateProduct = (productId, productToUpdate) => {
   return async (dispatch) => {
     const { data } = await axios.put(
       `/api/products/${productId}`,

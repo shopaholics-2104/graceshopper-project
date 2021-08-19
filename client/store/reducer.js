@@ -72,6 +72,12 @@ export const allProductsReducer = (state = initState.allProducts, action) => {
       return action.allProducts;
     case type.CREATE_PRODUCT:
       return [...state, action.newProduct];
+    case type.UPDATE_PRODUCT:
+      return state.map((product) =>
+        product.id === action.productToUpdate.id
+          ? action.productToUpdate
+          : product
+      );
     case type.DELETE_PRODUCT:
       return state.filter((product) => product.id !== action.productId);
     default:
