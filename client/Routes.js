@@ -7,6 +7,7 @@ import Cart from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
 import Admin from "./components/Admin/Admin";
 import Products from "./components/Products";
+import Search from "./components/Search"
 import { me } from "./store";
 
 import { fetchTotal } from "./store/thunk";
@@ -51,8 +52,12 @@ class Routes extends Component {
             <Route path="/products" component={Products} exact />
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
+
+            <Route path="/search" component={Search} />
+
             <Route path="/admin" component={Admin} />
             <Route path="/categories" component={Category} />
+
 
             <Redirect to="/home" />
           </Switch>
