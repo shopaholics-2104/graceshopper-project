@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { _fetchOpenOrder, _removeItem, _updateItem } from "../store/thunk";
-import CheckoutButton from "./CheckoutButton";
 import ClearButton from "./ClearButton";
+import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class Cart extends React.Component {
           <p>Items</p>
           <ClearButton />
         </div>
-        
+        
         <div className="cartItems">
           {cartItems &&
             cartItems.map((item) => (
@@ -99,6 +99,22 @@ class Cart extends React.Component {
                       delete_outline
                     </span>
                   </button>
+                  <button
+                    onClick={() =>
+                      updateCartItem(openOrder.id, item.id, quantity)
+                    }
+                    className="addBtn"
+                  >
+                    <span className="material-icons" style={{ fontSize: 25 }}>
+                      add_shopping_cart
+                    </span>
+                  </button>
+
+                         {/* <span>
+                    {(item.order_item.quantity * item.order_item.price).toFixed(
+                      2
+                    )}
+                  </span> */}
                 </div>
               </div>
             ))}
@@ -117,7 +133,10 @@ class Cart extends React.Component {
             <span>${totalAmount.toFixed(2)}</span>
           </div>
           <div>
-            <CheckoutButton />
+            <Link to={`/checkout`}>
+              <button type="button">Check Out</button>
+            </Link>
+            <ClearButton />
           </div>
         </div>
       </div>

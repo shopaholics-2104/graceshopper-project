@@ -33,6 +33,15 @@ router.get("/:id/history", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.json(user);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await User.create(req.body));
@@ -46,6 +55,15 @@ router.delete("/:id", async (req, res, next) => {
     const user = await User.findByPk(req.params.id);
     await user.destroy();
     res.sendStatus(204);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.status(200).send(await user.update(req.body));
   } catch (ex) {
     next(ex);
   }

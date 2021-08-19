@@ -9,14 +9,12 @@ import {
   orderReducer,
   cartReducer,
   openOrderReducer,
-
   totalReducer,
-
+  totalReducer,
   allUsersReducer,
   singleUserReducer,
   allCategoriesReducer,
   singleCategoryReducer,
-
 } from "./reducer";
 
 const reducer = combineReducers({
@@ -30,6 +28,7 @@ const reducer = combineReducers({
   allProducts: allProductsReducer,
   allOrders: orderReducer,
   openOrder: openOrderReducer,
+  cartItems: cartReducer,
   total: totalReducer,
 });
 const middleware = composeWithDevTools(

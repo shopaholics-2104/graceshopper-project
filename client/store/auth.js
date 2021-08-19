@@ -7,11 +7,13 @@ const TOKEN = "token";
  * ACTION TYPES
  */
 const SET_AUTH = "SET_AUTH";
+const UPDATE_AUTH = "UPDATE_AUTH";
 
 /**
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
+const updateAuth = (userToUpdate) => ({ type: UPDATE_AUTH, userToUpdate });
 
 /**
  * THUNK CREATORS
@@ -48,6 +50,13 @@ export const logout = () => {
   };
 };
 
+export const _updateUser = (user) => {
+  return async (dispatch) => {
+    const { data } = await axios.put(`/api/users/${user.id}`, user);
+    dispatch(updateAuth(data));
+  };
+};
+
 /**
  * REDUCER
  */
@@ -55,6 +64,8 @@ export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
       return action.auth;
+    case UPDATE_AUTH:
+      return action.userToUpdate;
     default:
       return state;
   }
