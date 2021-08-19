@@ -120,7 +120,7 @@ const categoryList = [
   { flavor: "The Dark Chocolate Pistachio Sea Salt" },
   { flavor: "The Brown Butter Oatmeal filled With Caramel" },
   { flavor: "The Brown Butter Bourbon Spice" },
-  { flavor: "The Caraeml Pecan Snickerdoodle" },
+  { flavor: "The Caramel Pecan Snickerdoodle" },
   { flavor: "The Cinnamon Roll Sugar" },
 ];
 

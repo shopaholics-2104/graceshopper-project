@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const { STRING } = Sequelize;
+const { STRING, ENUM } = Sequelize;
 
 const db = require("../db");
 

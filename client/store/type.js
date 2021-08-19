@@ -1,4 +1,11 @@
 const type = {
+  //admin activities affect category model (admin manage categories)
+  SET_ALL_CATEGORIES: "SET_ALL_CATEGORIES",
+  SET_SINGLE_CATEGORY: "SET_SINSET_SINGLE_CATEGORYGLE_USER",
+  CREATE_CATEGORY: "CREATE_CATEGORY",
+  DELETE_CATEGORY: "DELETE_CATEGORY",
+  UPDATE_CATEGORY: "UPDATE_CATEGORY",
+
   //admin activities affect user model (admin manage users)
   SET_ALL_USERS: "SET_ALL_USERS",
   SET_SINGLE_USER: "SET_SINGLE_USER",

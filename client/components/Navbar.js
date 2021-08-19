@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import { _fetchOpenOrder } from "../store/thunk";
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
@@ -17,7 +16,8 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
           </a>
           <Link to="/products">All Products</Link>
           <Link to="/cart">Cart</Link>
-          {isAdmin && <Link to="/admin">Admin</Link>}
+          <Link to="/categories">Category</Link>
+          {isAdmin ? <Link to="/admin">Admin</Link> : null}
         </div>
       ) : (
         <div>

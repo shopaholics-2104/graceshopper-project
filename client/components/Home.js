@@ -23,7 +23,11 @@ export class Home extends React.Component {
         <h3>
           Welcome, {role.toUpperCase()} {username}
         </h3>
-        {isAdmin && <Link to="/Admin">Admin Page</Link>}
+        {isAdmin && (
+          <Link to={{ pathname: "/Admin", state: { isAdmin } }}>
+            Admin Page
+          </Link>
+        )}
         <h4>Order History ({orderHistory.length})</h4>
       </div>
     );

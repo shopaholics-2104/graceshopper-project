@@ -26,7 +26,11 @@ class Product extends React.Component {
               {" "}
               <img className="product_img" src={product.imageUrl}></img>
             </Link>
-            <div>{product.name}</div> <p>{product.description}</p>
+            <div>{product.name}</div>{" "}
+            <Link to={`/categories/${product.category.id}`}>
+              {product.category.flavor}
+            </Link>{" "}
+            <p>{product.description}</p>
             <span>
               Single Price: {product.single_price} Dozen Price:{" "}
               {product.dozen_price} Status: {product.status}

@@ -1,5 +1,16 @@
 import type from "./type";
 const actionCreator = {
+  //categories
+  setAllCategories: (allCategories) => ({
+    type: type.SET_ALL_CATEGORIES,
+    allCategories,
+  }),
+
+  setSingleCategory: (singleCategory) => ({
+    type: type.SET_SINGLE_CATEGORY,
+    singleCategory,
+  }),
+
   //users
   setAllUsers: (allUsers) => ({
     type: type.SET_ALL_USERS,
@@ -36,9 +47,9 @@ const actionCreator = {
     type: type.CREATE_PRODUCT,
     newProduct,
   }),
-  deleteProduct: (productToDelete) => ({
+  deleteProduct: (productId) => ({
     type: type.DELETE_PRODUCT,
-    productToDelete,
+    productId,
   }),
   updateProduct: (productToUpdate) => ({
     type: type.UPDATE_PRODUCT,

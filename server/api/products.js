@@ -55,6 +55,30 @@ router.get("/running_low", async (req, res, next) => {
   }
 });
 
+//get specific product
+router.get("/:id", async (req, res, next) => {
+  try {
+    const single_product = await Product.findByPk(req.params.id, {
+      include: { all: true },
+    });
+    res.json(single_product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const productToUpdate = await Product.findByPk(req.params.id, {
+      include: { all: true },
+    });
+    productToUpdate.update(req.body);
+    res.json(productToUpdate);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Product.create(req.body));
@@ -101,5 +125,6 @@ router.get("/:id", async (req, res, next) => {
     next(err);
   }
 });
+//missing error handling router
 
 module.exports = router;
