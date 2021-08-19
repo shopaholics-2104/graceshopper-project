@@ -7,28 +7,16 @@ import { Link } from "react-router-dom";
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      productId: [],
-      quantity: [],
-    };
     this.handleChange = this.handleChange.bind(this);
   }
-  
   componentDidMount() {
     this.props.fetchOpenOrder(this.props.userId);
   }
 
-  componentDidUpdate(preProps) {
-    if (preProps.userId !== this.props.userId) {
-      this.props.cartItems.map((item) =>
-        this.setState({ [item.id]: item.quantity })
-      );
-    }
-  }
-
   handleChange(event) {
     console.log(event.target.name, event.target.value);
-    // this.setState({ [event.target.name]: event.target.value });
+
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
@@ -49,7 +37,7 @@ class Cart extends React.Component {
           <p>Items</p>
           <ClearButton />
         </div>
-
+        
         <div className="cartItems">
           {cartItems &&
             cartItems.map((item) => (
@@ -71,15 +59,36 @@ class Cart extends React.Component {
                 {/* for actions */}
                 <div className="cart_Items_actions">
                   <div className="cartItem_qty">
-                    <label htmlFor="qty"> Quantity </label>
-                    <input
-                      min="1"
-                      type="number"
-                      id="qty"
-                      name={item.id}
-                      value={this.state[item.id]}
-                      onChange={handleChange}
-                    />
+                    {/* <label htmlFor="qty"> Quantity </label> */}
+                    <span
+                      className="material-icons"
+                      onClick={() => {
+                        updateCartItem(
+                          openOrder.id,
+                          item.id,
+                          item.order_item.quantity + 1
+                        );
+                      }}
+                    >
+                      add
+                    </span>
+                    <div>{item.order_item.quantity}</div>
+                    <span
+                      className="material-icons"
+                      onClick={() => {
+                        item.order_item.quantity === 1
+                          ? removeCartItem(item.id, userId)
+                          : item.order_item.quantity > 0
+                          ? updateCartItem(
+                              openOrder.id,
+                              item.id,
+                              item.order_item.quantity - 1
+                            )
+                          : null;
+                      }}
+                    >
+                      remove
+                    </span>
                   </div>
                   {/* for delete button */}
                   <button
@@ -101,58 +110,7 @@ class Cart extends React.Component {
                     </span>
                   </button>
 
-        <div className="cartItems">
-          {cartItems &&
-            cartItems.map((item) => (
-              <div key={item.id} className="cart_Items">
-                <img
-                  className="cart_Items_img"
-                  src={item.imageUrl}
-                  alt={item.name}
-                />
-                {/* for details */}
-                <div className="cart_Items_details">
-                  <p className="details_name">{item.name}</p>
-                  <p className="details_desc">{item.description}</p>
-                  <p className="details_price">
-                    Cost Per Cookie: {item.order_item.price}
-                  </p>
-                </div>
-
-                {/* for actions */}
-                <div className="cart_Items_actions">
-                  <div className="cartItem_qty">
-                    <label htmlFor="qty"> Quantity </label>
-                    <input
-                      min="1"
-                      type="number"
-                      id="qty"
-                      name={item.id}
-                      value={this.state[item.id]}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {/* for delete button */}
-                  <button
-                    onClick={() => removeCartItem(item.id, userId)}
-                    className="deleteBtn"
-                  >
-                    <span className="material-icons" style={{ fontSize: 25 }}>
-                      delete_outline
-                    </span>
-                  </button>
-                  <button
-                    onClick={() =>
-                      updateCartItem(openOrder.id, item.id, quantity)
-                    }
-                    className="addBtn"
-                  >
-                    <span className="material-icons" style={{ fontSize: 25 }}>
-                      add_shopping_cart
-                    </span>
-                  </button>
-
-                  {/* <span>
+                         {/* <span>
                     {(item.order_item.quantity * item.order_item.price).toFixed(
                       2
                     )}
@@ -164,18 +122,21 @@ class Cart extends React.Component {
         <div className="cart_summary">
           <h4 className="summary_title">Cart Summary</h4>
           <div className="summary_price">
-            <span>TOTAL: ({cartItems.length})</span>
+            <span>
+              TOTAL: (
+              {cartItems.reduce((accum, item) => {
+                accum += item.order_item.quantity;
+                return accum;
+              }, 0)}
+              )
+            </span>
             <span>${totalAmount.toFixed(2)}</span>
           </div>
           <div>
-<<<<<<< HEAD
             <Link to={`/checkout`}>
               <button type="button">Check Out</button>
             </Link>
             <ClearButton />
-=======
-            <CheckoutButton />
->>>>>>> c9eb699a40e8b7f1d30bb7d1b2da5dfe5e6f9694
           </div>
         </div>
       </div>

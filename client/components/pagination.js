@@ -46,7 +46,7 @@ class Paginate extends Component {
 
     return (
       <div>
-        <ul className="paginate_Products">
+        <div className="product_card">
           {products.map((product) => {
             return (
               <div className="for_Product" key={product.id}>
@@ -60,13 +60,14 @@ class Paginate extends Component {
                   <p className="product_status">Status: {product.status}</p>
                   <div className="product_btn"></div>
                   <Link to={`/products/${product.id}`}>
-                    <button className="button_btn">view Item</button>
+                    <button className="button_btn">Look Inside</button>
                   </Link>
                 </div>
               </div>
             );
           })}
-
+        </div>
+        <div>
           {pages.map((page) => {
             return (
               <li
@@ -80,7 +81,7 @@ class Paginate extends Component {
               </li>
             );
           })}
-        </ul>
+        </div>
       </div>
     );
   }
