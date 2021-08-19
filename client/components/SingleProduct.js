@@ -18,9 +18,7 @@ class Product extends React.Component {
     const { fetchSingleProduct } = this.props;
     const productId = this.props.match.params.productId;
     fetchSingleProduct(productId);
-    
   }
-  
 
   handleSubmit(event) {
     event.preventDefault();
@@ -29,7 +27,6 @@ class Product extends React.Component {
       productId: Number(this.props.match.params.productId),
       quantity: Number(this.state.quantity),
       price: Number(this.state.price),
-      
     };
 
     this.props.addItem(userId, newItem);
@@ -61,7 +58,6 @@ class Product extends React.Component {
             <option value="">Select a Unit</option>
 
             <option value={single_price}>single unit</option>
-           
           </select>
 
           {!price ? (
@@ -97,13 +93,8 @@ const mapDispatch = (dispatch) => ({
   fetchSingleProduct: (productId) => {
     dispatch(_fetchSingleProduct(productId));
   },
-  fetchOpenOrder: (userId) => {
-    dispatch(_fetchOpenOrder(userId));
-  },
-
   addItem: (userId, newItem) => {
     dispatch(_addItem(userId, newItem));
-
   },
 });
 export default connect(mapState, mapDispatch)(Product);

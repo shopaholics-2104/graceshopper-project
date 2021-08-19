@@ -1,6 +1,13 @@
 import axios from "axios";
 import action from "./actions";
 
+export const _fetchAllUsers = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get("/api/users");
+    dispatch(action.setAllUsers(data));
+  };
+};
+
 export const _fetchAllProducts = () => {
   return async (dispatch) => {
     const { data } = await axios.get("/api/products");

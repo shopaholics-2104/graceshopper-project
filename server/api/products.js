@@ -6,7 +6,7 @@ const {
 //get all products even if not in stock
 router.get("/", async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({ include: { all: true } });
     res.json(products);
   } catch (err) {
     next(err);

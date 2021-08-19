@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
+import Admin from "./components/Admin";
 import Products from "./components/Products";
 import { me } from "./store";
 import Checkout from "./components/Checkout";
@@ -19,7 +20,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, isAdmin } = this.props;
 
     return (
       <div>
@@ -39,6 +40,8 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/admin" component={Admin} />
+
             <Redirect to="/home" />
           </Switch>
         ) : (
