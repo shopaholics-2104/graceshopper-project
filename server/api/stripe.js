@@ -11,20 +11,42 @@ const {
 const stripe = require("stripe")(
   "sk_test_51JPGA6HdmiNqjtgjIBcPQtMxQoEO3gMs9nkGdXMcNOUm9geQdZm0QVnhMnqWNy0jBPuxN15juR0H52Yr6H0G2rRo00NvYqxQhc"
 );
-const calculateOrderAmount = (items) => {
-  // Replace this constant with a calculation of the order's amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return 1400;
-};
-app.post("/create-payment-intent", async (req, res) => {
-  const { items } = req.body;
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
-    currency: "usd",
-  });
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
+
+router.post("/session", async (req, res, next) => {
+  try {
+    const { token, total } = req.body;
+
+    const customer = await stripe.customers.create({
+      email: token.email,
+      source: token.id,
+    });
+
+    const charge = await stripe.charges.create({
+      amount: total * 100,
+      currency: "usd",
+      customer: customer.id,
+      receipt_email: token.email,
+      description: "Marvelous Cookies",
+      shipping: {
+        name: token.card.name,
+        address: {
+          line1: token.card.address_line1,
+          city: token.card.address_city,
+          country: token.card.address_country,
+          postal_code: token.card.address_zip,
+          state: token.card.address_state,
+        },
+      },
+    });
+
+    if (charge) {
+      res.sendStatus(200);
+    } else {
+      const error = new Error("Unable To Charge");
+      error.status = 402;
+      throw error;
+    }
+  } catch (ex) {
+    next(ex);
+  }
 });

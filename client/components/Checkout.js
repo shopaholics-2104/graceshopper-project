@@ -4,6 +4,7 @@ import PlacesAutocomplete from "react-places-autocomplete";
 import { _fetchOpenOrder, _updateOrder } from "../store/thunk";
 import { _updateUser } from "../store";
 import { CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
+import CheckoutForm from "./Stripe";
 
 class CheckOut extends React.Component {
   constructor(props) {
@@ -128,7 +129,10 @@ class CheckOut extends React.Component {
                 <div style={{ margin: "0rem" }}>
                   {suggestions.map((suggestion) => {
                     return (
-                      <div {...getSuggestionItemProps(suggestion, {})}>
+                      <div
+                        {...getSuggestionItemProps(suggestion, {})}
+                        key={suggestion.placeId}
+                      >
                         {suggestion.description}
                       </div>
                     );
@@ -141,7 +145,8 @@ class CheckOut extends React.Component {
 
         {/* Stripe Cart Element */}
         <label htmlFor="payment">Payment: </label>
-        <CardElement
+        <CheckoutForm />
+        {/* <CardElement
           options={{
             style: {
               base: {
@@ -156,7 +161,7 @@ class CheckOut extends React.Component {
               },
             },
           }}
-        />
+        /> */}
 
         {/* Cart Items */}
         <h1>Cart</h1>

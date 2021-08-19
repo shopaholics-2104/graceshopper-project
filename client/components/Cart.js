@@ -13,7 +13,7 @@ class Cart extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  
+
   componentDidMount() {
     this.props.fetchOpenOrder(this.props.userId);
   }
@@ -100,47 +100,6 @@ class Cart extends React.Component {
                       add_shopping_cart
                     </span>
                   </button>
-
-                  {/* <span>
-                    {(item.order_item.quantity * item.order_item.price).toFixed(
-                      2
-                    )}
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => removeCartItem(item.id, userId)}
-                      type="button"
-                    >
-                      {" "}
-                      remove{" "}
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        updateCartItem(
-                          item.order_item.orderId,
-                          item.order_item.productId,
-                          item.order_item.quantity + 1
-                        )
-                      }
-                    >
-                      {" "}
-                      + 1{" "}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-
-        <div> Total Amount: {totalAmount.toFixed(2)}</div>
-        <Link to={`/checkout`}>
-          <button type="button">Check Out</button>
-        </Link>
-        <ClearButton />
-                  </span> */}
                 </div>
               </div>
             ))}
@@ -152,7 +111,10 @@ class Cart extends React.Component {
             <span>${totalAmount.toFixed(2)}</span>
           </div>
           <div>
-            <CheckoutButton />
+            <Link to={`/checkout`}>
+              <button type="button">Check Out</button>
+            </Link>
+            <ClearButton />
           </div>
         </div>
       </div>
