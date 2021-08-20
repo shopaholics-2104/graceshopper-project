@@ -11,7 +11,6 @@ import {
   openOrderReducer,
   totalReducer,
   allUsersReducer,
-  singleUserReducer,
   allCategoriesReducer,
   singleCategoryReducer,
 } from "./reducer";
@@ -19,7 +18,6 @@ import {
 const reducer = combineReducers({
   auth,
   allUsers: allUsersReducer,
-  singleUser: singleUserReducer,
   allCategories: allCategoriesReducer,
   singleCategory: singleCategoryReducer,
   singleProduct: singleProductReducer,

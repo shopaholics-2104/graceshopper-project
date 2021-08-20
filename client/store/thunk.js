@@ -1,13 +1,13 @@
 import axios from "axios";
 import action from "./actions";
 
-const LOCALCARTITEMS = "localCartItems";
+export const LOCALCARTITEMS = "localCartItems";
 
-//LocalStorage
-const getLocalCartItems = () => {
+//nonUser
+export const getLocalCartItems = () => {
   return JSON.parse(window.localStorage.getItem(LOCALCARTITEMS));
 };
-const setLocalCartItems = (localCartItems) => {
+export const setLocalCartItems = (localCartItems) => {
   window.localStorage.setItem(LOCALCARTITEMS, JSON.stringify(localCartItems));
 };
 
@@ -83,6 +83,27 @@ export const _clearLocalCart = () => {
   };
 };
 
+export const _moveLocalCartItemsToCart = (userId) => {
+  return async () => {
+    if (getLocalCartItems()) {
+      const listOfItemsToAdd = getLocalCartItems().reduce((accum, item) => {
+        accum.push({
+          productId: item.id,
+          quantity: item.order_item.quantity,
+          price: item.order_item.price,
+        });
+        return accum;
+      }, []);
+
+      const addItem = async (userId, newItem) => {
+        const { data } = await axios.post(`/api/orders/${userId}`, newItem);
+        dispatch(action.addItem(data));
+      };
+      await listOfItemsToAdd.map((item) => addItem(userId, item));
+      window.localStorage.removeItem(LOCALCARTITEMS);
+    }
+  };
+};
 //User
 export const _fetchAllUsers = () => {
   return async (dispatch) => {

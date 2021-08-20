@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { _fetchAllOrders } from "../store/thunk";
+import {
+  _addItem,
+  _fetchAllOrders,
+  _moveLocalCartItemsToCart,
+} from "../store/thunk";
 import EditUser from "./EditUser";
 import OrderDetails from "./OrderDetails";
 
@@ -12,9 +16,10 @@ export class Home extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    const { fetchAllOrders, userId } = this.props;
+  async componentDidMount() {
+    const { fetchAllOrders, userId, moveLocalCartItemsToCart } = this.props;
     fetchAllOrders(userId);
+    moveLocalCartItemsToCart(userId);
   }
 
   render() {
@@ -89,6 +94,9 @@ const mapDispatch = (dispatch) => {
   return {
     fetchAllOrders: (userId) => {
       dispatch(_fetchAllOrders(userId));
+    },
+    moveLocalCartItemsToCart: (userId) => {
+      dispatch(_moveLocalCartItemsToCart(userId));
     },
   };
 };
