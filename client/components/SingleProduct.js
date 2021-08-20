@@ -59,40 +59,47 @@ class Product extends React.Component {
     const { quantity, price } = this.state;
 
     return (
-      <div>
-        <img src={imageUrl}></img>
-        <h1>{name}</h1>
-        {category && (
-          <Link to={`/categories/${categoryId}`}>{category.flavor}</Link>
-        )}
-        <p>{description}</p>
-
-        <div>Inventory Status: {status}</div>
-        <form onSubmit={this.handleSubmit}>
-          <select value={price} name="price" onChange={this.handleChange}>
-            <option value="">Select a Unit</option>
-            <option value={single_price}>single unit</option>
-          </select>
-
-          {!price ? (
-            <div>Please Select a Purchase Unit</div>
-          ) : (
-            <div>
-              Price: {price}
-              <div>
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={this.handleChange}
-                  name="quantity"
-                  min="1"
-                ></input>{" "}
-              </div>
-            </div>
+      <div className="for_Product">
+        <img className="product_img" src={imageUrl}></img>
+        <div className="product_datail">
+          <h1 className="product_title">{name}</h1>
+          {category && (
+            <Link to={`/categories/${categoryId}`}>{category.flavor}</Link>
           )}
+          <p className="product_desc">{description}</p>
 
-          <button type="submit">Add to Cart</button>
-        </form>
+          <div className="product_status">Inventory Status: {status}</div>
+          <form onSubmit={this.handleSubmit}>
+            <select value={price} name="price" onChange={this.handleChange}>
+              <option value="">Select a Unit</option>
+              <option value={single_price}>single unit</option>
+            </select>
+
+            {!price ? (
+              <div className="product_status">
+                Please Select a Purchase Unit
+              </div>
+            ) : (
+              <div>
+                Price: {price}
+                <div>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={this.handleChange}
+                    name="quantity"
+                    min="1"
+                  ></input>{" "}
+                </div>
+              </div>
+            )}
+            <div className="product_btn"></div>
+
+            <button className="button_btn" type="submit">
+              Get The Power
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

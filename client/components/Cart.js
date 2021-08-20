@@ -100,6 +100,7 @@ class Cart extends React.Component {
                       delete_outline
                     </span>
                   </button>
+
                 </div>
               </div>
             ))}
@@ -118,12 +119,14 @@ class Cart extends React.Component {
             </span>
             <span>${totalAmount.toFixed(2)}</span>
           </div>
+
           <div>
             <Link to={`/checkout`}>
               <button type="button">Check Out</button>
             </Link>
             {userId ? <UserClearButton /> : <NonUserClearButton />}
           </div>
+
         </div>
       </div>
     );
