@@ -31,103 +31,107 @@ class Cart extends React.Component {
     const { handleChange } = this;
     console.log(this.state);
     return (
-      <div className="cart">
-        <div>
-          <h3>Shopping Cart ({cartItems && cartItems.length})</h3>
-          <p>Items</p>
-          <ClearButton />
+      <div>
+        <div className="shopping-cart">
+          <h3 className="shopping-cart-title">
+            Shopping Cart ({cartItems && cartItems.length})
+          </h3>
+          <span>
+            <ClearButton />
+          </span>
         </div>
-
-        <div className="cartItems">
-          {cartItems &&
-            cartItems.map((item) => (
-              <div key={item.id} className="cart_Items">
-                <img
-                  className="cart_Items_img"
-                  src={item.imageUrl}
-                  alt={item.name}
-                />
-                {/* for details */}
-                <div className="cart_Items_details">
-                  <p className="details_name">{item.name}</p>
-                  <p className="details_desc">{item.description}</p>
-                  <p className="details_price">
-                    Cost Per Cookie: {item.order_item.price}
-                  </p>
-                </div>
-
-                {/* for actions */}
-                <div className="cart_Items_actions">
-                  <div className="cartItem_qty">
-                    {/* <label htmlFor="qty"> Quantity </label> */}
-                    <span
-                      className="material-icons"
-                      onClick={() => {
-                        updateCartItem(
-                          openOrder.id,
-                          item.id,
-                          item.order_item.quantity + 1
-                        );
-                      }}
-                    >
-                      add
-                    </span>
-                    <div>{item.order_item.quantity}</div>
-                    <span
-                      className="material-icons"
-                      onClick={() => {
-                        item.order_item.quantity === 1
-                          ? removeCartItem(item.id, userId)
-                          : item.order_item.quantity > 0
-                          ? updateCartItem(
-                              openOrder.id,
-                              item.id,
-                              item.order_item.quantity - 1
-                            )
-                          : null;
-                      }}
-                    >
-                      remove
-                    </span>
+        <div className="cart">
+          <div className="cartItems">
+            {cartItems &&
+              cartItems.map((item) => (
+                <div key={item.id} className="cart_Items">
+                  <img
+                    className="cart_Items_img"
+                    src={item.imageUrl}
+                    alt={item.name}
+                  />
+                  {/* for details */}
+                  <div className="cart_Items_details">
+                    <p className="details_name">{item.name}</p>
+                    <p className="details_desc">{item.description}</p>
+                    <p className="details_price">
+                      Cost Per Cookie: {item.order_item.price}
+                    </p>
                   </div>
-                  {/* for delete button */}
-                  <button
-                    onClick={() => removeCartItem(item.id, userId)}
-                    className="deleteBtn"
-                  >
-                    <span className="material-icons" style={{ fontSize: 25 }}>
-                      delete_outline
-                    </span>
-                  </button>
 
-                  {/* <span>
+                  {/* for actions */}
+                  <div className="cart_Items_actions">
+                    <div className="cartItem_qty">
+                      {/* <label htmlFor="qty"> Quantity </label> */}
+                      <span
+                        className="material-icons"
+                        onClick={() => {
+                          updateCartItem(
+                            openOrder.id,
+                            item.id,
+                            item.order_item.quantity + 1
+                          );
+                        }}
+                      >
+                        add
+                      </span>
+                      <div>{item.order_item.quantity}</div>
+                      <span
+                        className="material-icons"
+                        onClick={() => {
+                          item.order_item.quantity === 1
+                            ? removeCartItem(item.id, userId)
+                            : item.order_item.quantity > 0
+                            ? updateCartItem(
+                                openOrder.id,
+                                item.id,
+                                item.order_item.quantity - 1
+                              )
+                            : null;
+                        }}
+                      >
+                        remove
+                      </span>
+                    </div>
+                    {/* for delete button */}
+                    <button
+                      onClick={() => removeCartItem(item.id, userId)}
+                      className="deleteBtn"
+                    >
+                      <span className="material-icons" style={{ fontSize: 25 }}>
+                        delete_outline
+                      </span>
+                    </button>
+
+                    {/* <span>
                     {(item.order_item.quantity * item.order_item.price).toFixed(
                       2
                     )}
                   </span> */}
+                  </div>
                 </div>
-              </div>
-            ))}
-        </div>
-        <div className="cart_summary">
-          <h4 className="summary_title">Cart Summary</h4>
-          <div className="summary_price">
-            <span>
-              TOTAL: (
-              {cartItems.reduce((accum, item) => {
-                accum += item.order_item.quantity;
-                return accum;
-              }, 0)}
-              )
-            </span>
-            <span>${totalAmount.toFixed(2)}</span>
+              ))}
           </div>
+          <div className="cart_summary">
+            <h4 className="summary_title">Cart Summary</h4>
+            <div className="summary_price">
+              <span>
+                TOTAL: (
+                {cartItems.reduce((accum, item) => {
+                  accum += item.order_item.quantity;
+                  return accum;
+                }, 0)}
+                )
+              </span>
+              <span>${totalAmount.toFixed(2)}</span>
+            </div>
 
-          <Link to={`/checkout`}>
-            <button className="checkoutBtn" type="button">
-              Proceed to check out
-            </button>
-          </Link>
+            <Link to={`/checkout`}>
+              <button className="checkoutBtn" type="button">
+                Proceed to check out
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     );

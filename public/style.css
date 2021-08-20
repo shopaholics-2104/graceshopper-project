@@ -2,10 +2,37 @@
 .home {
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(to top, rgba(251, 251, 251, 0.52), #fee92f),
+  background-image: linear-gradient(to top, rgba(243, 243, 243, 0.52), #fee92f),
     url(https://sandbox-uploads.imgix.net/u/1629390135-2fc4cab407a794c1e9d9c98ff6ab1740?w=600);
   background-size: cover;
   background-position: center center;
+  background-color: rgba(141, 44, 44, 0.25);
+}
+
+.pageHeader {
+  font-family: "Bungee Shade", cursive;
+  font-size: 1.5rem;
+  margin-left: 5rem;
+}
+
+.admin_header {
+  text-align: left;
+  margin-left: 5rem;
+}
+
+.admin_user_title,
+.admin_title {
+  font-family: "Bungee Shade", cursive;
+  font-weight: bold;
+  font-size: 1.5rem;
+  display: inline;
+}
+.admin_order_detail {
+  font-family: "Cabin Sketch", cursive;
+}
+.order_history {
+  font-family: "Cabin Sketch", cursive;
+  font-size: 1.5rem;
 }
 
 .container {
@@ -139,11 +166,29 @@ li a {
 }
 
 /* for cart summary section */
+.shopping-cart {
+  margin-left: 2rem;
+}
+.clearBtn {
+  padding: 10px 17px;
+  border: 1px solid #00adb5;
+  border-radius: 10px;
+  background-color: #00adb5;
+  color: white;
+  font-family: "Cabin Sketch", cursive;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.shopping-cart-title {
+  font-family: "Bungee Shade", cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
 .cart {
   margin: 2rem auto;
   width: 1100px;
-
   display: flex;
   justify-content: space-between;
 }
@@ -169,11 +214,13 @@ li a {
   font-family: "Bungee Shade", cursive;
   font-size: 1.2rem;
   font-weight: bold;
+  margin-left: 3.5rem;
 }
 
 .summary_price {
   display: flex;
   align-items: center;
+  margin-left: 1rem;
 }
 .summary_price span:nth-child(1) {
   font-family: "Bungee Shade", cursive;
@@ -196,6 +243,7 @@ li a {
   color: white;
   font-family: "Cabin Sketch", cursive;
   font-size: 1.2rem;
+  margin-left: 2.8rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -317,4 +365,75 @@ li a {
 
 .btn-default {
   font-family: "Cabin Sketch", cursive;
+}
+
+.dropdown .dropdown-menu {
+  background-color: transparent;
+  border: none;
+}
+
+/* sort button ============================== */
+/* =============================================== */
+
+.sortButton {
+  width: 100px;
+  padding: 0.5rem;
+  border: 1px solid #00adb5;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  font-family: "Cabin Sketch", cursive;
+  font-size: 0.65rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sortButton:hover {
+  opacity: 0.5;
+}
+
+.btn {
+  display: inline-block;
+  width: 150px;
+  padding: 0.5rem;
+  border: none;
+  background-color: black;
+  border-radius: 15px;
+  color: white;
+  font-family: "Cabin Sketch", cursive;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* for category ================================== */
+.category-title {
+  display: inline;
+  font-family: "Bungee Shade", cursive;
+  font-weight: bold;
+  margin-left: 5rem;
+}
+
+.sortButton_container {
+  float: right;
+  margin-right: 5rem;
+}
+
+.category_flavor_title {
+  font-family: "Bungee Shade", cursive;
+  color: black;
+  margin-left: 5rem;
+  margin-top: 3rem;
+}
+
+.line_break {
+  height: 20px;
+}
+
+.product_name {
+  font-family: "Cabin Sketch", cursive;
+  color: black;
+}
+
+.search_container {
+  margin-left: 5rem;
 }
