@@ -6,22 +6,45 @@ import { Link } from "react-router-dom";
 class Cateory extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      sortType: 'asc'
+    }
   }
 
   componentDidMount() {
     this.props.fetchAllCategories();
   }
 
+  onSort = sortType => {
+    this.setState({sortType})
+  }
+
   render() {
+    const {sortType} = this.state
     const { allCategories } = this.props;
+    const sorted = allCategories.sort( (a, b) => {
+
+      const isReversed = (sortType === 'asc' ) ? 1 : -1
+      return isReversed * a.flavor.localeCompare(b.flavor)
+    })
 
     return (
       <div>
         <h1>Category</h1>
+        <div className='sort'>
+          <div className='row'>
+            <div className='col'>
+              <button className='sortButton' onClick={()=>this.onSort('asc')}>Sort A-Z</button>
+              <button className='sortButton' onClick={()=>this.onSort('desc')}>Sort Z-A</button>
+            </div>
+          </div>
+        </div>
 
-        {allCategories.map((category) => (
+        {sorted.map((category) => (
           <div key={category.id}>
-            <h3>{category.flavor}</h3>
+            <Link to={`/categories/${category.id}`}>
+              <h3>{category.flavor}</h3>
+            </Link>
             {category.products.length ? (
               category.products.map((product) => (
                 <ul key={product.id}>
