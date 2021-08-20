@@ -14,13 +14,11 @@ class Cart extends React.Component {
   }
 
   handleChange(event) {
-    console.log(event.target.name, event.target.value);
-
     this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
-    const {
+    let {
       totalAmount,
       userId,
       cartItems,
@@ -28,8 +26,14 @@ class Cart extends React.Component {
       openOrder,
       updateCartItem,
     } = this.props;
+
+    //use localCartItems in windows.localStorage as cartItems if not login
+    cartItems = userId
+      ? cartItems
+      : JSON.parse(window.localStorage.getItem("localCartItems"));
+
     const { handleChange } = this;
-    console.log(this.state);
+
     return (
       <div className="cart">
         <div>
@@ -37,7 +41,7 @@ class Cart extends React.Component {
           <p>Items</p>
           <ClearButton />
         </div>
-        
+
         <div className="cartItems">
           {cartItems &&
             cartItems.map((item) => (
@@ -110,7 +114,7 @@ class Cart extends React.Component {
                     </span>
                   </button>
 
-                         {/* <span>
+                  {/* <span>
                     {(item.order_item.quantity * item.order_item.price).toFixed(
                       2
                     )}

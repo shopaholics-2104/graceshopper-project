@@ -88,18 +88,48 @@ export const _updateOrder = (order) => {
 };
 
 //Cart
+
+const _addToLocal = async (newItem) => {
+  const { data } = await axios.get(`/api/products/${newItem.productId}`);
+  if (!localStorage.hasOwnProperty("localCartItems")) {
+    window.localStorage.setItem(
+      "localCartItems",
+      JSON.stringify([
+        {
+          ...data,
+          order_item: { quantity: newItem.quantity, price: newItem.price },
+        },
+      ])
+    );
+  } else {
+    const localCartItems = JSON.parse(
+      window.localStorage.getItem("localCartItems")
+    );
+
+    const item = localCartItems.filter(
+      (item) => item.id === newItem.productId
+    )[0];
+    item
+      ? (item.order_item.quantity += newItem.quantity)
+      : localCartItems.push({
+          ...data,
+          order_item: { quantity: newItem.quantity, price: newItem.price },
+        });
+    window.localStorage.setItem(
+      "localCartItems",
+      JSON.stringify(localCartItems)
+    );
+    console.log("this is localCartItems--->", localCartItems);
+  }
+};
+
 export const _addItem = (userId, newItem) => {
   return async (dispatch) => {
     if (userId) {
       const { data } = await axios.post(`/api/orders/${userId}`, newItem);
       dispatch(action.addItem(data));
     } else {
-      localStorage.hasOwnProperty(newItem.productId);
-      const { data } = await axios.get(`/api/products/${newItem.productId}`);
-      window.localStorage.setItem(newItem.productId, JSON.stringify(data));
-
-      const cartItems = { ...localStorage };
-      console.log("after add", localStorage);
+      _addToLocal(newItem);
     }
   };
 };
