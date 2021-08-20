@@ -12,8 +12,6 @@ import { me } from "./store";
 import Checkout from "./components/Checkout";
 import { fetchTotal } from "./store/thunk";
 
-
-
 import Category from "./components/Categories";
 import SingleCategory from "./components/SingleCategory";
 
@@ -68,7 +66,7 @@ class Routes extends Component {
               component={Products}
               exact
             />
-            <Route path="/" exact component={Login} />
+            {/* <Route path="/" exact component={Login} /> */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/checkout" component={Checkout} />

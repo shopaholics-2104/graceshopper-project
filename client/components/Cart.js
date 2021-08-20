@@ -37,7 +37,7 @@ class Cart extends React.Component {
           <p>Items</p>
           <ClearButton />
         </div>
-        
+
         <div className="cartItems">
           {cartItems &&
             cartItems.map((item) => (
@@ -99,18 +99,8 @@ class Cart extends React.Component {
                       delete_outline
                     </span>
                   </button>
-                  <button
-                    onClick={() =>
-                      updateCartItem(openOrder.id, item.id, quantity)
-                    }
-                    className="addBtn"
-                  >
-                    <span className="material-icons" style={{ fontSize: 25 }}>
-                      add_shopping_cart
-                    </span>
-                  </button>
 
-                         {/* <span>
+                  {/* <span>
                     {(item.order_item.quantity * item.order_item.price).toFixed(
                       2
                     )}
@@ -132,12 +122,12 @@ class Cart extends React.Component {
             </span>
             <span>${totalAmount.toFixed(2)}</span>
           </div>
-          <div>
-            <Link to={`/checkout`}>
-              <button type="button">Check Out</button>
-            </Link>
-            <ClearButton />
-          </div>
+
+          <Link to={`/checkout`}>
+            <button className="checkoutBtn" type="button">
+              Proceed to check out
+            </button>
+          </Link>
         </div>
       </div>
     );
