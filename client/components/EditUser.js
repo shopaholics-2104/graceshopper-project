@@ -50,7 +50,7 @@ class EditUser extends React.Component {
       <Fragment>
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn"
           data-toggle="modal"
           data-target={`#UserId${user.id}`}
         >
@@ -61,7 +61,9 @@ class EditUser extends React.Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
+
                 <h4 className="modal-title">{this.state.username}</h4>
+
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>

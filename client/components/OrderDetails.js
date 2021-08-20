@@ -7,7 +7,7 @@ const OrderDetails = ({ order }) => {
     <Fragment>
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn"
         data-toggle="modal"
         data-target={`#OrderId${order.id}`}
       >

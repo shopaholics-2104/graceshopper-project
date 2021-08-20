@@ -27,26 +27,35 @@ export class Home extends React.Component {
 
     return (
       <div>
-        <h3>
-          Welcome, {role.toUpperCase()} {username}
-        </h3>
-        <div>
-          <EditUser user={user} />
-        </div>
-        {/* {isAdmin && (
+        <div className="admin_header">
+          <h3 className="admin_title">
+            Welcome, {role.toUpperCase()} {username} <EditUser user={user} />
+          </h3>
+          {/* {isAdmin && (
           <Link to={{ pathname: "/Admin", state: { isAdmin } }}>
             Admin Page
           </Link>
         )} */}
 
-        <h4>Order History ({orderHistory.length})</h4>
+          <h4 className="order_history">
+            Order History ({orderHistory.length})
+          </h4>
+        </div>
         <table className="table table-hover">
           <thead className="thead-dark">
             <tr>
-              <th scope="col">Order Id</th>
-              <th scope="col">Purchased Time</th>
-              <th scope="col">Total Amount</th>
-              <th scope="col">Order Details</th>
+              <th className="admin_order_detail" scope="col">
+                Order Id
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Purchased Time
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Total Amount
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Order Details
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -64,10 +73,14 @@ export class Home extends React.Component {
 
           <thead className="thead-dark">
             <tr>
-              <th scope="col">Total Number of Orders</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col">{orderHistory.length}</th>
+              <th className="admin_order_detail" scope="col">
+                Total Number of Orders
+              </th>
+              <th className="admin_order_detail" scope="col"></th>
+              <th className="admin_order_detail" scope="col"></th>
+              <th className="admin_order_detail" scope="col">
+                {orderHistory.length}
+              </th>
             </tr>
           </thead>
         </table>

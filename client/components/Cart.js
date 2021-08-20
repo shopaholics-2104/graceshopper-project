@@ -46,85 +46,94 @@ class Cart extends React.Component {
     const { minusButton } = this;
 
     return (
-      <div className="cart">
-        <div className="cartItems">
-          {cartItems &&
-            cartItems.map((item) => (
-              <div key={item.id} className="cart_Items">
-                <img
-                  className="cart_Items_img"
-                  src={item.imageUrl}
-                  alt={item.name}
-                />
-                {/* for details */}
-                <div className="cart_Items_details">
-                  <p className="details_name">{item.name}</p>
-                  <p className="details_desc">{item.description}</p>
-                  <p className="details_price">
-                    Cost Per Cookie: {item.order_item.price}
-                  </p>
-                </div>
 
-                {/* for actions */}
-                <div className="cart_Items_actions">
-                  <div className="cartItem_qty">
-                    {/* <label htmlFor="qty"> Quantity </label> */}
-                    <span
-                      className="material-icons"
-                      onClick={() => {
-                        updateCartItem(
-                          openOrder.id,
-                          item.id,
-                          item.order_item.quantity + 1
-                        );
-                      }}
-                    >
-                      add
-                    </span>
-                    <div>{item.order_item.quantity}</div>
-                    <span
-                      className="material-icons"
-                      onClick={() => {
+      <div>
+        <div className="shopping-cart">
+          <h3 className="shopping-cart-title">
+            Shopping Cart ({cartItems && cartItems.length})
+          </h3>
+          <span>
+            {userId ? <UserClearButton /> : <NonUserClearButton />}
+          </span>
+        </div>
+        <div className="cart">
+          <div className="cartItems">
+            {cartItems &&
+              cartItems.map((item) => (
+                <div key={item.id} className="cart_Items">
+                  <img
+                    className="cart_Items_img"
+                    src={item.imageUrl}
+                    alt={item.name}
+                  />
+                  {/* for details */}
+                  <div className="cart_Items_details">
+                    <p className="details_name">{item.name}</p>
+                    <p className="details_desc">{item.description}</p>
+                    <p className="details_price">
+                      Cost Per Cookie: {item.order_item.price}
+                    </p>
+                  </div>
+
+                  {/* for actions */}
+                  <div className="cart_Items_actions">
+                    <div className="cartItem_qty">
+                      {/* <label htmlFor="qty"> Quantity </label> */}
+                      <span
+                        className="material-icons"
+                        onClick={() => {
+                          updateCartItem(
+                            openOrder.id,
+                            item.id,
+                            item.order_item.quantity + 1
+                          );
+                        }}
+                      >
+                        add
+                      </span>
+                      <div>{item.order_item.quantity}</div>
+                      <span
+                        className="material-icons"
+                        onClick={() => {
                         minusButton(item, userId);
                       }}
+                      >
+                        remove
+                      </span>
+                    </div>
+                    {/* for delete button */}
+                    <button
+                      onClick={() => removeCartItem(item.id, userId)}
+                      className="deleteBtn"
                     >
-                      remove
-                    </span>
-                  </div>
-                  {/* for delete button */}
-                  <button
-                    onClick={() => removeCartItem(item.id, userId)}
-                    className="deleteBtn"
-                  >
-                    <span className="material-icons" style={{ fontSize: 25 }}>
-                      delete_outline
-                    </span>
-                  </button>
-
+                      <span className="material-icons" style={{ fontSize: 25 }}>
+                        delete_outline
+                      </span>
+                    </button>
+                 </div>
                 </div>
-              </div>
-            ))}
-        </div>
-        <div className="cart_summary">
-          <h4 className="summary_title">Cart Summary</h4>
-          <div className="summary_price">
-            <span>
-              TOTAL: (
-              {cartItems &&
-                cartItems.reduce((accum, item) => {
+              ))}
+          </div>
+          <div className="cart_summary">
+            <h4 className="summary_title">Cart Summary</h4>
+            <div className="summary_price">
+              <span>
+                TOTAL: (
+                {cartItems.reduce((accum, item) => {
                   accum += item.order_item.quantity;
                   return accum;
                 }, 0)}
-              )
-            </span>
-            <span>${totalAmount.toFixed(2)}</span>
-          </div>
+                )
+              </span>
+              <span>${totalAmount.toFixed(2)}</span>
+            </div>
 
-          <div>
+
             <Link to={`/checkout`}>
-              <button type="button">Check Out</button>
+              <button className="checkoutBtn" type="button">
+                Proceed to check out
+              </button>
             </Link>
-            {userId ? <UserClearButton /> : <NonUserClearButton />}
           </div>
 
         </div>

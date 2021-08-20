@@ -9,7 +9,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
     {isLoggedIn ? (
       <div className="navbar">
         {/* The navbar will show these links after you log in */}
-        <nav className="navbar navbar-expand-md navbar-light bg-light">
+        <nav className="navbar navbar-expand-md navbar-transparent ">
           <button
             type="button"
             className="navbar-toggler"
@@ -32,12 +32,12 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                 <Link to="/cart">Cart</Link>
               </li>
             </ul>
-            <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <ul className="nav navbar-nav ml-auto">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle " data-toggle="dropdown">
                   MORE
                 </a>
-                <div class="dropdown-menu dropdown-menu-right">
+                <div className="dropdown-menu dropdown-menu-right">
                   <li className="dropdown-item">
                     <Link to="/categories">Category</Link>
                   </li>
@@ -49,7 +49,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                     {isAdmin ? <Link to="/admin">Admin</Link> : null}
                   </li>
 
-                  <div class="dropdown-divider"></div>
+                  <div className="dropdown-divider"></div>
 
                   <li className="dropdown-item">
                     <a href="#" onClick={handleClick}>

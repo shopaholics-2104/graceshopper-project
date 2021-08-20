@@ -12,7 +12,7 @@ class ClearButton extends Component {
     const { handleClear } = this;
 
     return (
-      <button type="button" onClick={handleClear}>
+      <button className="clearBtn" type="button" onClick={handleClear}>
         Clear the Cart
       </button>
     );
