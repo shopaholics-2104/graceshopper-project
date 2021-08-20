@@ -1,26 +1,41 @@
 import React from "react";
 import { connect } from "react-redux";
-import { _fetchOpenOrder, _removeItem, _updateItem } from "../store/thunk";
-import ClearButton from "./ClearButton";
+import {
+  _fetchOpenOrder,
+  _removeItem,
+  _updateItem,
+  _fetchLocalCartItems,
+  _updateLocalCartItems,
+  _removeLocalCartItem,
+} from "../store/thunk";
+import { NonUserClearButton, UserClearButton } from "./ClearButton";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.minusButton = this.minusButton.bind(this);
   }
   componentDidMount() {
     this.props.fetchOpenOrder(this.props.userId);
   }
+  minusButton(item, userId) {
+    const { removeCartItem, updateCartItem, openOrder } = this.props;
+
+    item.order_item.quantity === 1
+      ? removeCartItem(item.id, userId)
+      : item.order_item.quantity > 0
+      ? updateCartItem(openOrder.id, item.id, item.order_item.quantity - 1)
+      : null;
+  }
 
   handleChange(event) {
-    console.log(event.target.name, event.target.value);
-
     this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
-    const {
+    let {
       totalAmount,
       userId,
       cartItems,
@@ -28,16 +43,10 @@ class Cart extends React.Component {
       openOrder,
       updateCartItem,
     } = this.props;
-    const { handleChange } = this;
-    console.log(this.state);
+    const { minusButton } = this;
+
     return (
       <div className="cart">
-        <div>
-          <h3>Shopping Cart ({cartItems && cartItems.length})</h3>
-          <p>Items</p>
-          <ClearButton />
-        </div>
-
         <div className="cartItems">
           {cartItems &&
             cartItems.map((item) => (
@@ -76,15 +85,7 @@ class Cart extends React.Component {
                     <span
                       className="material-icons"
                       onClick={() => {
-                        item.order_item.quantity === 1
-                          ? removeCartItem(item.id, userId)
-                          : item.order_item.quantity > 0
-                          ? updateCartItem(
-                              openOrder.id,
-                              item.id,
-                              item.order_item.quantity - 1
-                            )
-                          : null;
+                        minusButton(item, userId);
                       }}
                     >
                       remove
@@ -100,11 +101,6 @@ class Cart extends React.Component {
                     </span>
                   </button>
 
-                  {/* <span>
-                    {(item.order_item.quantity * item.order_item.price).toFixed(
-                      2
-                    )}
-                  </span> */}
                 </div>
               </div>
             ))}
@@ -114,20 +110,23 @@ class Cart extends React.Component {
           <div className="summary_price">
             <span>
               TOTAL: (
-              {cartItems.reduce((accum, item) => {
-                accum += item.order_item.quantity;
-                return accum;
-              }, 0)}
+              {cartItems &&
+                cartItems.reduce((accum, item) => {
+                  accum += item.order_item.quantity;
+                  return accum;
+                }, 0)}
               )
             </span>
             <span>${totalAmount.toFixed(2)}</span>
           </div>
 
-          <Link to={`/checkout`}>
-            <button className="checkoutBtn" type="button">
-              Proceed to check out
-            </button>
-          </Link>
+          <div>
+            <Link to={`/checkout`}>
+              <button type="button">Check Out</button>
+            </Link>
+            {userId ? <UserClearButton /> : <NonUserClearButton />}
+          </div>
+
         </div>
       </div>
     );
@@ -146,7 +145,19 @@ const mapState = (state) => ({
     : 0.0,
 });
 
-const mapDispatch = (dispatch) => ({
+const mapDispatchNonUser = (dispatch) => ({
+  fetchOpenOrder: () => {
+    dispatch(_fetchLocalCartItems());
+  },
+  removeCartItem: (productId) => {
+    dispatch(_removeLocalCartItem(productId));
+  },
+  updateCartItem: (orderId, productId, quantity) => {
+    dispatch(_updateLocalCartItems(productId, quantity));
+  },
+});
+
+const mapDispatchUser = (dispatch) => ({
   fetchOpenOrder: (userId) => {
     dispatch(_fetchOpenOrder(userId));
   },
@@ -158,4 +169,6 @@ const mapDispatch = (dispatch) => ({
   },
 });
 
-export default connect(mapState, mapDispatch)(Cart);
+export const userCart = connect(mapState, mapDispatchUser)(Cart);
+
+export const nonUserCart = connect(mapState, mapDispatchNonUser)(Cart);

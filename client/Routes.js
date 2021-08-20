@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
-import Cart from "./components/Cart";
+import { nonUserCart, userCart } from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
 import Admin from "./components/Admin/Admin";
 import Products from "./components/Products";
@@ -48,7 +48,7 @@ class Routes extends Component {
             />
             <Route path="/products" component={Products} exact />
             <Route path="/home" component={Home} />
-            <Route path="/cart" component={Cart} />
+            <Route path="/cart" component={userCart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/admin" component={Admin} />
 
@@ -77,6 +77,7 @@ class Routes extends Component {
               component={SingleProduct}
               exact
             />
+            <Route path="/cart" component={nonUserCart} />
           </Switch>
         )}
         <Switch></Switch>

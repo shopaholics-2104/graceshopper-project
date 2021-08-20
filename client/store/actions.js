@@ -16,24 +16,6 @@ const actionCreator = {
     type: type.SET_ALL_USERS,
     allUsers,
   }),
-
-  setSingleUser: (singleUser) => ({
-    type: type.SET_SINGLE_USER,
-    singleUser,
-  }),
-  createUser: (newUser) => ({
-    type: type.CREATE_USER,
-    newUser,
-  }),
-  deleteUser: (UserToDelete) => ({
-    type: type.DELETE_User,
-    UserToDelete,
-  }),
-  updateUser: (UserToUpdate) => ({
-    type: type.UPDATE_User,
-    UserToUpdate,
-  }),
-
   //products
   setAllProducts: (allProducts) => ({
     type: type.SET_ALL_PRODUCTS,

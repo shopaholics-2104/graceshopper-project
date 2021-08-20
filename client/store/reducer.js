@@ -3,7 +3,6 @@ import type from "./type";
 
 const initState = {
   allUsers: [],
-  singleUser: {},
   allProducts: [],
   singleProduct: {},
   allCategories: [],
@@ -18,21 +17,6 @@ export const allUsersReducer = (state = initState.allUsers, action) => {
   switch (action.type) {
     case type.SET_ALL_USERS:
       return action.allUsers;
-    case type.CREATE_USER:
-      return [...state, action.newUser];
-    case type.DELETE_USER:
-      return state.filter((user) => user.id !== action.userToDelete.id);
-    default:
-      return state;
-  }
-};
-
-export const singleUserReducer = (state = initState.singleUser, action) => {
-  switch (action.type) {
-    case type.SET_SINGLE_USER:
-      return action.singleUser;
-    case type.UPDATE_USER:
-      return action.userToUpdate;
     default:
       return state;
   }
@@ -141,7 +125,7 @@ export const cartReducer = (state = initState.cartItems, action) => {
         item.id === action.itemToUpdate.id ? action.itemToUpdate : item
       );
     case type.CLEAR_CART:
-      return [];
+      return initState.cartItems;
     default:
       return state;
   }
