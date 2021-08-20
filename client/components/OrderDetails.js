@@ -17,7 +17,7 @@ const OrderDetails = ({ order }) => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h4 className="modal-title">Order-{order.id}</h4>
+              <h4 className="modal-title">Order: {order.id}</h4>
               <button type="button" className="close" data-dismiss="modal">
                 &times;
               </button>

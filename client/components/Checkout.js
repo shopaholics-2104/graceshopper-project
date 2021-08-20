@@ -4,7 +4,9 @@ import PlacesAutocomplete from "react-places-autocomplete";
 import { _fetchOpenOrder, _updateOrder } from "../store/thunk";
 import { _updateUser } from "../store";
 import { CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
+import StripeCheckout from "react-stripe-checkout";
 import CheckoutForm from "./Stripe";
+import EditUser from "./EditUser";
 
 class CheckOut extends React.Component {
   constructor(props) {
@@ -53,14 +55,8 @@ class CheckOut extends React.Component {
 
     const { stripe, elements } = this.props;
 
-    if (!stripe || !elements) {
-      // If Stripe.js has not loaded yet, disable form submission until Stripe.js has loaded.
-      return;
-    }
+    if (!stripe || !elements) return;
 
-    // Gets a reference to the mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
     const cardElement = elements.getElement(CardElement);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -116,7 +112,7 @@ class CheckOut extends React.Component {
           <label htmlFor="address">Address: </label>
 
           {/* Google Places Autocomplete API */}
-          <PlacesAutocomplete
+        <PlacesAutocomplete
             value={address}
             onChange={handleAddressChange}
             onSelect={handleAdressSelect}
@@ -141,27 +137,16 @@ class CheckOut extends React.Component {
               </div>
             )}
           </PlacesAutocomplete>
-        </form>
-
-        {/* Stripe Cart Element */}
-        <label htmlFor="payment">Payment: </label>
-        <CheckoutForm />
-        {/* <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
-                },
-              },
-              invalid: {
-                color: "#9e2146",
-              },
-            },
-          }}
-        /> */}
+        {/* </form> 
+        {/* <EditUser /> */}
+        <h1>Payment</h1>
+        {/* Stripe Card Element */}
+        <label htmlFor="payment"> </label>
+        <CheckoutForm
+          email={email}
+          name={`${firstName} ${lastName}`}
+          address={address}
+        />
 
         {/* Cart Items */}
         <h1>Cart</h1>
@@ -216,13 +201,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckOut);
-
-// export const InjectedCheckoutForm = () => {
-//   return (
-//     <ElementsConsumer>
-//       {({ elements, stripe }) => (
-//         <CheckOut elements={elements} stripe={stripe} />
-//       )}
-//     </ElementsConsumer>
-//   );
-// };

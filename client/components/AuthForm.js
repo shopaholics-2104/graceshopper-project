@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
 
@@ -9,26 +9,62 @@ const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
-    <div>
+    <Fragment>
       <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
+        <div
+          className="modal fade"
+          id="modalLoginForm"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header text-center">
+                <h4 className="modal-title w-100 font-weight-bold">
+                  Hello, friend!
+                </h4>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body mx-3">
+                <div className="md-form mb-5">
+                  <i className="fas fa-envelope prefix grey-text"></i>
+
+                  <h4 className="modal-title">
+                    <small>Username</small>
+                  </h4>
+                  <form onSubmit={handleSubmit} name={name} />
+                  <input name="username" type="text" />
+                </div>
+
+                <div className="md-form mb-4">
+                  <i className="fas fa-lock prefix grey-text"></i>
+
+                  <h4 className="modal-title">
+                    <small>Password</small>
+                  </h4>
+                  <input name="password" type="password" />
+                </div>
+              </div>
+              <div className="modal-footer d-flex justify-content-center">
+                <button className="btn btn-default" type="submit">
+                  {displayName}
+                </button>
+              </div>
+              {error && error.response && <div> {error.response.data} </div>}
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
       </form>
-    </div>
+    </Fragment>
   );
 };
 
