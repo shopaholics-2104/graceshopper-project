@@ -20,8 +20,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
           {isAdmin ? <Link to="/admin">Admin</Link> : null}
 
           <Link to="/search">Search</Link>
-
-          <Link to="/categories">Category</Link>
         </div>
       ) : (
         <div>
@@ -29,6 +27,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/products">All Products</Link>
+          <Link to="/categories">Category</Link>
           <Link to="/search">Search</Link>
         </div>
       )}
