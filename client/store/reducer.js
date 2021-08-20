@@ -141,7 +141,7 @@ export const cartReducer = (state = initState.cartItems, action) => {
         item.id === action.itemToUpdate.id ? action.itemToUpdate : item
       );
     case type.CLEAR_CART:
-      return [];
+      return initState.cartItems;
     default:
       return state;
   }

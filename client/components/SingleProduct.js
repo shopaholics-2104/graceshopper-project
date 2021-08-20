@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { _fetchSingleProduct, _fetchOpenOrder, _addItem } from "../store/thunk";
+import {
+  _fetchSingleProduct,
+  _fetchOpenOrder,
+  _addItem,
+  _addLocalCartItem,
+} from "../store/thunk";
 
 class Product extends React.Component {
   constructor(props) {
@@ -103,7 +108,9 @@ const mapDispatch = (dispatch) => ({
     dispatch(_fetchSingleProduct(productId));
   },
   addItem: (userId, newItem) => {
-    dispatch(_addItem(userId, newItem));
+    userId
+      ? dispatch(_addItem(userId, newItem))
+      : dispatch(_addLocalCartItem(newItem));
   },
 });
 export default connect(mapState, mapDispatch)(Product);
