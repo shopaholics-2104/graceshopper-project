@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
-
+import { _updateUser } from "../store/auth";
+import { connect } from "react-redux";
 class EditUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: "",
       firstName: "",
       lastName: "",
       email: "",
@@ -26,23 +26,26 @@ class EditUser extends React.Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-  handleSubmit() {}
+  handleSubmit() {
+    const { updateUser, user } = this.props;
+    console.log(this.state);
+    updateUser(user.id, this.state);
+  }
   render() {
     const { user } = this.props;
-    const {
-      username,
-      password,
-      firstName,
-      lastName,
-      email,
-      addressLine_1,
-      addressLine_2,
-      city,
-      state,
-      zipCode,
-      country,
-      mobile,
-    } = this.state;
+    const listOfState = [
+      "username",
+      "firstName",
+      "lastName",
+      "email",
+      "addressLine_1",
+      "addressLine_2",
+      "city",
+      "state",
+      "zipCode",
+      "country",
+      "mobile",
+    ];
     return (
       <Fragment>
         <button
@@ -58,84 +61,53 @@ class EditUser extends React.Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal_title">{username}</h4>
+
+                <h4 className="modal-title">{this.state.username}</h4>
+
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>
               </div>
-
-              <div className="modal-body">
-                <div className="container">
-                  <div className="row g-2">
-                    <div className="col-6">
-                      <label>UserName:</label>
-                      <input
-                        value={username}
-                        name="username"
-                        onChange={this.handleChange}
-                        className="p-3 border bg-light"
-                      />
-                    </div>
-                    <div className="col-6">
-                      <label>First Name:</label>
-                      <div className="p-3 border bg-light"> {firstName}</div>
-                    </div>
-                    <div className="col-6">
-                      <label>Last Name:</label>
-                      <div className="p-3 border bg-light"> {lastName}</div>
-                    </div>
-
-                    {/* <div className="col-6">
-                      <label>Role:</label>
-                      <div className="p-3 border bg-light"> {user.role}</div>
-                    </div> */}
-
-                    {/* <div class="col-6">
-                      <label>Order History:</label>
-                      <div className="p-3 border bg-light">
-                        {user.orders.length}
-                      </div>
-                    </div> */}
-                    <div className="col-6">
-                      <label>Email:</label>
-                      <div className="p-3 border bg-light">{email}</div>
-                    </div>
-                    <div className="col-6">
-                      <label> Mobile:</label>
-                      <div className="p-3 border bg-light">{mobile}</div>
-                    </div>
-                    <div className="col-6">
-                      <label>addressLine_1:</label>
-                      <div className="p-3 border bg-light">{addressLine_1}</div>
-                    </div>
-                    <div className="col-6">
-                      <label>addressLine_2:</label>
-                      <div className="p-3 border bg-light">{addressLine_2}</div>
-                    </div>
-                    <div className="col-6">
-                      <label>City:</label>
-                      <div className="p-3 border bg-light">{city}</div>
+              <form>
+                <div className="modal-body">
+                  <div className="container">
+                    <div className="row g-2">
+                      {Object.keys(this.state).map(
+                        (state, ind) =>
+                          listOfState.includes(state) && (
+                            <div key={`stateId${ind}`} className="col-6">
+                              <label>{state}:</label>
+                              <input
+                                value={this.state[state]}
+                                name={`${state}`}
+                                onChange={this.handleChange}
+                                className="p-3 border bg-light"
+                              />
+                            </div>
+                          )
+                      )}
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-warning"
-                  data-dismiss="modal"
-                >
-                  Update
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-warning"
+                    data-dismiss="modal"
+                    onClick={this.handleSubmit}
+                  >
+                    Update
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -144,4 +116,10 @@ class EditUser extends React.Component {
   }
 }
 
-export default EditUser;
+const mapDispatch = (dispatch) => ({
+  updateUser: (userId, user) => {
+    dispatch(_updateUser(userId, user));
+  },
+});
+
+export default connect(null, mapDispatch)(EditUser);

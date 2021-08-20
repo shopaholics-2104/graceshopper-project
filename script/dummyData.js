@@ -211,7 +211,7 @@ const orderList = [
     userId: 1,
     status: "Completed",
     comment: "order completed",
-    totalAmount: 3540.0,
+    totalAmount: 799.92,
   },
   { userId: 3, status: "Paid", comment: "order paid", totalAmount: 99.99 },
 ];
@@ -220,6 +220,9 @@ const orderItems = [
   { quantity: 1, price: 99.99, orderId: 1, productId: 1 },
   { quantity: 1, price: 99.99, orderId: 1, productId: 2 },
   { quantity: 1, price: 99.99, orderId: 2, productId: 3 },
+  { quantity: 1, price: 99.99, orderId: 3, productId: 3 },
+  { quantity: 2, price: 99.99, orderId: 3, productId: 4 },
+  { quantity: 5, price: 99.99, orderId: 3, productId: 1 },
 ];
 
 module.exports = { productList, categoryList, userList, orderList, orderItems };

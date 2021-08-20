@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Product },
 } = require("../db");
+const Category = require("../db/models/Category");
 
 //get all products even if not in stock
 router.get("/", async (req, res, next) => {
@@ -58,12 +59,13 @@ router.get("/running_low", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const productToUpdate = await Product.findByPk(req.params.id, {
-      include: { all: true },
+      include: { model: Category },
     });
+
     productToUpdate.update(req.body);
     res.json(productToUpdate);
   } catch (err) {
-    next(err);
+    console.log(err);
   }
 });
 
@@ -110,7 +112,7 @@ router.get("/pagination/:idx?", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const single_product = await Product.findByPk(req.params.id, {
-      include: { all: true },
+      include: { model: Category },
     });
     res.json(single_product);
   } catch (err) {
