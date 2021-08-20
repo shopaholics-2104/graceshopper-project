@@ -69,7 +69,7 @@ class Search extends React.Component{
             <div>
                 <div>
                     <form>
-                        <input type='text' name='search' value={query} onChange= {handleSearchChange} />
+                        <input type='text' name='search' placeholder='Search...'value={query} onChange= {handleSearchChange} />
                     </form>
                 </div>
                 <div className='categoriesTitle'>
