@@ -30,14 +30,8 @@ class AdminProduct extends React.Component {
     this.setState(product);
   }
   render() {
-    const {
-      name,
-      imageUrl,
-      description,
-      single_price,
-      status,
-      categoryId,
-    } = this.state;
+    const { name, imageUrl, description, single_price, status, categoryId } =
+      this.state;
     const { handleChange, handleSubmit } = this;
     const { product, allCategories } = this.props;
     return (

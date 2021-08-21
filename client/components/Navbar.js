@@ -28,6 +28,9 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               </li>
 
               <li className="nav-item">
+                <Link to="/categories">Category</Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/cart">Cart</Link>
               </li>
             </ul>
@@ -39,17 +42,12 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                 <div className="dropdown-menu dropdown-menu-right">
                   <ul>
                     <li className="dropdown-item">
-                      <Link to="/categories">Category</Link>
-                    </li>
-                    <li className="nav-item">
                       <Link to="/search">Search</Link>
                     </li>
 
                     <li className="dropdown-item">
                       {isAdmin ? <Link to="/admin">Admin</Link> : null}
                     </li>
-
-                    <div className="dropdown-divider"></div>
 
                     <li className="dropdown-item">
                       <a href="#" onClick={handleClick}>

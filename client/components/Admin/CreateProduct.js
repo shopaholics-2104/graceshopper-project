@@ -27,14 +27,8 @@ class CreateProduct extends React.Component {
   }
 
   render() {
-    const {
-      name,
-      imageUrl,
-      description,
-      single_price,
-      status,
-      categoryId,
-    } = this.state;
+    const { name, imageUrl, description, single_price, status, categoryId } =
+      this.state;
     const { handleChange, handleSubmit } = this;
     const { allCategories } = this.props;
     return (
