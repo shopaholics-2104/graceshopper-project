@@ -8,6 +8,8 @@ const Admin = ({ isAdmin }) => {
     isAdmin && (
       <div className="admin">
         <AdminUser />
+        <br />
+        <br />
         <AdminProducts />
       </div>
     )
