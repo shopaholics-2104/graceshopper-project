@@ -3,19 +3,14 @@ import { connect } from "react-redux";
 import PlacesAutocomplete from "react-places-autocomplete";
 import { _fetchOpenOrder, _updateOrder } from "../store/thunk";
 import { _updateUser } from "../store";
-import { CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
+import { CardElement } from "@stripe/react-stripe-js";
 import CheckoutForm from "./Stripe";
+import EditUser from "./EditUser";
 
 class CheckOut extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: "",
-    };
-    this.handleChange = this.handleChange.bind(this);
+    this.state = {};
   }
 
   componentDidMount() {
@@ -49,32 +44,25 @@ class CheckOut extends React.Component {
   }
 
   handleCheckOut = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
-    const { stripe, elements } = this.props;
+    // const { stripe, elements } = this.props;
 
-    if (!stripe || !elements) {
-      // If Stripe.js has not loaded yet, disable form submission until Stripe.js has loaded.
-      return;
-    }
+    // if (!stripe || !elements) return;
 
-    // Gets a reference to the mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
-    const cardElement = elements.getElement(CardElement);
+    // const cardElement = elements.getElement(CardElement);
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
-    });
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: "card",
+    //   card: cardElement,
+    // });
 
-    if (error) {
-      console.log("[error]", error);
-    } else {
-      console.log("[PaymentMethod]", paymentMethod);
-    }
+    // if (error) {
+    //   console.log("[error]", error);
+    // } else {
+    //   console.log("[PaymentMethod]", paymentMethod);
+    // }
 
-    await this.props.updateUser({ ...this.props.user, ...this.state });
     await this.props.updateOrder({
       ...this.props.openOrder,
       status: "CheckOut",
@@ -82,14 +70,6 @@ class CheckOut extends React.Component {
       totalAmount: this.props.totalAmount,
     });
     await this.props.fetchOpenOrder(this.props.user.id);
-  };
-
-  handleAddressChange = (address) => {
-    this.setState({ address });
-  };
-
-  handleAdressSelect = (address) => {
-    this.setState({ address });
   };
 
   render() {
@@ -102,69 +82,13 @@ class CheckOut extends React.Component {
     } = this;
     const { totalAmount, cartItems, stripe } = this.props;
 
+    console.log(this.props);
+
     return (
       <div>
-        {/* Checkout Form */}
-        <h1>Checkout</h1>
-        <form id="checkout-form" onSubmit={handleCheckOut}>
-          <label htmlFor="firstName">First Name: </label>
-          <input name="firstName" onChange={handleChange} value={firstName} />
-          <label htmlFor="lastName">Last Name: </label>
-          <input name="lastName" onChange={handleChange} value={lastName} />
-          <label htmlFor="email">Email: </label>
-          <input name="email" onChange={handleChange} value={email} />
-          <label htmlFor="address">Address: </label>
-
-          {/* Google Places Autocomplete API */}
-          <PlacesAutocomplete
-            value={address}
-            onChange={handleAddressChange}
-            onSelect={handleAdressSelect}
-          >
-            {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-              <div style={{ margin: "0rem" }}>
-                <input
-                  {...getInputProps({ placeholder: "Search Places..." })}
-                />
-                <div style={{ margin: "0rem" }}>
-                  {suggestions.map((suggestion) => {
-                    return (
-                      <div
-                        {...getSuggestionItemProps(suggestion, {})}
-                        key={suggestion.placeId}
-                      >
-                        {suggestion.description}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
-        </form>
-
-        {/* Stripe Cart Element */}
-        <label htmlFor="payment">Payment: </label>
-        <CheckoutForm />
-        {/* <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
-                },
-              },
-              invalid: {
-                color: "#9e2146",
-              },
-            },
-          }}
-        /> */}
-
         {/* Cart Items */}
         <h1>Cart</h1>
+
         <table border="2">
           <tbody>
             <tr>
@@ -191,9 +115,18 @@ class CheckOut extends React.Component {
         <br></br>
         <div> Total Amount: {totalAmount.toFixed(2)}</div>
         <br></br>
-        <button type="button" onClick={handleCheckOut}>
-          Check Out
-        </button>
+
+        <h1>Payment</h1>
+        <CheckoutForm
+          email={email}
+          name={`${firstName} ${lastName}`}
+          address={address}
+          updateOrder={this.props.updateOrder}
+          fetchOpenOrder={this.props.fetchOpenOrder}
+          history={this.props.history}
+          // openOrder={this.props.openOrder}
+          // totalAmount={this.props.totalAmount}
+        />
       </div>
     );
   }
@@ -207,6 +140,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   user: state.auth,
+
   openOrder: state.openOrder,
   cartItems: state.cartItems,
   totalAmount: state.cartItems.reduce(
@@ -216,13 +150,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckOut);
-
-// export const InjectedCheckoutForm = () => {
-//   return (
-//     <ElementsConsumer>
-//       {({ elements, stripe }) => (
-//         <CheckOut elements={elements} stripe={stripe} />
-//       )}
-//     </ElementsConsumer>
-//   );
-// };

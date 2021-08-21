@@ -11,8 +11,8 @@ import Search from "./components/Search";
 import { me } from "./store";
 import Checkout from "./components/Checkout";
 import { fetchTotal } from "./store/thunk";
-
 import Category from "./components/Categories";
+import ConfirmationPage from "./components/ConfirmationPage";
 import SingleCategory from "./components/SingleCategory";
 
 /**
@@ -51,6 +51,7 @@ class Routes extends Component {
             <Route path="/cart" component={userCart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/admin" component={Admin} />
+            <Route path="/confirmation" component={ConfirmationPage} />
 
             <Route path="/search" component={Search} />
 

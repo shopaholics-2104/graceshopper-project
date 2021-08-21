@@ -37,19 +37,21 @@ const OrderDetails = ({ order }) => {
                 </thead>
 
                 <tbody>
-                  {products.map((product) => (
-                    <tr key={product.id}>
-                      <th scope="row">{product.id}</th>
-                      <td>{product.name}</td>
-                      <td>${product.order_item.price}</td>
-                      <td>{product.order_item.quantity}</td>
-                      <td>
-                        {(
-                          product.order_item.quantity * product.order_item.price
-                        ).toFixed(2)}
-                      </td>
-                    </tr>
-                  ))}
+                  {products &&
+                    products.map((product) => (
+                      <tr key={product.id}>
+                        <th scope="row">{product.id}</th>
+                        <td>{product.name}</td>
+                        <td>${product.order_item.price}</td>
+                        <td>{product.order_item.quantity}</td>
+                        <td>
+                          {(
+                            product.order_item.quantity *
+                            product.order_item.price
+                          ).toFixed(2)}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
               {/* <div className="container">
