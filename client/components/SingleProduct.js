@@ -70,7 +70,12 @@ class Product extends React.Component {
 
           <div className="product_status">Inventory Status: {status}</div>
           <form onSubmit={this.handleSubmit}>
-            <select value={price} name="price" onChange={this.handleChange}>
+            <select
+              className="product_status"
+              value={price}
+              name="price"
+              onChange={this.handleChange}
+            >
               <option value="">Select a Unit</option>
               <option value={single_price}>single unit</option>
             </select>
@@ -80,9 +85,9 @@ class Product extends React.Component {
                 Please Select a Purchase Unit
               </div>
             ) : (
-              <div>
+              <div className="product_status">
                 Price: {price}
-                <div>
+                <div className="product_status">
                   <input
                     type="number"
                     value={quantity}
