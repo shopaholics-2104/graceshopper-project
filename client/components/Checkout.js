@@ -44,25 +44,6 @@ class CheckOut extends React.Component {
   }
 
   handleCheckOut = async (event) => {
-    // event.preventDefault();
-
-    // const { stripe, elements } = this.props;
-
-    // if (!stripe || !elements) return;
-
-    // const cardElement = elements.getElement(CardElement);
-
-    // const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //   type: "card",
-    //   card: cardElement,
-    // });
-
-    // if (error) {
-    //   console.log("[error]", error);
-    // } else {
-    //   console.log("[PaymentMethod]", paymentMethod);
-    // }
-
     await this.props.updateOrder({
       ...this.props.openOrder,
       status: "CheckOut",
@@ -74,20 +55,13 @@ class CheckOut extends React.Component {
 
   render() {
     const { firstName, lastName, email, address } = this.state;
-    const {
-      handleCheckOut,
-      handleChange,
-      handleAddressChange,
-      handleAdressSelect,
-    } = this;
     const { totalAmount, cartItems, stripe } = this.props;
-
-    console.log(this.props);
 
     return (
       <div className="checkout_page">
         <h1 className="checkout_title">Cart</h1>
         {/* Cart Items */}
+
         <div className="checkout">
           <table border="2">
             <tbody>
@@ -125,10 +99,9 @@ class CheckOut extends React.Component {
             updateOrder={this.props.updateOrder}
             fetchOpenOrder={this.props.fetchOpenOrder}
             history={this.props.history}
-            // openOrder={this.props.openOrder}
-            // totalAmount={this.props.totalAmount}
           />
         </div>
+
       </div>
     );
   }
@@ -142,7 +115,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   user: state.auth,
-
   openOrder: state.openOrder,
   cartItems: state.cartItems,
   totalAmount: state.cartItems.reduce(

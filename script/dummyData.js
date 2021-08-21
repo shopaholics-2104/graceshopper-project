@@ -114,6 +114,82 @@ const productList = [
       "https://cdn.dribbble.com/users/228053/screenshots/2692658/vision4.png?compress=1&resize=400x300",
     categoryId: 5,
   },
+  //////////////////////////
+  //////////////////////////
+  //////////////////////////
+  //////////////////////////
+  {
+    name: "Batman",
+    description:
+      "This cookie will transform you to a tortured, brooding vigilante dressed as a bat who fights against evil and strikes fear into the hearts of criminals everywhere. In his public identity he is Bruce Wayne, billionaire industrialist and notorious playboy.",
+    single_price: 99.99,
+
+    dozen_price: 1170.0,
+    status: "running_low",
+    imageUrl:
+      "https://mystickermania.com/cdn/stickers/chibi-marvel-dc-comics/dc-chibi-batman-512x512.png",
+    categoryId: 3,
+  },
+  {
+    name: "Gamora",
+    description:
+      "This cookie will give you powers that include superhuman strength and agility and an accelerated healing factor. You will also be an elite combatant, being able to beat most of the opponents in the galaxy. ",
+    single_price: 99.99,
+
+    dozen_price: 1170.0,
+    status: "running_low",
+    imageUrl:
+      "https://mystickermania.com/cdn/stickers/chibi-marvel-dc-comics/marvel-chibi-gamora-512x512.png",
+    categoryId: 4,
+  },
+  {
+    name: "Spiderman",
+    description:
+      "This cookie will give you spider-like abilities including superhuman strength and the ability to cling to most surfaces.",
+    single_price: 99.99,
+
+    dozen_price: 1170.0,
+    status: "running_low",
+    imageUrl:
+      "https://mystickermania.com/cdn/stickers/chibi-marvel-dc-comics/chibi-marvel-spider-man-512x512.png",
+    categoryId: 2,
+  },
+  {
+    name: "Deadpool",
+    description:
+      "This cookie will transform you to a disfigured mercenary with the superhuman ability of regeneration and physical prowess.",
+    single_price: 99.99,
+
+    dozen_price: 1170.0,
+    status: "running_low",
+    imageUrl:
+      "https://mystickermania.com/cdn/stickers/chibi-marvel-dc-comics/chibi-marvel-deadpool-512x512.png",
+    categoryId: 2,
+  },
+  {
+    name: "Thor",
+    description:
+      "This cookie will transform you to a hammer-wielding god associated with lightning, thunder, storms, sacred groves and trees, strength, the protection of mankind and also hallowing and fertility.",
+    single_price: 99.99,
+
+    dozen_price: 1170.0,
+    status: "running_low",
+    imageUrl:
+      "https://mystickermania.com/cdn/stickers/chibi-marvel-dc-comics/marvel-chibi-thor-512x512.png",
+    categoryId: 1,
+  },
+  {
+    name: "Mystique",
+    description:
+      "This cookie will transform you to a mutant shapeshifter with the ability to psionically shift the formation of your biological cells at will to change your appearance and thereby assume the form of other humans and animals. ",
+    single_price: 99.99,
+
+    dozen_price: 1170.0,
+    status: "running_low",
+    imageUrl:
+      "https://mystickermania.com/cdn/stickers/chibi-marvel-dc-comics/marvel-chibi-mystique-512x512.png",
+    categoryId: 1,
+  },
 ];
 
 const categoryList = [

@@ -1,4 +1,10 @@
 /* home page */
+.admin {
+  padding: 30px;
+}
+.orderHistoryTable {
+  padding: 30px;
+}
 .home {
   width: 100vw;
   height: 100vh;

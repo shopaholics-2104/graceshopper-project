@@ -6,6 +6,7 @@ class AdminProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       imageUrl: "",
       description: "",
       single_price: 0.0,
@@ -29,7 +30,7 @@ class AdminProduct extends React.Component {
     this.setState(product);
   }
   render() {
-    const { imageUrl, description, single_price, status, categoryId } =
+    const { name, imageUrl, description, single_price, status, categoryId } =
       this.state;
     const { handleChange, handleSubmit } = this;
     const { product, allCategories } = this.props;
@@ -48,11 +49,22 @@ class AdminProduct extends React.Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">{product.name}</h4>
+                <h4 className="modal-title">{name}</h4>
               </div>
 
               <form>
                 <div className="modal-body">
+                  <div className="form-group">
+                    <label htmlFor="name">Product Name</label>
+                    <input
+                      name="name"
+                      value={name}
+                      onChange={handleChange}
+                      type="url"
+                      className="form-control"
+                      id="name"
+                    />
+                  </div>
                   <div className="form-group">
                     <label htmlFor="imageUrl">Product ImageUrl</label>
                     <input

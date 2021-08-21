@@ -29,61 +29,63 @@ export class Home extends React.Component {
       <div>
         <div className="admin_header">
           <h3 className="admin_title">
-            Welcome, {role.toUpperCase()} {username} <EditUser user={user} />
+            Welcome, {role.toUpperCase()} {username}
           </h3>
-          {/* {isAdmin && (
-          <Link to={{ pathname: "/Admin", state: { isAdmin } }}>
-            Admin Page
-          </Link>
-        )} */}
-
+          <br />
+          <br />
+          <div>
+            <EditUser user={user} />
+          </div>
+          <br />
           <h4 className="order_history">
             Order History ({orderHistory.length})
           </h4>
         </div>
-        <table className="table table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th className="admin_order_detail" scope="col">
-                Order Id
-              </th>
-              <th className="admin_order_detail" scope="col">
-                Purchased Time
-              </th>
-              <th className="admin_order_detail" scope="col">
-                Total Amount
-              </th>
-              <th className="admin_order_detail" scope="col">
-                Order Details
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {orderHistory.map((order) => (
-              <tr key={`orderId&${order.id}`}>
-                <th scope="row">{order.id}</th>
-                <td>{order.updatedAt}</td>
-                <td>{order.totalAmount}</td>
-                <td>
-                  <OrderDetails order={order} />
-                </td>
+        <div className="orderHistoryTable">
+          <table className="table table-hover">
+            <thead className="thead-dark">
+              <tr>
+                <th className="admin_order_detail" scope="col">
+                  Order Id
+                </th>
+                <th className="admin_order_detail" scope="col">
+                  Purchased Time
+                </th>
+                <th className="admin_order_detail" scope="col">
+                  Total Amount
+                </th>
+                <th className="admin_order_detail" scope="col">
+                  Order Details
+                </th>
               </tr>
-            ))}
-          </tbody>
+            </thead>
+            <tbody>
+              {orderHistory.map((order) => (
+                <tr key={`orderId&${order.id}`}>
+                  <th scope="row">{order.id}</th>
+                  <td className="order_history">{order.updatedAt}</td>
+                  <td className="order_history">{order.totalAmount}</td>
+                  <td className="admin_order_detail">
+                    <OrderDetails order={order} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
 
-          <thead className="thead-dark">
-            <tr>
-              <th className="admin_order_detail" scope="col">
-                Total Number of Orders
-              </th>
-              <th className="admin_order_detail" scope="col"></th>
-              <th className="admin_order_detail" scope="col"></th>
-              <th className="admin_order_detail" scope="col">
-                {orderHistory.length}
-              </th>
-            </tr>
-          </thead>
-        </table>
+            <thead className="thead-dark">
+              <tr>
+                <th className="admin_order_detail" scope="col">
+                  Total Number of Orders
+                </th>
+                <th className="admin_order_detail" scope="col"></th>
+                <th className="admin_order_detail" scope="col"></th>
+                <th className="admin_order_detail" scope="col">
+                  {orderHistory.length}
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
     );
   }
