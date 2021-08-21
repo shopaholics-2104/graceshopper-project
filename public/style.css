@@ -493,3 +493,11 @@ li a {
 .finalBtn:hover {
   opacity: 0.75;
 }
+
+.flavor_container {
+  margin-left: 5rem;
+  text-align: left;
+}
+.flavor_names {
+  font-family: "Bungee Shade", cursive;
+}

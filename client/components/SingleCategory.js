@@ -17,9 +17,9 @@ class Cateory extends React.Component {
     const { singleCategory } = this.props;
     const { products } = singleCategory;
     return (
-      <div>
-        <h1>{singleCategory.flavor}</h1>
-
+      <div className="flavor_container">
+        <h2 className="flavor_names">{singleCategory.flavor} </h2>
+        <br></br>
         {products &&
           products.map((product) => (
             <ul key={product.id}>
