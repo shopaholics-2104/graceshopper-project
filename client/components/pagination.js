@@ -93,12 +93,13 @@ class Paginate extends Component {
             );
           })}
         </div>
-        <div>
+        <div className="pagination">
           {pages.map((page) => {
             return (
               <li
+                className="page_number"
                 key={page.idx}
-                className={page.idx === idx ? "selected" : " "}
+                id={page.idx === idx ? "selected" : " "}
               >
                 <Link to={`/products/pagination/${page.idx}`}>
                   {" "}
