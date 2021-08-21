@@ -91,18 +91,17 @@ class Search extends React.Component {
             />
           </form>
         </div>
-        <div className="categoriesTitle">
-          <h2>Flavors</h2>
+        <div>
+          <h2 className="searchTitle">Flavors</h2>
         </div>
-        <div className="categories">{cat_child}</div>
-        <div className="productsTitle">
-          <h2>Cookies</h2>
+        <div className="product_name">{cat_child}</div>
+        <div>
+          <h2 className="searchTitle">Cookies</h2>
         </div>
-        <div className="products">{child}</div>
+        <div className="product_name">{child}</div>
       </div>
     );
   }
 }
 
 export default Search;
-
