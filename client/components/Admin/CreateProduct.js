@@ -120,7 +120,7 @@ class CreateProduct extends React.Component {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="description">Cookie Category</label>
+                    <label htmlFor="description">Cookie Description</label>
                     <textarea
                       name="description"
                       value={description}
