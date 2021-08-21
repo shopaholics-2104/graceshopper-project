@@ -61,7 +61,7 @@ class EditUser extends React.Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">{this.state.username}</h4>
+                <h4 className="order_history">{this.state.username}</h4>
 
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
@@ -75,12 +75,12 @@ class EditUser extends React.Component {
                         (state, ind) =>
                           listOfState.includes(state) && (
                             <div key={`stateId${ind}`} className="col-6">
-                              <label>{state}:</label>
+                              <label className="order_history">{state}:</label>
                               <input
                                 value={this.state[state]}
                                 name={`${state}`}
                                 onChange={this.handleChange}
-                                className="p-3 border bg-light"
+                                className="border bg-light"
                               />
                             </div>
                           )

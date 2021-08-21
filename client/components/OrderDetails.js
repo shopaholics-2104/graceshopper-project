@@ -54,44 +54,6 @@ const OrderDetails = ({ order }) => {
                     ))}
                 </tbody>
               </table>
-              {/* <div className="container">
-                <div className="row g-2">
-                  {products.map((product) => (
-                    <div key={product.id}>
-                      <div className="col-6">
-                        <label>Name</label>
-                        <div className="p-3 border bg-light">
-                          {" "}
-                          {product.name}
-                        </div>
-                      </div>
-                      <div className="col-6">
-                        <label>Price</label>
-                        <div className="p-3 border bg-light">
-                          {" "}
-                          ${product.price}
-                        </div>
-                      </div>
-
-                      <div className="col-6">
-                        <label>Quantity</label>
-                        <div className="p-3 border bg-light">
-                          {" "}
-                          {product.quantity}
-                        </div>
-                      </div>
-
-                      <div className="col-6">
-                        <label>Subtotal</label>
-                        <div className="p-3 border bg-light">
-                          {" "}
-                          {(product.quantity * product.price).toFixed(2)}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
             </div>
 
             <div className="modal-footer">
