@@ -32,14 +32,7 @@ const CheckoutForm = (props) => {
       alert("Payment Declined");
     } else {
       console.log("[PaymentMethod]", paymentMethod);
-      //axios.post(
-      // try {
 
-      // } catch (error) {
-
-      // }
-
-      // )
       await props.updateOrder({
         ...props.openOrder,
         status: "CheckOut",
@@ -68,7 +61,8 @@ const CheckoutForm = (props) => {
           },
         }}
       />
-      <button type="submit" disabled={!stripe}>
+      <br></br>
+      <button className="finalBtn" type="submit" disabled={!stripe}>
         Pay and Checkout
       </button>
     </form>
