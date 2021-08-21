@@ -58,46 +58,50 @@ class CheckOut extends React.Component {
     const { totalAmount, cartItems, stripe } = this.props;
 
     return (
-      <div>
+      <div className="checkout_page">
+        <h1 className="checkout_title">Cart</h1>
         {/* Cart Items */}
-        <h1>Cart</h1>
 
-        <table border="2">
-          <tbody>
-            <tr>
-              <td>Item Name</td>
-              <td>Item Quantity</td>
-              <td>Item Price</td>
-              <td>Total Price</td>
-            </tr>
-            {cartItems &&
-              cartItems.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>{item.order_item.quantity}</td>
-                  <td>{item.order_item.price}</td>
-                  <td>
-                    {(item.order_item.quantity * item.order_item.price).toFixed(
-                      2
-                    )}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-        <br></br>
-        <div> Total Amount: {totalAmount.toFixed(2)}</div>
-        <br></br>
+        <div className="checkout">
+          <table border="2">
+            <tbody>
+              <tr>
+                <td>Item Name</td>
+                <td>Item Quantity</td>
+                <td>Item Price</td>
+                <td>Total Price</td>
+              </tr>
+              {cartItems &&
+                cartItems.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.order_item.quantity}</td>
+                    <td>{item.order_item.price}</td>
+                    <td>
+                      {(
+                        item.order_item.quantity * item.order_item.price
+                      ).toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+          <br></br>
+          <div> Total Amount: {totalAmount.toFixed(2)}</div>
+          <br></br>
 
-        <h1>Payment</h1>
-        <CheckoutForm
-          email={email}
-          name={`${firstName} ${lastName}`}
-          address={address}
-          updateOrder={this.props.updateOrder}
-          fetchOpenOrder={this.props.fetchOpenOrder}
-          history={this.props.history}
-        />
+          <h4 className="checkout_title">Payment</h4>
+          <br></br>
+          <CheckoutForm
+            email={email}
+            name={`${firstName} ${lastName}`}
+            address={address}
+            updateOrder={this.props.updateOrder}
+            fetchOpenOrder={this.props.fetchOpenOrder}
+            history={this.props.history}
+          />
+        </div>
+
       </div>
     );
   }
