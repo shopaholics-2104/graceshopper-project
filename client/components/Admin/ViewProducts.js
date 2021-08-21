@@ -25,10 +25,29 @@ class Product extends React.Component {
         <h2 className="admin_user_title">Products</h2>{" "}
         <CreateProduct allCategories={allCategories} />
         <table className="table table-hover">
+          <thead className="thead-dark">
+            <tr>
+              <th className="admin_order_detail" scope="col">
+                Id
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Name
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Price
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Edit Product
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Remove Product
+              </th>
+            </tr>
+          </thead>
           <tbody>
             {allProducts.map((product) => (
               <tr key={`productId&${product.id}`}>
-                <th scope="row">{product.id}</th>
+                <th scope="col">{product.id}</th>
 
                 <td>{product.name}</td>
                 <td>{product.single_price}</td>

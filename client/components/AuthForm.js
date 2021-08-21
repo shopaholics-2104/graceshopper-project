@@ -14,7 +14,7 @@ const AuthForm = (props) => {
         <div
           className="modal fade"
           id="modalLoginForm"
-          tabindex="-1"
+          tabIndex="-1"
           role="dialog"
           aria-labelledby="myModalLabel"
           aria-hidden="true"
@@ -27,7 +27,7 @@ const AuthForm = (props) => {
                 </h4>
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >
@@ -41,7 +41,6 @@ const AuthForm = (props) => {
                   <h4 className="modal-title">
                     <small>Username</small>
                   </h4>
-                  <form onSubmit={handleSubmit} name={name} />
                   <input name="username" type="text" />
                 </div>
 

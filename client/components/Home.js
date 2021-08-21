@@ -29,14 +29,14 @@ export class Home extends React.Component {
       <div>
         <div className="admin_header">
           <h3 className="admin_title">
-            Welcome, {role.toUpperCase()} {username} <EditUser user={user} />
+            Welcome, {role.toUpperCase()} {username}
           </h3>
-          {/* {isAdmin && (
-          <Link to={{ pathname: "/Admin", state: { isAdmin } }}>
-            Admin Page
-          </Link>
-        )} */}
-
+          <br />
+          <br />
+          <div>
+            <EditUser user={user} />
+          </div>
+          <br />
           <h4 className="order_history">
             Order History ({orderHistory.length})
           </h4>
@@ -62,9 +62,9 @@ export class Home extends React.Component {
             {orderHistory.map((order) => (
               <tr key={`orderId&${order.id}`}>
                 <th scope="row">{order.id}</th>
-                <td>{order.updatedAt}</td>
-                <td>{order.totalAmount}</td>
-                <td>
+                <td className="order_history">{order.updatedAt}</td>
+                <td className="order_history">{order.totalAmount}</td>
+                <td className="admin_order_detail">
                   <OrderDetails order={order} />
                 </td>
               </tr>

@@ -37,24 +37,26 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                   MORE
                 </a>
                 <div className="dropdown-menu dropdown-menu-right">
-                  <li className="dropdown-item">
-                    <Link to="/categories">Category</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/search">Search</Link>
-                  </li>
+                  <ul>
+                    <li className="dropdown-item">
+                      <Link to="/categories">Category</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/search">Search</Link>
+                    </li>
 
-                  <li className="dropdown-item">
-                    {isAdmin ? <Link to="/admin">Admin</Link> : null}
-                  </li>
+                    <li className="dropdown-item">
+                      {isAdmin ? <Link to="/admin">Admin</Link> : null}
+                    </li>
 
-                  <div className="dropdown-divider"></div>
+                    <div className="dropdown-divider"></div>
 
-                  <li className="dropdown-item">
-                    <a href="#" onClick={handleClick}>
-                      Logout
-                    </a>
-                  </li>
+                    <li className="dropdown-item">
+                      <a href="#" onClick={handleClick}>
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </li>
             </ul>
