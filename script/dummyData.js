@@ -207,7 +207,7 @@ const userList = [
     firstName: "cody",
     lastName: "smith",
     email: "cody@gmail.com",
-    role: "admin",
+
     addressLine_1: "123 EvergreenDrive SE",
     mobile: "828-123-1234",
     city: "Hickory",
@@ -229,7 +229,7 @@ const userList = [
     country: "USA",
   },
   {
-    username: "Lucy",
+    username: "lucy",
     password: "123",
     firstName: "lucy",
     lastName: "smith",
@@ -238,6 +238,7 @@ const userList = [
     mobile: "828-098-2580",
     city: "NYC",
     state: "NY",
+    role: "admin",
     zipCode: "10017",
     country: "USA",
   },
