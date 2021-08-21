@@ -50,9 +50,9 @@ export const logout = () => {
   };
 };
 
-export const _updateUser = (user) => {
+export const _updateUser = (userId, user) => {
   return async (dispatch) => {
-    const { data } = await axios.put(`/api/users/${user.id}`, user);
+    const { data } = await axios.put(`/api/users/${userId}`, user);
     dispatch(updateAuth(data));
   };
 };

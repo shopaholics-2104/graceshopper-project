@@ -18,15 +18,23 @@ class User extends React.Component {
     const { allUsers } = this.props;
     return (
       <Fragment>
-        <h1>Users</h1>
+        <h1 className="admin_user_title">Users</h1>
 
         <table className="table table-hover">
           <thead className="thead-dark">
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Role</th>
-              <th scope="col">Username</th>
-              <th scope="col">User Info</th>
+              <th className="admin_order_detail" scope="col">
+                Id
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Role
+              </th>
+              <th className="admin_order_detail" scope="col">
+                Username
+              </th>
+              <th className="admin_order_detail" scope="col">
+                User Info
+              </th>
             </tr>
           </thead>
           <tbody>

@@ -8,10 +8,6 @@ const type = {
 
   //admin activities affect user model (admin manage users)
   SET_ALL_USERS: "SET_ALL_USERS",
-  SET_SINGLE_USER: "SET_SINGLE_USER",
-  CREATE_USER: "CREATE_USER",
-  DELETE_USER: "DELETE_USER",
-  UPDATE_USER: "UPDATE_USER",
 
   //admin activities affect product model (admin manage products)
   SET_ALL_PRODUCTS: "SET_ALL_PRODUCTS",

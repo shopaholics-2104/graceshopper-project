@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
-import Cart from "./components/Cart";
+import { nonUserCart, userCart } from "./components/Cart";
 import SingleProduct from "./components/SingleProduct";
 import Admin from "./components/Admin/Admin";
 import Products from "./components/Products";
@@ -12,6 +12,7 @@ import { me } from "./store";
 import Checkout from "./components/Checkout";
 import { fetchTotal } from "./store/thunk";
 import Category from "./components/Categories";
+import ConfirmationPage from "./components/ConfirmationPage";
 import SingleCategory from "./components/SingleCategory";
 
 /**
@@ -47,9 +48,10 @@ class Routes extends Component {
             />
             <Route path="/products" component={Products} exact />
             <Route path="/home" component={Home} />
-            <Route path="/cart" component={Cart} />
+            <Route path="/cart" component={userCart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/admin" component={Admin} />
+            <Route path="/confirmation" component={ConfirmationPage} />
 
             <Route path="/search" component={Search} />
 
@@ -69,13 +71,14 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/checkout" component={Checkout} />
-
+            <Route path="/search" component={Search} />
             <Route path="/products" component={Products} exact />
             <Route
               path="/products/:productId"
               component={SingleProduct}
               exact
             />
+            <Route path="/cart" component={nonUserCart} />
           </Switch>
         )}
         <Switch></Switch>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { _fetchOpenOrder, _clearCart } from "../store/thunk";
+import { _fetchOpenOrder, _clearCart, _clearLocalCart } from "../store/thunk";
 import { connect } from "react-redux";
 
 class ClearButton extends Component {
@@ -12,7 +12,7 @@ class ClearButton extends Component {
     const { handleClear } = this;
 
     return (
-      <button type="button" onClick={handleClear}>
+      <button className="clearBtn" type="button" onClick={handleClear}>
         Clear the Cart
       </button>
     );
@@ -20,7 +20,16 @@ class ClearButton extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  clearCart: (order) => dispatch(_clearCart(order)),
+  clearCart: (order) => {
+    dispatch(_clearCart(order));
+  },
+  fetchOpenOrder: (userId) => dispatch(_fetchOpenOrder(userId)),
+});
+
+const mapDispatchNonUser = (dispatch) => ({
+  clearCart: () => {
+    dispatch(_clearLocalCart());
+  },
   fetchOpenOrder: (userId) => dispatch(_fetchOpenOrder(userId)),
 });
 
@@ -34,4 +43,12 @@ const mapStateToProps = (state) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClearButton);
+export const UserClearButton = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ClearButton);
+
+export const NonUserClearButton = connect(
+  null,
+  mapDispatchNonUser
+)(ClearButton);

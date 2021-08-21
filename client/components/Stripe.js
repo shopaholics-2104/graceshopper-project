@@ -1,5 +1,8 @@
 import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { _fetchOpenOrder, _updateOrder } from "../store/thunk";
+import { connect } from "react-redux";
+
 import {
   CardElement,
   Elements,
@@ -29,10 +32,24 @@ const CheckoutForm = (props) => {
       alert("Payment Declined");
     } else {
       console.log("[PaymentMethod]", paymentMethod);
-      alert("Payment Successful");
+      //axios.post(
+      // try {
+
+      // } catch (error) {
+
+      // }
+
+      // )
+      await props.updateOrder({
+        ...props.openOrder,
+        status: "CheckOut",
+        comment: "order checked out",
+        totalAmount: props.totalAmount,
+      });
+      await props.fetchOpenOrder(props.user.id);
+      props.history.push("/confirmation");
     }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <CardElement
@@ -52,10 +69,26 @@ const CheckoutForm = (props) => {
         }}
       />
       <button type="submit" disabled={!stripe}>
-        Pay
+        Pay and Checkout
       </button>
     </form>
   );
 };
 
-export default CheckoutForm;
+const mapDispatchToProps = (dispatch) => ({
+  updateOrder: (order) => dispatch(_updateOrder(order)),
+  updateUser: (user) => dispatch(_updateUser(user)),
+  fetchOpenOrder: (userId) => dispatch(_fetchOpenOrder(userId)),
+});
+
+const mapStateToProps = (state) => ({
+  user: state.auth,
+  openOrder: state.openOrder,
+  cartItems: state.cartItems,
+  totalAmount: state.cartItems.reduce(
+    (accum, item) => accum + item.order_item.quantity * item.order_item.price,
+    0
+  ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutForm);
