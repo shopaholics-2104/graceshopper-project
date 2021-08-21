@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 const Admin = ({ isAdmin }) => {
   return (
     isAdmin && (
-      <div>
+      <div className="admin">
         <AdminUser />
         <AdminProducts />
       </div>
