@@ -55,22 +55,23 @@ class CheckOut extends React.Component {
 
   render() {
     const { firstName, lastName, email, address } = this.state;
-    const { totalAmount, cartItems, stripe } = this.props;
+    const { totalAmount, cartItems } = this.props;
 
     return (
       <div className="checkout_page">
         <h1 className="checkout_title">Cart</h1>
         {/* Cart Items */}
-
-        <div className="checkout">
-          <table border="2">
-            <tbody>
+        <div className="admin_order_detail">
+          <table className="table table-sm">
+            <thead>
               <tr>
-                <td>Item Name</td>
-                <td>Item Quantity</td>
-                <td>Item Price</td>
-                <td>Total Price</td>
+                <th scope="col">Item Name</th>
+                <th scope="col">Item Quantity</th>
+                <th scope="col">Item Price</th>
+                <th scope="col">Total Price</th>
               </tr>
+            </thead>
+            <tbody>
               {cartItems &&
                 cartItems.map((item) => (
                   <tr key={item.id}>
@@ -86,22 +87,24 @@ class CheckOut extends React.Component {
                 ))}
             </tbody>
           </table>
-          <br></br>
-          <div> Total Amount: {totalAmount.toFixed(2)}</div>
-          <br></br>
-
-          <h4 className="checkout_title">Payment</h4>
-          <br></br>
-          <CheckoutForm
-            email={email}
-            name={`${firstName} ${lastName}`}
-            address={address}
-            updateOrder={this.props.updateOrder}
-            fetchOpenOrder={this.props.fetchOpenOrder}
-            history={this.props.history}
-          />
         </div>
+        <br></br>
+        <div className="admin_order_detail">
+          {" "}
+          Total Amount: {totalAmount.toFixed(2)}
+        </div>
+        <br></br>
 
+        <h4 className="checkout_title">Payment</h4>
+        <br></br>
+        <CheckoutForm
+          email={email}
+          name={`${firstName} ${lastName}`}
+          address={address}
+          updateOrder={this.props.updateOrder}
+          fetchOpenOrder={this.props.fetchOpenOrder}
+          history={this.props.history}
+        />
       </div>
     );
   }
