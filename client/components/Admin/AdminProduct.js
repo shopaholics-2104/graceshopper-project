@@ -30,8 +30,14 @@ class AdminProduct extends React.Component {
     this.setState(product);
   }
   render() {
-    const { name, imageUrl, description, single_price, status, categoryId } =
-      this.state;
+    const {
+      name,
+      imageUrl,
+      description,
+      single_price,
+      status,
+      categoryId,
+    } = this.state;
     const { handleChange, handleSubmit } = this;
     const { product, allCategories } = this.props;
     return (
@@ -42,7 +48,7 @@ class AdminProduct extends React.Component {
           data-toggle="modal"
           data-target={`#ProductId${product.id}`}
         >
-          Edit Product
+          Edit Cookies
         </button>
 
         <div className="modal" id={`ProductId${product.id}`}>
@@ -55,7 +61,7 @@ class AdminProduct extends React.Component {
               <form>
                 <div className="modal-body">
                   <div className="form-group">
-                    <label htmlFor="name">Product Name</label>
+                    <label htmlFor="name">Cookie Name</label>
                     <input
                       name="name"
                       value={name}
@@ -66,7 +72,7 @@ class AdminProduct extends React.Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="imageUrl">Product ImageUrl</label>
+                    <label htmlFor="imageUrl">Cookie ImageUrl</label>
                     <input
                       name="imageUrl"
                       value={imageUrl}
@@ -78,7 +84,7 @@ class AdminProduct extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="single_price">Product single_price</label>
+                    <label htmlFor="single_price">Cookie single_price</label>
                     <input
                       name="single_price"
                       value={single_price}
@@ -90,7 +96,7 @@ class AdminProduct extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="status">Product Inventory Status</label>
+                    <label htmlFor="status">Cookie Inventory Status</label>
                     <select
                       name="status"
                       value={status}
@@ -105,7 +111,7 @@ class AdminProduct extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="categoryId">Product Flavor</label>
+                    <label htmlFor="categoryId">Cookie Flavor</label>
                     <select
                       name="categoryId"
                       value={categoryId}
@@ -122,7 +128,7 @@ class AdminProduct extends React.Component {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="description">Product Description</label>
+                    <label htmlFor="description">Cookie Description</label>
                     <textarea
                       name="description"
                       value={description}

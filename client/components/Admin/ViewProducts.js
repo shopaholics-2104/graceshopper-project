@@ -22,7 +22,7 @@ class Product extends React.Component {
     const { allProducts, deleteProduct, allCategories } = this.props;
     return (
       <Fragment>
-        <h2 className="admin_user_title">Products</h2>{" "}
+        <h2 className="admin_user_title">Cookies</h2>{" "}
         <CreateProduct allCategories={allCategories} />
         <table className="table table-hover">
           <thead className="thead-dark">
@@ -37,10 +37,10 @@ class Product extends React.Component {
                 Price
               </th>
               <th className="admin_order_detail" scope="col">
-                Edit Product
+                Edit Cookie
               </th>
               <th className="admin_order_detail" scope="col">
-                Remove Product
+                Remove Cookie
               </th>
             </tr>
           </thead>

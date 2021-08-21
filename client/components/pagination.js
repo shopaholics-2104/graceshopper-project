@@ -55,7 +55,7 @@ class Paginate extends Component {
     return (
       <div>
         <div className="pageHeader">
-          <h1>All Products</h1>
+          <h1>All Cookies</h1>
         </div>
         <div className="sort">
           <div className="row">
