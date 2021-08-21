@@ -42,14 +42,14 @@
   font-weight: bold;
   font-size: 1.5rem;
   display: inline;
-  margin-left: 5rem;
+  margin-left: 0.3rem;
 }
 .admin_order_detail {
   font-family: "Cabin Sketch", cursive;
 }
 .order_history {
   font-family: "Cabin Sketch", cursive;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .container {
@@ -504,4 +504,17 @@ li a {
 }
 .flavor_names {
   font-family: "Bungee Shade", cursive;
+}
+
+.confirm_container {
+  margin-left: 5rem;
+  text-align: left;
+}
+.confirm_title {
+  font-family: "Bungee Shade", cursive;
+}
+
+.confirm_subtitle {
+  font-family: "Cabin Sketch", cursive;
+  font-size: 1.5rem;
 }

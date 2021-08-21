@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 
 const ConfirmationPage = (props) => {
   return (
-    <div>
+    <div className="confirm_container">
       {" "}
-      <h2>Thank you, {props.user.firstName}! </h2>
-      We've received your order. You'll receive a confirmation soon via email.
+      <h2 className="confirm_title">Thank you, {props.user.firstName}! </h2>
+      <p className="confirm_subtitle">
+        We've received your order. You'll receive a confirmation soon via email.
+      </p>
     </div>
   );
 };
