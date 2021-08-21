@@ -27,8 +27,14 @@ class CreateProduct extends React.Component {
   }
 
   render() {
-    const { name, imageUrl, description, single_price, status, categoryId } =
-      this.state;
+    const {
+      name,
+      imageUrl,
+      description,
+      single_price,
+      status,
+      categoryId,
+    } = this.state;
     const { handleChange, handleSubmit } = this;
     const { allCategories } = this.props;
     return (
@@ -39,7 +45,7 @@ class CreateProduct extends React.Component {
           data-toggle="modal"
           data-target={"#CreateProduct"}
         >
-          Create Product
+          Create Cookie
         </button>
 
         <div className="modal" id={"CreateProduct"}>
@@ -52,7 +58,7 @@ class CreateProduct extends React.Component {
               <form>
                 <div className="modal-body">
                   <div className="form-group">
-                    <label htmlFor="imageUrl">Product Name</label>
+                    <label htmlFor="imageUrl">Cookie Name</label>
                     <input
                       name="name"
                       value={name}
@@ -63,7 +69,7 @@ class CreateProduct extends React.Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="imageUrl">Product ImageUrl</label>
+                    <label htmlFor="imageUrl">Cookie ImageUrl</label>
                     <input
                       name="imageUrl"
                       value={imageUrl}
@@ -75,7 +81,7 @@ class CreateProduct extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="single_price">Product single_price</label>
+                    <label htmlFor="single_price">Cookie single_price</label>
                     <input
                       name="single_price"
                       value={single_price}
@@ -87,7 +93,7 @@ class CreateProduct extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="status">Product Inventory Status</label>
+                    <label htmlFor="status">Cookie Inventory Status</label>
                     <select
                       name="status"
                       value={status}
@@ -102,7 +108,7 @@ class CreateProduct extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="category">Product Flavor</label>
+                    <label htmlFor="category">Cookie Flavor</label>
                     <select
                       name="categoryId"
                       value={categoryId}
@@ -120,7 +126,7 @@ class CreateProduct extends React.Component {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="description">Product Category</label>
+                    <label htmlFor="description">Cookie Category</label>
                     <textarea
                       name="description"
                       value={description}

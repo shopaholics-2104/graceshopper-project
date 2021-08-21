@@ -24,7 +24,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               </li>
 
               <li className="nav-item">
-                <Link to="/products">All Products</Link>
+                <Link to="/products">All Cookies</Link>
               </li>
 
               <li className="nav-item">
@@ -76,7 +76,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               <Link to="/signup">Sign Up</Link>
             </li>
             <li>
-              <Link to="/products">All Products</Link>
+              <Link to="/products">All Cookies</Link>
             </li>
             <li>
               <Link to="/search">Search</Link>

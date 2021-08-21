@@ -12,9 +12,13 @@
     url(https://sandbox-uploads.imgix.net/u/1629390135-2fc4cab407a794c1e9d9c98ff6ab1740?w=600);
   background-size: cover;
   background-position: center center;
-  background-color: rgba(141, 44, 44, 0.25);
+  background-attachment: fixed;
 }
 
+.title-row {
+  background-color: transparent;
+  margin-left: 5rem;
+}
 .pagination {
   display: flex;
   flex: 1;
