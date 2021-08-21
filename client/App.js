@@ -9,8 +9,8 @@ const App = () => {
 
       <Routes />
 
-      <div className="title-row">
-        <div className="title-col">
+      <div className="row">
+        <div className="col">
           <h1 className="title">MARVELOUS COOKIES</h1>
           <p className="subtitle">The most magical cookie in the world</p>
         </div>
